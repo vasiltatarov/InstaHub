@@ -1,9 +1,8 @@
 ﻿namespace MyForum.Web.Areas.Administration.Controllers
 {
+    using Microsoft.AspNetCore.Mvc;
     using MyForum.Services.Data;
     using MyForum.Web.ViewModels.Administration.Dashboard;
-
-    using Microsoft.AspNetCore.Mvc;
 
     public class DashboardController : AdministrationController
     {

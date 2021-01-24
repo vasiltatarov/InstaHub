@@ -1,9 +1,11 @@
 ﻿namespace MyForum.Services.Data
 {
+    using System.Linq;
     using System.Threading.Tasks;
 
     using MyForum.Data.Common.Repositories;
     using MyForum.Data.Models;
+    using MyForum.Services.Mapping;
 
     public class PostsService : IPostsService
     {
@@ -13,6 +15,11 @@
         {
             this.postRepository = postRepository;
         }
+
+        public T GetById<T>(int id)
+            => this.postRepository.All()
+                .Where(x => x.Id == id)
+                .To<T>().FirstOrDefault();
 
         public async Task<int> CreateAsync(string title, string content, int categoryId, string userId)
         {

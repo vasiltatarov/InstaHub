@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-namespace MyForum.Web.Controllers
+﻿namespace MyForum.Web.Controllers
 {
     using System.Threading.Tasks;
 
@@ -53,7 +51,9 @@ namespace MyForum.Web.Controllers
 
         public IActionResult ById(int id)
         {
-            return this.View();
+            var postViewModel = this.postsService.GetById<PostViewModel>(id);
+
+            return this.View(postViewModel);
         }
     }
 }

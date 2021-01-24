@@ -1,13 +1,9 @@
-﻿using MyForum.Data.Models;
-using MyForum.Services.Data;
-
-namespace MyForum.Web.Controllers
+﻿namespace MyForum.Web.Controllers
 {
     using System.Diagnostics;
-    using System.Linq;
 
     using Microsoft.AspNetCore.Mvc;
-    using MyForum.Data;
+    using MyForum.Services.Data;
     using MyForum.Web.ViewModels;
     using MyForum.Web.ViewModels.Home;
 

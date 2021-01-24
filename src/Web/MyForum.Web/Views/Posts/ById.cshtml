@@ -1,0 +1,8 @@
+﻿@model MyForum.Web.ViewModels.Posts.PostViewModel
+@{
+    this.ViewData["Title"] = this.Model.Title;
+}
+
+<h1>@this.Model.Title</h1>
+
+@Html.Raw(Model.Content)

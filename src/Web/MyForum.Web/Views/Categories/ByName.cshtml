@@ -12,7 +12,9 @@
 @foreach (var post in this.Model.Posts)
 {
     <div class="media-body">
-        <h4 class="media-heading">@post.Title</h4>
+        <h4 class="media-heading">
+            <a asp-controller="Posts" asp-action="ById" asp-route-id="@post.Id">@post.Title</a>
+        </h4>
         <hr/>
         <p>@post.ShortContent</p>
         <hr/>

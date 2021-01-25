@@ -11,7 +11,7 @@
 </div>
 @foreach (var post in this.Model.Posts)
 {
-    <div class="media-body">
+    <div class="media-body card-header border border-dark  p-2" style="border-radius: 20px;">
         <h4 class="media-heading">
             <a asp-controller="Posts" asp-action="ById" asp-route-id="@post.Id">@post.Title</a>
         </h4>

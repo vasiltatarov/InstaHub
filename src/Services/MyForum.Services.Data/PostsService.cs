@@ -1,5 +1,6 @@
 ﻿namespace MyForum.Services.Data
 {
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -36,5 +37,8 @@
 
             return post.Id;
         }
+
+        public IEnumerable<T> GetAllPosts<T>()
+            => this.postRepository.All().To<T>().ToList();
     }
 }

@@ -18,6 +18,11 @@
 
         public string SanitizedContent => new HtmlSanitizer().Sanitize(this.Content);
 
+        public string ShortContent =>
+            this.SanitizedContent.Length >= 250
+                ? this.SanitizedContent.Substring(0, 250) + "..."
+                : this.SanitizedContent;
+
         public string UserUserName { get; set; }
 
         public DateTime CreatedOn { get; set; }

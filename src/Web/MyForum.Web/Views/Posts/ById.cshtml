@@ -14,7 +14,8 @@
                         <div class="media-body ml-3">
                             <a class="fas fa-user-edit" href="javascript:void(0)" data-abc="true">@this.Model.UserUserName</a>
                             <div class="text-muted small">
-                                <i class="fas fa-calendar-alt"></i> @this.Model.CreatedOn
+                                <i class="fas fa-calendar-alt"></i> 
+                                <time datetime="@this.Model.CreatedOn.ToString("O")"></time>
                             </div>
                         </div>
                         <div class="text-muted small ml-3">
@@ -52,7 +53,7 @@
                 </div>
             </div>
             <h2 class="text-center">Comments</h2>
-            @foreach (var comment in this.Model.Comments.OrderByDescending(x => x.CreatedOn))
+            @foreach (var comment in this.Model.Comments.Where(x => x.ParentId == null).OrderByDescending(x => x.CreatedOn))
             {
                 <div class="card mb-2">
                     <div class="card-header">
@@ -61,7 +62,8 @@
                             <div class="media-body ml-3">
                                 <a class="fas fa-user-edit" href="javascript:void(0)" data-abc="true">@comment.UserUserName</a>
                                 <div class="text-muted small">
-                                    <i class="fas fa-calendar-alt"></i> @comment.CreatedOn
+                                    <i class="fas fa-calendar-alt"></i> 
+                                    <time datetime="@this.Model.CreatedOn.ToString("O")"></time>
                                 </div>
                             </div>
                             <button type="button" class="btn btn-secondary" onclick="showCommentForm(@comment.Id)">

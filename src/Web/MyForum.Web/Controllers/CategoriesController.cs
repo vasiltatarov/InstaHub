@@ -31,6 +31,7 @@
             {
                 viewModel.PagesCount = 1;
             }
+
             viewModel.CurrentPage = page;
 
             return this.View(viewModel);

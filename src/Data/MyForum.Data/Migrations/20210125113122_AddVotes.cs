@@ -1,8 +1,9 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace MyForum.Data.Migrations
+﻿namespace MyForum.Data.Migrations
 {
+    using System;
+
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class AddVotes : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)

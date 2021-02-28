@@ -1,6 +1,7 @@
 ﻿namespace MyForum.Web.ViewModels.Posts
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
 
     using AutoMapper;
@@ -28,6 +29,8 @@
         public DateTime CreatedOn { get; set; }
 
         public int VotesCount { get; set; }
+
+        public IEnumerable<PostCommentViewModel> Comments { get; set; }
 
         public void CreateMappings(IProfileExpression configuration)
         {

@@ -1,6 +1,45 @@
 ﻿@model MyForum.Web.ViewModels.Posts.PostViewModel
 @{
     this.ViewData["Title"] = this.Model.Title;
+
+    async Task DisplayComments(int? parentId)
+    {
+        var comments = this.Model.Comments
+            .Where(x => x.ParentId == parentId)
+            .OrderByDescending(x => x.CreatedOn);
+
+        if (!comments.Any())
+        {
+            return;
+        }
+
+        foreach (var comment in comments)
+        {
+            <div class="card mb-2">
+                <div class="card-header">
+                    <div class="media flex-wrap w-100 align-items-center">
+                        <img alt="" class="d-block ui-w-40 rounded-circle" src="~/images/05.jpg" style="width: 80px; height: 70px;">
+                        <div class="media-body ml-3">
+                            <a class="fas fa-user-edit" href="javascript:void(0)" data-abc="true">@comment.UserUserName</a>
+                            <div class="text-muted small">
+                                <i class="fas fa-calendar-alt"></i>
+                                <time datetime="@this.Model.CreatedOn.ToString("O")"></time>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-secondary" onclick="showCommentForm(@comment.Id)">
+                            <i class="ion ion-md-create"></i>&nbsp; Answer
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p>
+                        @Html.Raw(@comment.SanitizeContent)
+                    </p>
+                    @{ await DisplayComments(comment.Id); }
+                </div>
+            </div>
+        }
+    }
 }
 
 <div class="container-fluid mt-100">
@@ -14,7 +53,7 @@
                         <div class="media-body ml-3">
                             <a class="fas fa-user-edit" href="javascript:void(0)" data-abc="true">@this.Model.UserUserName</a>
                             <div class="text-muted small">
-                                <i class="fas fa-calendar-alt"></i> 
+                                <i class="fas fa-calendar-alt"></i>
                                 <time datetime="@this.Model.CreatedOn.ToString("O")"></time>
                             </div>
                         </div>
@@ -53,31 +92,7 @@
                 </div>
             </div>
             <h2 class="text-center">Comments</h2>
-            @foreach (var comment in this.Model.Comments.Where(x => x.ParentId == null).OrderByDescending(x => x.CreatedOn))
-            {
-                <div class="card mb-2">
-                    <div class="card-header">
-                        <div class="media flex-wrap w-100 align-items-center">
-                            <img alt="" class="d-block ui-w-40 rounded-circle" src="~/images/05.jpg" style="width: 70px; height: 50px;">
-                            <div class="media-body ml-3">
-                                <a class="fas fa-user-edit" href="javascript:void(0)" data-abc="true">@comment.UserUserName</a>
-                                <div class="text-muted small">
-                                    <i class="fas fa-calendar-alt"></i> 
-                                    <time datetime="@this.Model.CreatedOn.ToString("O")"></time>
-                                </div>
-                            </div>
-                            <button type="button" class="btn btn-secondary" onclick="showCommentForm(@comment.Id)">
-                                <i class="ion ion-md-create"></i>&nbsp; Answer
-                            </button>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <p>
-                            @Html.Raw(@comment.SanitizeContent)
-                        </p>
-                    </div>
-                </div>
-            }
+            @{await DisplayComments(null);}
         </div>
     </div>
 </div>
@@ -97,14 +112,14 @@
 
 <div>
     <form asp-controller="Comments" asp-action="Create" method="post" id="AddCommentForm" style="display: none">
-        <input type="hidden" name="PostId" value="@this.Model.Id"/>
-        <input type="hidden" name="ParentId" value="0"/>
+        <input type="hidden" name="PostId" value="@this.Model.Id" />
+        <input type="hidden" name="ParentId" value="0" />
         <div>
             <label for="Content"></label>
             <textarea name="Content" id="Content" class="form-control"></textarea>
         </div>
         <div>
-            <input type="submit" class="btn btn-primary" value="Add comment"/>
+            <input type="submit" class="btn btn-primary" value="Add comment" />
         </div>
     </form>
 </div>

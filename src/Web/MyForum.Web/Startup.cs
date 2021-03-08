@@ -1,4 +1,6 @@
-﻿namespace MyForum.Web
+﻿using Microsoft.AspNetCore.Identity;
+
+namespace MyForum.Web
 {
     using System.Reflection;
 
@@ -61,6 +63,14 @@
 
             services.AddSingleton(this.configuration);
 
+            // Identity Core
+            services.AddIdentityCore<ApplicationUser>()
+                .AddRoles<IdentityRole>()
+                .AddClaimsPrincipalFactory<UserClaimsPrincipalFactory<ApplicationUser, IdentityRole>>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders()
+                .AddDefaultUI();
+
             // Data repositories
             services.AddScoped(typeof(IDeletableEntityRepository<>), typeof(EfDeletableEntityRepository<>));
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
@@ -73,6 +83,7 @@
             services.AddTransient<IPostsService, PostsService>();
             services.AddTransient<IVotesService, VotesService>();
             services.AddTransient<ICommentService, CommentService>();
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

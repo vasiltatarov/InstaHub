@@ -2,8 +2,7 @@
 {
     public enum VoteType
     {
-        DownVote = -1,
-        Neutral = 0,
+        DownVote = 0,
         UpVote = 1,
     }
 }

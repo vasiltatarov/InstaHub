@@ -1,12 +1,11 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using MyForum.Data.Common.Repositories;
-
-namespace MyForum.Web.Controllers
+﻿namespace MyForum.Web.Controllers
 {
     using System.Linq;
 
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using MyForum.Data.Common.Repositories;
     using MyForum.Data.Models;
     using MyForum.Web.ViewModels.ViewUserProfile;
 
@@ -32,7 +31,7 @@ namespace MyForum.Web.Controllers
             {
                 return this.BadRequest();
             }
-            //The Service will acept data - username, CreatedOn, ...
+
             var userViewModel = new UserProfileViewModel()
             {
                 Username = user.UserName,
@@ -40,7 +39,16 @@ namespace MyForum.Web.Controllers
                 ImagePath = user.ImagePath,
                 Posts = this.postRepository.All()
                     .Where(x => x.UserId == user.Id)
-                    .ToList(),
+                    .Select(x => new UserProfilePostViewModel()
+                    {
+                        Id = x.Id,
+                        Title = x.Title,
+                        Content = x.Content,
+                        CreatedOn = x.CreatedOn,
+                        Comments = x.Comments,
+                        Votes = x.Votes,
+                    })
+                    .ToArray(),
             };
 
             return this.View(userViewModel);

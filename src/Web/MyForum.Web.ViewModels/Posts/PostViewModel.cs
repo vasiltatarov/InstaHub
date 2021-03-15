@@ -4,6 +4,8 @@
     using System.Collections.Generic;
     using System.Linq;
 
+    using AngleSharp.Dom;
+    using AngleSharp.Html.Parser;
     using AutoMapper;
     using Ganss.XSS;
     using MyForum.Data.Models;
@@ -19,10 +21,12 @@
 
         public string SanitizedContent => new HtmlSanitizer().Sanitize(this.Content);
 
-        public string ShortContent =>
+        public string ShortContent => new HtmlParser().ParseDocument(
             this.SanitizedContent.Length >= 250
-                ? this.SanitizedContent.Substring(0, 250) + "..."
-                : this.SanitizedContent;
+            ? this.SanitizedContent.Substring(0, 250) + "..."
+            : this.SanitizedContent)
+            .Body
+            .Text();
 
         public string UserUserName { get; set; }
 

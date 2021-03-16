@@ -9,6 +9,7 @@
     using MyForum.Services.Data;
     using MyForum.Web.ViewModels.Posts;
 
+    [Authorize]
     public class PostsController : Controller
     {
         private readonly IPostsService postsService;
@@ -50,10 +51,9 @@
             return this.RedirectToAction(nameof(this.ById), new { id = postId });
         }
 
-        public IActionResult ById(int id)
+        public async Task<IActionResult> ById(int id)
         {
-            var postViewModel = this.postsService.GetById<PostViewModel>(id);
-
+            var postViewModel = await this.postsService.GetById<PostViewModel>(id);
             return this.View(postViewModel);
         }
     }

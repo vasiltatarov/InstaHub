@@ -102,8 +102,15 @@
                                         </p>
                                     </div>
                                     <div class="text-muted small text-center align-self-center">
-                                        <span class="d-none d-sm-inline-block"><i class="fas fa-thumbs-up"></i> @post.VotesCount</span>
-                                        <span><i class="far fa-comment ml-2"></i> @post.Comments.Count()</span>
+                                        <span class="d-none d-sm-inline-block">
+                                            <i class="fas fa-thumbs-up"></i> @post.VotesCount
+                                        </span>
+                                        <span>
+                                            <i class="far fa-comment ml-2"></i> @post.Comments.Count()
+                                        </span>
+                                        <span>
+                                            <i class="far fa-eye ml-2"></i> @post.VisitorsCount
+                                        </span>
                                     </div>
                                 </div>
                             </div>

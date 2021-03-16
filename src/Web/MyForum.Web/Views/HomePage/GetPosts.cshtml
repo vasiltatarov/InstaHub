@@ -1,17 +1,19 @@
-﻿@model IEnumerable<MyForum.Web.ViewModels.Posts.PostViewModel>
+﻿@using System.Linq
+@model IEnumerable<MyForum.Web.ViewModels.Posts.PostViewModel>
 
 <link href="~/css/home.css" rel="stylesheet" />
 
 <form method="get" asp-action="GetPosts">
     <div class="inner-main-header">
-        <a class="nav-link nav-icon rounded-circle nav-link-faded mr-3 d-md-none" href="#" data-toggle="inner-sidebar"><i class="material-icons">arrow_forward_ios</i></a>
-        <select class="custom-select custom-select-sm w-auto mr-1">
-            <option selected="">Latest</option>
-            <option value="1">Popular</option>
-            <option value="3">Solved</option>
-            <option value="3">Unsolved</option>
-            <option value="3">No Replies Yet</option>
+        <select id="searchFor" name="searchFor">
+            <option value="latest" selected="">Latest</option>
+            <option value="earliest">Earlier</option>
+            <option value="mostVisited">Most Visited</option>
+            <option value="mostLiked">Most Liked</option>
         </select>
+        <span class="ml-auto w-auto">
+            Results: @this.Model.Count()
+        </span>
         <span class="ml-auto w-auto">
             <input type="search" name="searchTerm" class="form-control form-control bg-gray-200 border-gray-200 shadow-none mb-4 mt-4" placeholder="Search forum" />
         </span>

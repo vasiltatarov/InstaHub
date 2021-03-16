@@ -5,6 +5,7 @@
     using Microsoft.AspNetCore.Mvc;
     using MyForum.Services.Data;
     using MyForum.Web.ViewModels.Categories;
+    using MyForum.Web.ViewModels.Home;
 
     public class CategoriesController : Controller
     {
@@ -17,6 +18,16 @@
         {
             this.categoriesService = categoriesService;
             this.postsService = postsService;
+        }
+
+        public IActionResult GetCategories()
+        {
+            var indexViewModel = new IndexViewModel()
+            {
+                Categories = this.categoriesService.GetAll<IndexCategoryViewModel>(),
+            };
+
+            return this.View(indexViewModel);
         }
 
         public IActionResult ByName(string name, int page = 1)

@@ -16,14 +16,13 @@
             this.categoriesService = categoriesService;
         }
 
+        /// <summary>
+        /// This is my home page. Start page of the application.
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Index()
         {
-            var indexViewModel = new IndexViewModel()
-            {
-                Categories = this.categoriesService.GetAll<IndexCategoryViewModel>(),
-            };
-
-            return this.View(indexViewModel);
+            return this.View();
         }
 
         public IActionResult Privacy()

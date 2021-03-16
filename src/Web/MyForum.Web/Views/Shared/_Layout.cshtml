@@ -5,56 +5,94 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@this.ViewData["Title"] - @GlobalConstants.SystemName</title>
+
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true" />
+    <link href="~/css/home.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+
+    <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css" />
+
     <link href="~/lib/fontawesome/css/all.css" rel="stylesheet" asp-append-version="true" />
 </head>
 <body>
+
     <header>
-        <nav class="navbar navbar-expand-sm navbar-dark bg-info border-bottom box-shadow mb-3" style="background-color: #e3f2fd;">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">@GlobalConstants.SystemName</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <partial name="_LoginPartial" />
-                    <ul class="navbar-nav flex-grow-1 nav nav-pills">
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="HomePage" asp-action="GetPosts">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Categories</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Posts" asp-action="Create">Create Post</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        @*<li class="nav-item">
-                            <form class="d-flex">
-                                <input class="form-control col-12" type="search" placeholder="Search" aria-label="Search">
-                                <button asp-area="" asp-controller="Search" asp-action="SearchData" class="btn btn-outline-primary  text-light" type="submit">Search</button>
-                            </form>
-                        </li>*@
-                    </ul>
+        <div>
+            <!-- Inner sidebar -->
+            <div class="inner-sidebar bg-dark">
+                <!-- Inner sidebar header -->
+                <div class="inner-sidebar-header justify-content-center">
+                    <a asp-area="" asp-controller="Posts" asp-action="Create" class="btn btn-primary has-icon btn-block" type="button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus mr-2">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                        NEW POST
+                    </a>
                 </div>
+                <!-- /Inner sidebar header -->
+                <!-- Inner sidebar body -->
+                <div class="inner-sidebar-body p-0">
+                    <div class="p-3 h-100" data-simplebar="init">
+                        <div class="simplebar-wrapper" style="margin: -16px;">
+                            <div style="height: 100%;">
+                                <div style="padding: 16px;">
+                                    <nav class="nav nav-pills flex-column btn-group btn-group-toggle">
+                                        <a asp-area="" asp-controller="Home" asp-action="Index" class="text-white nav-link nav-link-faded has-icon">
+                                            <i class="fas fa-home fa-fw"></i>&nbsp; Home
+                                        </a>
+                                        <a asp-area="" asp-controller="HomePage" asp-action="GetPosts" class="text-white nav-link nav-link-faded has-icon">
+                                            <i class="fas fa-pager fa-fw"></i>&nbsp; All Posts
+                                        </a>
+                                        <a asp-area="" asp-controller="Categories" asp-action="GetCategories" class="text-white nav-link nav-link-faded has-icon">
+                                            <i class="fas fa-paste fa-fw"></i>&nbsp; Post Categories
+                                        </a>
+                                        <a asp-area="" asp-controller="ViewUserProfile" asp-action="ByUsername" asp-route-username="@User.Identity.Name" class="text-white nav-link nav-link-faded has-icon">
+                                            <i class="fas fa-users fa-fw"></i>&nbsp; Profiles
+                                        </a>
+                                        @if (this.User.Identity.IsAuthenticated)
+                                        {
+                                            <a asp-area="" asp-controller="ViewUserProfile" asp-action="ByUsername" asp-route-username="@User.Identity.Name" class="text-white nav-link nav-link-faded has-icon">
+                                                <i class="fas fa-user-tie fa-fw"></i>&nbsp; Profile
+                                            </a>
+                                        }
+                                        <a asp-area="" asp-controller="Home" asp-action="Privacy" class="text-white nav-link nav-link-faded has-icon">
+                                            <i class="fas fa-user-secret fa-fw"></i>&nbsp; Privacy
+                                        </a>
+                                        <partial name="_LoginPartial" />
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /Inner sidebar body -->
             </div>
-        </nav>
+            <!-- /Inner sidebar -->
+            <div class="container">
+                <partial name="_CookieConsentPartial" />
+                <main role="main" class="pb-3">
+                    @this.RenderBody()
+                </main>
+            </div>
+        </div>
     </header>
 
-    <div class="container">
-        <partial name="_CookieConsentPartial" />
-        <main role="main" class="pb-3">
-            @this.RenderBody()
-        </main>
-    </div>
-
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer text-muted bg-dark">
         <div class="container">
-            &copy; @DateTime.Now.Year - @GlobalConstants.SystemName - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <div class="row text-white">
+                <div class="col-md-6">
+                    <p>&copy; 2020-2021 <strong>Vasil Tatarov&#x27;s Forum</strong></p>
+                </div>
+                <div class="col-md-6">
+                    <p>
+                        <a class="text-white" href="https://github.com/vasiltatarov/ForumSystem" target="_blank">
+                            <i class="fab fa-github"></i> Open Source Project
+                        </a>
+                    </p>
+                </div>
+            </div>
         </div>
     </footer>
 

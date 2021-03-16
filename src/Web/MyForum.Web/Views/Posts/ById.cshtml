@@ -88,11 +88,11 @@
                     <div class="px-4 pt-3">
                         <a href="javascript:void(0)" class="text-muted d-inline-flex align-items-center align-middle" data-abc="true">
                             <i class="fa fa-heart text-danger"></i>&nbsp;
-                            <span class="align-middle">445</span>
+                            <span class="align-middle">@Model.VotesCount</span>
                         </a>
                         <span class="text-muted d-inline-flex align-items-center align-middle ml-4">
                             <i class="fa fa-eye text-muted fsize-3"></i>&nbsp;
-                            <span class="align-middle">14532</span>
+                            <span class="align-middle">@Model.VisitorsCount</span>
                         </span>
                     </div>
                     @if (this.User.Identity.IsAuthenticated)

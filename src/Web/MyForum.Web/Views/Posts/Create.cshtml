@@ -17,51 +17,53 @@
     });
 </script>
 
-<div class="container">
-    <div class="row">
+<body style="background: aliceblue">
+    <div class="container">
+        <div class="row">
 
-        <div class="col-md-12 col-md-offset-2">
+            <div class="col-md-12 col-md-offset-2">
 
-            <div class="text-center">
-                <h1>@this.ViewData["Title"]</h1>
+                <div class="text-center">
+                    <h1>@this.ViewData["Title"]</h1>
+                </div>
+                <hr />
+
+                <form method="post" asp-action="Create" asp-controller="Posts">
+
+                    <div class="form-group">
+                        <label asp-for="Title">Title <span>*</span> <small>(This field use for title on your post.)</small></label>
+                        <input asp-for="Title" class="form-control" />
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Content">Content <span>*</span> </label>
+                        <textarea asp-for="Content" rows="5" class="form-control"></textarea>
+                        <span asp-validation-for="Content" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="CategoryId">Category <span>*</span> <small>(Select in which category you want to make your new post.)</small></label>
+                        <select asp-for="CategoryId" asp-items="categories" class="form-control"></select>
+                        <span asp-validation-for="CategoryId" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <p><span class="require">*</span> - required fields</p>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">
+                            Create
+                        </button>
+                        <a asp-controller="Home" asp-action="Index" class="btn btn-default">
+                            Cancel
+                        </a>
+                    </div>
+
+                </form>
             </div>
-            <hr />
 
-            <form method="post" asp-action="Create" asp-controller="Posts">
-
-                <div class="form-group">
-                    <label asp-for="Title">Title <span>*</span> <small>(This field use in url path.)</small></label>
-                    <input asp-for="Title" class="form-control" />
-                    <span asp-validation-for="Title" class="text-danger"></span>
-                </div>
-
-                <div class="form-group">
-                    <label asp-for="Content">Content</label>
-                    <textarea asp-for="Content" rows="5" class="form-control"></textarea>
-                    <span asp-validation-for="Content" class="text-danger"></span>
-                </div>
-
-                <div class="form-group">
-                    <label asp-for="CategoryId">Category Id <span>*</span></label>
-                    <select asp-for="CategoryId" asp-items="categories" class="form-control"></select>
-                    <span asp-validation-for="CategoryId" class="text-danger"></span>
-                </div>
-
-                <div class="form-group">
-                    <p><span class="require">*</span> - required fields</p>
-                </div>
-
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary">
-                        Create
-                    </button>
-                    <a asp-controller="Home" asp-action="Index" class="btn btn-default">
-                        Cancel
-                    </a>
-                </div>
-
-            </form>
         </div>
-
     </div>
-</div>
+</body>

@@ -18,67 +18,64 @@
 <body>
 
     <header>
-        <div>
-            <!-- Inner sidebar -->
-            <div class="inner-sidebar bg-dark">
-                <!-- Inner sidebar header -->
-                <div class="inner-sidebar-header justify-content-center">
-                    <a asp-area="" asp-controller="Posts" asp-action="Create" class="btn btn-primary has-icon btn-block" type="button">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus mr-2">
-                            <line x1="12" y1="5" x2="12" y2="19"></line>
-                            <line x1="5" y1="12" x2="19" y2="12"></line>
-                        </svg>
-                        NEW POST
-                    </a>
-                </div>
-                <!-- /Inner sidebar header -->
-                <!-- Inner sidebar body -->
-                <div class="inner-sidebar-body p-0">
-                    <div class="p-3 h-100" data-simplebar="init">
-                        <div class="simplebar-wrapper" style="margin: -16px;">
-                            <div style="height: 100%;">
-                                <div style="padding: 16px;">
-                                    <nav class="nav nav-pills flex-column btn-group btn-group-toggle">
-                                        <a asp-area="" asp-controller="Home" asp-action="Index" class="text-white nav-link nav-link-faded has-icon">
-                                            <i class="fas fa-home fa-fw"></i>&nbsp; Home
-                                        </a>
-                                        <a asp-area="" asp-controller="HomePage" asp-action="GetPosts" class="text-white nav-link nav-link-faded has-icon">
-                                            <i class="fab fa-stack-overflow fa-fw"></i>&nbsp; All Posts
-                                        </a>
-                                        <a asp-area="" asp-controller="Categories" asp-action="GetCategories" class="text-white nav-link nav-link-faded has-icon">
-                                            <i class="fas fa-passport fa-fw"></i>&nbsp; Post Categories
-                                        </a>
+        <!-- Inner sidebar -->
+        <div class="inner-sidebar bg-dark">
+            <!-- Inner sidebar header -->
+            <div class="inner-sidebar-header justify-content-center">
+                <a asp-area="" asp-controller="Posts" asp-action="Create" class="btn btn-primary has-icon btn-block" type="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus mr-2">
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                    </svg>
+                    NEW POST
+                </a>
+            </div>
+            <!-- /Inner sidebar header -->
+            <!-- Inner sidebar body -->
+            <div class="inner-sidebar-body p-0">
+                <div class="p-3 h-100" data-simplebar="init">
+                    <div class="simplebar-wrapper" style="margin: -16px;">
+                        <div style="height: 100%;">
+                            <div style="padding: 16px;">
+                                <nav class="nav nav-pills flex-column btn-group btn-group-toggle">
+                                    <a asp-area="" asp-controller="Home" asp-action="Index" class="text-white nav-link nav-link-faded has-icon">
+                                        <i class="fas fa-home fa-fw"></i>&nbsp; Home
+                                    </a>
+                                    <a asp-area="" asp-controller="HomePage" asp-action="GetPosts" class="text-white nav-link nav-link-faded has-icon">
+                                        <i class="fab fa-stack-overflow fa-fw"></i>&nbsp; All Posts
+                                    </a>
+                                    <a asp-area="" asp-controller="Categories" asp-action="GetCategories" class="text-white nav-link nav-link-faded has-icon">
+                                        <i class="fas fa-passport fa-fw"></i>&nbsp; Post Categories
+                                    </a>
+                                    <a asp-area="" asp-controller="ViewUserProfile" asp-action="ByUsername" asp-route-username="@User.Identity.Name" class="text-white nav-link nav-link-faded has-icon">
+                                        <i class="fas fa-users fa-fw"></i>&nbsp; Profiles
+                                    </a>
+                                    @if (this.User.Identity.IsAuthenticated)
+                                    {
                                         <a asp-area="" asp-controller="ViewUserProfile" asp-action="ByUsername" asp-route-username="@User.Identity.Name" class="text-white nav-link nav-link-faded has-icon">
-                                            <i class="fas fa-users fa-fw"></i>&nbsp; Profiles
+                                            <i class="fas fa-user-tie fa-fw"></i>&nbsp; Profile
                                         </a>
-                                        @if (this.User.Identity.IsAuthenticated)
-                                        {
-                                            <a asp-area="" asp-controller="ViewUserProfile" asp-action="ByUsername" asp-route-username="@User.Identity.Name" class="text-white nav-link nav-link-faded has-icon">
-                                                <i class="fas fa-user-tie fa-fw"></i>&nbsp; Profile
-                                            </a>
-                                        }
-                                        <a asp-area="" asp-controller="Home" asp-action="Privacy" class="text-white nav-link nav-link-faded has-icon">
-                                            <i class="fas fa-user-secret fa-fw"></i>&nbsp; Privacy
-                                        </a>
-                                        <partial name="_LoginPartial" />
-                                    </nav>
-                                </div>
+                                    }
+                                    <a asp-area="" asp-controller="Home" asp-action="Privacy" class="text-white nav-link nav-link-faded has-icon">
+                                        <i class="fas fa-user-secret fa-fw"></i>&nbsp; Privacy
+                                    </a>
+                                    <partial name="_LoginPartial" />
+                                </nav>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- /Inner sidebar body -->
             </div>
-            <!-- /Inner sidebar -->
-            <div class="container">
-                <partial name="_CookieConsentPartial" />
-                <main role="main" class="pb-3">
-                    @this.RenderBody()
-                </main>
-            </div>
+            <!-- /Inner sidebar body -->
+        </div>
+        <!-- /Inner sidebar -->
+        <div class="container">
+            <partial name="_CookieConsentPartial" />
+            <main role="main" class="pb-3">
+                @this.RenderBody()
+            </main>
         </div>
     </header>
-
     <footer class="border-top footer text-muted bg-dark">
         <div class="container">
             <div class="row text-white">

@@ -47,11 +47,11 @@
                                     <a asp-area="" asp-controller="Categories" asp-action="GetCategories" class="text-white nav-link nav-link-faded has-icon">
                                         <i class="fas fa-passport fa-fw"></i>&nbsp; Post Categories
                                     </a>
-                                    <a asp-area="" asp-controller="ViewUserProfile" asp-action="ByUsername" asp-route-username="@User.Identity.Name" class="text-white nav-link nav-link-faded has-icon">
-                                        <i class="fas fa-users fa-fw"></i>&nbsp; Profiles
-                                    </a>
                                     @if (this.User.Identity.IsAuthenticated)
                                     {
+                                        <a asp-area="" asp-controller="Profiles" asp-action="GetProfiles" class="text-white nav-link nav-link-faded has-icon">
+                                            <i class="fas fa-users fa-fw"></i>&nbsp; Profiles
+                                        </a>
                                         <a asp-area="" asp-controller="ViewUserProfile" asp-action="ByUsername" asp-route-username="@User.Identity.Name" class="text-white nav-link nav-link-faded has-icon">
                                             <i class="fas fa-user-tie fa-fw"></i>&nbsp; Profile
                                         </a>

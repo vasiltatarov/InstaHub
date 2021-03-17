@@ -53,7 +53,6 @@
         public IEnumerable<T> GetAllPosts<T>()
             => this.postRepository
                 .All()
-                .OrderByDescending(x => x.CreatedOn)
                 .To<T>()
                 .ToList();
 

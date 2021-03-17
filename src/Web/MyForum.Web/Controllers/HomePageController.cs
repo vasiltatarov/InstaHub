@@ -8,10 +8,13 @@
     using Microsoft.AspNetCore.Mvc;
     using MyForum.Services.Data;
     using MyForum.Web.ViewModels.Posts;
+    using PagedList;
 
     [Authorize]
     public class HomePageController : Controller
     {
+        private const int ItemsPerPage = 10;
+
         private readonly IPostsService postsService;
 
         public HomePageController(IPostsService postsService)
@@ -26,9 +29,12 @@
         /// searchTerm is a key word to search in the post's titles.
         /// <param name="searchFor"></param>
         /// searchFor is a key word to search in the post's titles.
+        /// <param name="page"></param>
+        /// Install PagedList.Mvc and PagedList to do pagination.
+        /// In cshtml file use IPagedList<T>.
         /// <returns></returns>
         [HttpGet]
-        public IActionResult GetPosts(string searchTerm, string searchFor)
+        public IActionResult GetPosts(string searchTerm, string searchFor = "latest", int page = 1)
         {
             var posts = this.postsService.GetAllPosts<PostViewModel>();
 
@@ -44,10 +50,10 @@
                 posts = this.OrderPostsBy(posts, searchFor);
             }
 
-            return this.View(posts);
+            return this.View(posts.ToPagedList(page, ItemsPerPage));
         }
 
-        public IEnumerable<PostViewModel> OrderPostsBy(IEnumerable<PostViewModel> posts, string searchFor)
+        private IEnumerable<PostViewModel> OrderPostsBy(IEnumerable<PostViewModel> posts, string searchFor)
             => (searchFor) switch
             {
                 "latest" => posts.OrderByDescending(x => x.CreatedOn),

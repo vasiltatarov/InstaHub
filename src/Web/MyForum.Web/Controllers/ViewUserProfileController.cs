@@ -7,10 +7,14 @@
     using Microsoft.AspNetCore.Mvc;
     using MyForum.Data.Common.Repositories;
     using MyForum.Data.Models;
+    using MyForum.Services.Mapping;
     using MyForum.Web.ViewModels.ViewUserProfile;
+    using PagedList;
 
     public class ViewUserProfileController : Controller
     {
+        private const int PagedOnList = 5;
+
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IDeletableEntityRepository<Post> postRepository;
 
@@ -23,35 +27,20 @@
         }
 
         [Authorize]
-        public IActionResult ByUsername(string username)
+        public IActionResult ByUsername(string username, int page = 1)
         {
-            var user = this.userManager.Users.FirstOrDefault(x => x.UserName == username);
+            var user = this.userManager.Users
+                .To<UserProfileViewModel>()
+                .FirstOrDefault(x => x.Username == username);
 
             if (user == null)
             {
                 return this.BadRequest();
             }
 
-            var userViewModel = new UserProfileViewModel()
-            {
-                Username = user.UserName,
-                CreatedOn = user.CreatedOn,
-                ImagePath = user.ImagePath,
-                Posts = this.postRepository.All()
-                    .Where(x => x.UserId == user.Id)
-                    .Select(x => new UserProfilePostViewModel()
-                    {
-                        Id = x.Id,
-                        Title = x.Title,
-                        Content = x.Content,
-                        CreatedOn = x.CreatedOn,
-                        Comments = x.Comments,
-                        Votes = x.Votes,
-                    })
-                    .ToArray(),
-            };
+            user.Posts = user.Posts.ToPagedList(page, PagedOnList);
 
-            return this.View(userViewModel);
+            return this.View(user);
         }
     }
 }

@@ -4,8 +4,9 @@
     using System.Collections.Generic;
 
     using MyForum.Data.Models;
+    using MyForum.Services.Mapping;
 
-    public class UserProfilePostViewModel
+    public class UserProfilePostViewModel : IMapFrom<Post>
     {
         public int Id { get; set; }
 

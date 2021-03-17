@@ -47,8 +47,8 @@
                                 <hr>
                                 <ul class="list-inline share-list">
                                     <li><i class="fa fa-bell"></i>@profile.PostsCount Posts</li>
-                                    <li><i class="far fa-eye ml-2"></i> @profile.PostViews Post Views</li>
-                                    <li><i class="fas fa-thumbs-up"></i>@profile.VotesCount Post Likes</li>
+                                    <li><i class="far fa-eye ml-2"></i> @profile.PostViews Views</li>
+                                    <li><i class="fas fa-thumbs-up"></i>@profile.Posts.Sum(x => x.Votes.Count) Likes</li>
                                 </ul>
                             </div>
                         </div>

@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using MyForum.Web.ViewModels.ViewUserProfile;
 
 namespace MyForum.Web.ViewModels.Profiles
 {
@@ -18,6 +19,8 @@ namespace MyForum.Web.ViewModels.Profiles
         public int PostViews { get; set; }
 
         public int VotesCount { get; set; }
+
+        public UserProfilePostViewModel[] Posts { get; set; }
 
         public void CreateMappings(IProfileExpression configuration)
         {

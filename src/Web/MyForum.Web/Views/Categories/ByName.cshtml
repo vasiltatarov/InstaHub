@@ -1,86 +1,105 @@
-﻿@model MyForum.Web.ViewModels.Categories.CategoryViewModel
+﻿@using MyForum.Common
+@model MyForum.Web.ViewModels.Categories.CategoryViewModel
 @{
     this.ViewData["Title"] = this.Model.Title;
 }
 
-<div class="text-center">
-    <h1 class="display-4">@this.ViewData["Title"]</h1>
-</div>
-<div class="alert alert-info">
-    @this.Model.Description
-</div>
-@foreach (var post in this.Model.ForumPosts)
-{
-    <div class="media-body card-header border border-dark p-2 m-2" style="border-radius: 20px;">
-        <h4 class="media-heading">
-            <a asp-controller="Posts" asp-action="ById" asp-route-id="@post.Id">@post.Title</a>
-        </h4>
-        <hr />
-        <p>@post.ShortContent</p>
-        <hr />
-        <ul class="list-inline list-unstyled text-right">
-            <li class="list-inline-item">
-                <b><i class="fas fa-user-edit"></i> @post.UserUserName</b>
-            </li>
-            <li class="list-inline-item">
-                |
-            </li>
-            <li class="list-inline-item">
-                <i class="fas fa-calendar-alt"></i> <time datetime="@post.CreatedOn.ToString("O")"></time>
-            </li>
-            <li class="list-inline-item">
-                |
-            </li>
-            <li class="list-inline-item">
-                <i class="fas fa-comments"></i> @post.CommentsCount comments
-            </li>
-        </ul>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@this.ViewData["Title"] - @GlobalConstants.SystemName</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true" />
+    <link href="~/css/home.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+
+    <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css" />
+
+    <link href="~/lib/fontawesome/css/all.css" rel="stylesheet" asp-append-version="true" />
+</head>
+<body>
+    <div class="text-center">
+        <h1 class="display-4">@this.ViewData["Title"]</h1>
     </div>
-}
+    <div class="alert alert-info">
+        @this.Model.Description
+    </div>
+    @foreach (var post in this.Model.ForumPosts)
+    {
+        <div class="media-body card-header border border-dark p-2 m-2" style="border-radius: 20px;">
+            <h4 class="media-heading">
+                <a asp-controller="Posts" asp-action="ById" asp-route-id="@post.Id">@post.Title</a>
+            </h4>
+            <hr />
+            <p>@post.ShortContent</p>
+            <hr />
+            <ul class="list-inline list-unstyled text-right">
+                <li class="list-inline-item">
+                    <b><i class="fas fa-user-edit"></i> @post.UserUserName</b>
+                </li>
+                <li class="list-inline-item">
+                    |
+                </li>
+                <li class="list-inline-item">
+                    <i class="fas fa-calendar-alt"></i> <time datetime="@post.CreatedOn.ToString("O")"></time>
+                </li>
+                <li class="list-inline-item">
+                    |
+                </li>
+                <li class="list-inline-item">
+                    <i class="fas fa-comments"></i> @post.CommentsCount comments
+                </li>
+            </ul>
+        </div>
+    }
 
-@*Pagination*@
-<nav>
-    <ul class="pagination pagination pagination justify-content-center">
-        @if (this.Model.CurrentPage == 1)
-        {
-            <li class="page-item disabled">
-                <a class="page-link" href="#">
-                    <i class="fas fa-angle-double-left"></i>
-                </a>
-            </li>
-        }
-        else
-        {
-            <li class="page-item">
-                <a class="page-link" asp-route="forumCategory" asp-route-name="@this.Model.Title" asp-route-page="@(this.Model.CurrentPage - 1)">
-                    <i class="fas fa-angle-double-left"></i>
-                </a>
-            </li>
-        }
+    @*Pagination*@
+    <nav>
+        <ul class="pagination pagination pagination justify-content-center">
+            @if (this.Model.CurrentPage == 1)
+            {
+                <li class="page-item disabled">
+                    <a class="page-link" href="#">
+                        <i class="fas fa-angle-double-left"></i>
+                    </a>
+                </li>
+            }
+            else
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-route="forumCategory" asp-route-name="@this.Model.Title" asp-route-page="@(this.Model.CurrentPage - 1)">
+                        <i class="fas fa-angle-double-left"></i>
+                    </a>
+                </li>
+            }
 
-        @for (int i = 1; i <= this.Model.PagesCount; i++)
-        {
-            var active = i == this.Model.CurrentPage ? " active" : string.Empty;
-            <li class="page-item @active">
-                <a class="page-link" asp-route="forumCategory" asp-route-name="@this.Model.Title" asp-route-page="@i">@i</a>
-            </li>
-        }
+            @for (int i = 1; i <= this.Model.PagesCount; i++)
+            {
+                var active = i == this.Model.CurrentPage ? " active" : string.Empty;
+                <li class="page-item @active">
+                    <a class="page-link" asp-route="forumCategory" asp-route-name="@this.Model.Title" asp-route-page="@i">@i</a>
+                </li>
+            }
 
-        @if (this.Model.CurrentPage == this.Model.PagesCount)
-        {
-            <li class="page-item disabled">
-                <a class="page-link" href="#">
-                    <i class="fas fa-angle-double-right"></i>
-                </a>
-            </li>
-        }
-        else
-        {
-            <li class="page-item">
-                <a class="page-link" asp-route="forumCategory" asp-route-name="@this.Model.Title" asp-route-page="@(this.Model.CurrentPage + 1)">
-                    <i class="fas fa-angle-double-right"></i>
-                </a>
-            </li>
-        }
-    </ul>
-</nav>
+            @if (this.Model.CurrentPage == this.Model.PagesCount)
+            {
+                <li class="page-item disabled">
+                    <a class="page-link" href="#">
+                        <i class="fas fa-angle-double-right"></i>
+                    </a>
+                </li>
+            }
+            else
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-route="forumCategory" asp-route-name="@this.Model.Title" asp-route-page="@(this.Model.CurrentPage + 1)">
+                        <i class="fas fa-angle-double-right"></i>
+                    </a>
+                </li>
+            }
+        </ul>
+    </nav>
+</body>

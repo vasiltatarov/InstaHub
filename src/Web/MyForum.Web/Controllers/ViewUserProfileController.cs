@@ -1,4 +1,7 @@
-﻿namespace MyForum.Web.Controllers
+﻿using System.Security.Claims;
+using System.Threading.Tasks;
+
+namespace MyForum.Web.Controllers
 {
     using System.Linq;
 
@@ -33,10 +36,14 @@
                 .To<UserProfileViewModel>()
                 .FirstOrDefault(x => x.Username == username);
 
+            var currentUserImagePath = this.userManager.GetUserAsync(this.User).Result.ImagePath;
+
             if (user == null)
             {
                 return this.BadRequest();
             }
+
+            user.CurrentUserImagePath = currentUserImagePath;
 
             user.Posts = user.Posts.ToPagedList(page, PagedOnList);
 

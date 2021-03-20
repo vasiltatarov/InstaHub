@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     using AutoMapper;
     using MyForum.Data.Models;
@@ -15,6 +16,9 @@
         public DateTime CreatedOn { get; set; }
 
         public string ImagePath { get; set; }
+
+        [NotMapped]
+        public string CurrentUserImagePath { get; set; }
 
         public IEnumerable<UserProfilePostViewModel> Posts { get; set; }
 

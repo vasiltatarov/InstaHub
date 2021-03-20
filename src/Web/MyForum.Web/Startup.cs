@@ -122,7 +122,7 @@
                 endpoints =>
                     {
                         endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
-                        endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+                        endpoints.MapControllerRoute("default", "{controller=HomePage}/{action=Posts}/{id?}");
                         endpoints.MapControllerRoute("forumCategory", "p/{name:minlength(3)}", new { controller = "Categories", action = "ByName" });
                         endpoints.MapRazorPages();
                     });

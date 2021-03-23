@@ -9,6 +9,7 @@
     using MyForum.Services.Data;
     using MyForum.Web.ViewModels.UserSavedPosts;
 
+    [Authorize]
     public class UserSavedPostsController : Controller
     {
         private readonly UserManager<ApplicationUser> userManager;
@@ -38,6 +39,13 @@
             return this.View(posts);
         }
 
-        //Drop SavedPost
+        [Authorize]
+        public async Task<IActionResult> DeleteSavedPostById(int postId)
+        {
+            var userId = this.userManager.GetUserId(this.User);
+            await this.userSavedPostsService.Delete(userId, postId);
+
+            return this.RedirectToAction("GetSavedPosts");
+        }
     }
 }

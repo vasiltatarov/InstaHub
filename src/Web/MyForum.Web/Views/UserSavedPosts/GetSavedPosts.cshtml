@@ -86,6 +86,11 @@
                                                     <div class="timeline-comment-box">
                                                         <div class="input">
                                                             <div class="input-group">
+                                                                <span>
+                                                                    <a asp-controller="UserSavedPosts" asp-action="DeleteSavedPostById" asp-route-postId="@post.PostId" class="btn btn-danger" type="button">
+                                                                        Remove from saved!
+                                                                    </a>
+                                                                </span>
                                                             </div>
                                                         </div>
                                                     </div>

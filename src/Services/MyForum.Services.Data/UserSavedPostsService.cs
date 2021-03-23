@@ -24,13 +24,13 @@
 
         public async Task AddAsync(string userId, int postId)
         {
-            if (this.userSavedPostsRepository.All().Any(x => x.UserId == userId && x.PostId == postId))
+            if (this.userSavedPostsRepository.All()
+                .Any(x => x.UserId == userId &&
+                          x.PostId == postId &&
+                          x.IsDeleted == false))
             {
                 return;
             }
-
-            var post = this.postsRepository.All()
-                .FirstOrDefault(x => x.Id == postId);
 
             var userSavePost = new UserSavedPost()
             {
@@ -49,5 +49,13 @@
                 .Where(x => x.UserId == userId)
                 .To<T>()
                 .ToList();
+
+        public async Task Delete(string userId, int postId)
+        {
+            var userPost = this.userSavedPostsRepository.All()
+                .FirstOrDefault(x => x.UserId == userId && x.PostId == postId && x.IsDeleted == false);
+            this.userSavedPostsRepository.Delete(userPost);
+            await this.userSavedPostsRepository.SaveChangesAsync();
+        }
     }
 }

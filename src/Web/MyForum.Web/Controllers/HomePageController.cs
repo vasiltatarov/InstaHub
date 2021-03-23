@@ -62,35 +62,5 @@
                 "mostLiked" => posts.OrderByDescending(x => x.VotesCount),
                 _ => posts
             };
-
-        //[HttpGet]
-        //public IActionResult GetPosts(string searchTerm, string searchFor = "latest", int page = 1)
-        //{
-        //    var posts = this.postsService.GetAllPosts<PostViewModel>();
-
-        //    if (!string.IsNullOrWhiteSpace(searchTerm))
-        //    {
-        //        posts = posts
-        //            .Where(x => x.Title.ToLower().StartsWith(searchTerm, true, CultureInfo.InvariantCulture))
-        //            .ToList();
-        //    }
-
-        //    if (!string.IsNullOrWhiteSpace(searchFor))
-        //    {
-        //        posts = this.OrderPostsBy(posts, searchFor);
-        //    }
-
-        //    return this.View(posts.ToPagedList(page, ItemsPerPage));
-        //}
-
-        //private IEnumerable<PostViewModel> OrderPostsBy(IEnumerable<PostViewModel> posts, string searchFor)
-        //    => (searchFor) switch
-        //    {
-        //        "latest" => posts.OrderByDescending(x => x.CreatedOn),
-        //        "earliest" => posts.OrderBy(x => x.CreatedOn),
-        //        "mostVisited" => posts.OrderByDescending(x => x.VisitorsCount),
-        //        "mostLiked" => posts.OrderByDescending(x => x.VotesCount),
-        //        _ => posts
-        //    };
     }
 }

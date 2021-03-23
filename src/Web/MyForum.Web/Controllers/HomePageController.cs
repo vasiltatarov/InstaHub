@@ -33,7 +33,6 @@
         /// Install PagedList.Mvc and PagedList to do pagination.
         /// In cshtml file use IPagedList<T>.
         /// <returns></returns>
-
         [HttpGet]
         public IActionResult Posts(string searchTerm, string searchFor = "latest", int page = 1)
         {

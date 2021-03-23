@@ -52,6 +52,9 @@
                                         <a asp-area="" asp-controller="ViewUserProfile" asp-action="ByUsername" asp-route-username="@User.Identity.Name" class="text-white nav-link nav-link-faded has-icon">
                                             <i class="fas fa-user-tie fa-fw"></i>&nbsp; Profile
                                         </a>
+                                        <a asp-controller="UserSavedPosts" asp-action="GetSavedPosts" class="text-white nav-link nav-link-faded has-icon">
+                                            <i class="fas fa-save fa-fw"></i>&nbsp; Saved Posts
+                                        </a>
                                     }
                                     <a asp-area="" asp-controller="Home" asp-action="Privacy" class="text-white nav-link nav-link-faded has-icon">
                                         <i class="fas fa-user-secret fa-fw"></i>&nbsp; Privacy

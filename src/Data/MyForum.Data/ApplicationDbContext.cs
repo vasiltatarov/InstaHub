@@ -1,4 +1,6 @@
-﻿namespace MyForum.Data
+﻿using MyForum.Data.Configurations;
+
+namespace MyForum.Data
 {
     using System;
     using System.Linq;

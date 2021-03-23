@@ -360,9 +360,6 @@ namespace MyForum.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int?>("UserSavedPostId")
-                        .HasColumnType("int");
-
                     b.Property<int>("VisitorsCount")
                         .HasColumnType("int");
 
@@ -373,8 +370,6 @@ namespace MyForum.Data.Migrations
                     b.HasIndex("IsDeleted");
 
                     b.HasIndex("UserId");
-
-                    b.HasIndex("UserSavedPostId");
 
                     b.ToTable("Posts");
                 });
@@ -430,6 +425,9 @@ namespace MyForum.Data.Migrations
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("PostId")
+                        .HasColumnType("int");
+
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
@@ -437,6 +435,8 @@ namespace MyForum.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("IsDeleted");
+
+                    b.HasIndex("PostId");
 
                     b.HasIndex("UserId");
 
@@ -563,10 +563,6 @@ namespace MyForum.Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("MyForum.Data.Models.UserSavedPost", null)
-                        .WithMany("SavedPosts")
-                        .HasForeignKey("UserSavedPostId");
-
                     b.Navigation("Category");
 
                     b.Navigation("User");
@@ -574,11 +570,19 @@ namespace MyForum.Data.Migrations
 
             modelBuilder.Entity("MyForum.Data.Models.UserSavedPost", b =>
                 {
+                    b.HasOne("MyForum.Data.Models.Post", "Post")
+                        .WithMany()
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("MyForum.Data.Models.ApplicationUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("Post");
 
                     b.Navigation("User");
                 });
@@ -623,11 +627,6 @@ namespace MyForum.Data.Migrations
                     b.Navigation("Comments");
 
                     b.Navigation("Votes");
-                });
-
-            modelBuilder.Entity("MyForum.Data.Models.UserSavedPost", b =>
-                {
-                    b.Navigation("SavedPosts");
                 });
 #pragma warning restore 612, 618
         }

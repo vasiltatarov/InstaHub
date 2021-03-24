@@ -8,187 +8,176 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@this.ViewData["Title"] - @GlobalConstants.SystemName</title>
 
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <!-- bootstrap theme -->
-    <link href="css/bootstrap-theme.css" rel="stylesheet">
-    <!--external css-->
-    <!-- font icon -->
-    <link href="css/elegant-icons-style.css" rel="stylesheet" />
-    <link href="css/font-awesome.min.css" rel="stylesheet" />
-    <!-- full calendar css-->
-    <link href="assets/fullcalendar/fullcalendar/bootstrap-fullcalendar.css" rel="stylesheet" />
-    <link href="assets/fullcalendar/fullcalendar/fullcalendar.css" rel="stylesheet" />
-    <!-- easy pie chart-->
-    <link href="assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen" />
-    <!-- owl carousel -->
-    <link rel="stylesheet" href="css/owl.carousel.css" type="text/css">
-    <link href="css/jquery-jvectormap-1.2.2.css" rel="stylesheet">
-    <!-- Custom styles -->
-    <link rel="stylesheet" href="css/fullcalendar.css">
-    <link href="css/widgets.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-    <link href="css/style-responsive.css" rel="stylesheet" />
-    <link href="css/xcharts.min.css" rel=" stylesheet">
-    <link href="css/jquery-ui-1.10.4.min.css" rel="stylesheet">
+    <link href="~/css/profile.css" rel="stylesheet" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true" />
+    <link href="~/css/home.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+
+    <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css" />
+
+    <link href="~/lib/fontawesome/css/all.css" rel="stylesheet" asp-append-version="true" />
 </head>
 <body style="background: aliceblue">
 
-<div class="container">
-    <div>
-        <form method="get" asp-action="Posts">
-            <div class="inner-main-header m-2" style="border: 1px solid; border-radius: 25px;">
-                <select id="searchFor" name="searchFor">
-                    <option value="latest" selected="">Latest</option>
-                    <option value="earliest">Earlier</option>
-                    <option value="mostVisited">Most Visited</option>
-                    <option value="mostLiked">Most Liked</option>
-                </select>
-                <span class="ml-auto w-auto">
-                    Results: @this.Model.Count()
-                </span>
-                <span class="ml-auto w-auto">
-                    <input type="search" name="searchTerm" class="form-control form-control shadow-none mb-4 mt-4" placeholder="Search forum" />
-                </span>
-                <span class="ml-2">
-                    <button type="submit" class="fas fa-search btn btn-primary form-control"></button>
-                </span>
-            </div>
-        </form>
-    </div>
-    <hr />
-    <div class="row">
-        <div class="col-md-12">
-            <div id="content">
-                <!-- begin profile-content -->
-                <div class="profile-content">
-                    <!-- begin tab-content -->
-                    <div class="tab-content p-0">
-                        <!-- begin #profile-post tab -->
-                        <div class="tab-pane fade active show" id="profile-post">
-                            <!-- begin timeline -->
-                            <ul class="timeline">
-                                @foreach (var post in Model)
-                                {
-                                    <li>
-                                        <!-- begin timeline-time -->
-                                        <div class="timeline-time">
-                                            <span>
-                                                <time datetime="@post.CreatedOn.ToString("O")"></time>
-                                            </span>
-                                        </div>
-                                        <!-- end timeline-time -->
-                                        <!-- begin timeline-icon -->
-                                        <div class="timeline-icon">
-                                            <a href="javascript:;">&nbsp;</a>
-                                        </div>
-                                        <!-- end timeline-icon -->
-                                        <!-- begin timeline-body -->
-                                        <div class="timeline-body">
-                                            <div class="timeline-header">
-                                                <span class="userimage"><img src="~/uploads/@post.UserImagePath" alt=""></span>
-                                                <span class="username">
-                                                    <b>
-                                                        <a asp-controller="Posts" asp-action="ById" asp-route-id="@post.Id">@post.Title</a>
-                                                    </b>
-                                                </span>
+    <div class="container">
+        <div>
+            <form method="get" asp-action="Posts">
+                <div class="inner-main-header m-2" style="border: 1px solid; border-radius: 25px;">
+                    <select id="searchFor" name="searchFor">
+                        <option value="latest" selected="">Latest</option>
+                        <option value="earliest">Earlier</option>
+                        <option value="mostVisited">Most Visited</option>
+                        <option value="mostLiked">Most Liked</option>
+                    </select>
+                    <span class="ml-auto w-auto">
+                        Results: @this.Model.Count()
+                    </span>
+                    <span class="ml-auto w-auto">
+                        <input type="search" name="searchTerm" class="form-control form-control shadow-none mb-4 mt-4" placeholder="Search forum" />
+                    </span>
+                    <span class="ml-2">
+                        <button type="submit" class="fas fa-search btn btn-primary form-control"></button>
+                    </span>
+                </div>
+            </form>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-md-12">
+                <div id="content">
+                    <!-- begin profile-content -->
+                    <div class="profile-content">
+                        <!-- begin tab-content -->
+                        <div class="tab-content p-0">
+                            <!-- begin #profile-post tab -->
+                            <div class="tab-pane fade active show" id="profile-post">
+                                <!-- begin timeline -->
+                                <ul class="timeline">
+                                    @foreach (var post in Model)
+                                    {
+                                        <li>
+                                            <!-- begin timeline-time -->
+                                            <div class="timeline-time">
                                                 <span>
-                                                    <a asp-controller="ViewUserProfile" asp-action="ByUsername" asp-route-username="@post.UserUserName" class="fas fa-user-edit float-right" data-abc="true">@post.UserUserName</a>
+                                                    <time datetime="@post.CreatedOn.ToString("O")"></time>
                                                 </span>
                                             </div>
-                                            <div class="timeline-content">
-                                                <p>
-                                                    @post.ShortContent
-                                                </p>
+                                            <!-- end timeline-time -->
+                                            <!-- begin timeline-icon -->
+                                            <div class="timeline-icon">
+                                                <a href="javascript:;">&nbsp;</a>
                                             </div>
+                                            <!-- end timeline-icon -->
+                                            <!-- begin timeline-body -->
+                                            <div class="timeline-body">
+                                                <div class="timeline-header">
+                                                    <span class="userimage"><img src="~/uploads/@post.UserImagePath" alt=""></span>
+                                                    <span class="username">
+                                                        <b>
+                                                            <a asp-controller="Posts" asp-action="ById" asp-route-id="@post.Id">@post.Title</a>
+                                                        </b>
+                                                    </span>
+                                                    <span>
+                                                        <a asp-controller="ViewUserProfile" asp-action="ByUsername" asp-route-username="@post.UserUserName" class="fas fa-user-edit float-right" data-abc="true">@post.UserUserName</a>
+                                                    </span>
+                                                </div>
+                                                <div class="timeline-content">
+                                                    <p>
+                                                        @post.ShortContent
+                                                    </p>
+                                                </div>
 
-                                            <div class="timeline-likes">
-                                                <div class="stats-right">
-                                                    <i class="far fa-comment ml-2"></i> @post.Comments.Count()
-                                                    <i class="far fa-eye ml-2"></i> @post.VisitorsCount
-                                                </div>
-                                                <div class="stats">
-                                                    <span class="fa-stack fa-fw stats-icon">
-                                                        <i class="fa fa-circle fa-stack-2x text-danger"></i>
-                                                        <i class="fa fa-heart fa-stack-1x fa-inverse t-plus-1"></i>
-                                                    </span>
-                                                    <span class="fa-stack fa-fw stats-icon">
-                                                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                                                        <i class="fa fa-thumbs-up fa-stack-1x fa-inverse"></i>
-                                                    </span>
-                                                    <span class="stats-total">@post.VotesCount</span>
-                                                </div>
-                                            </div>
-                                            <div class="timeline-comment-box">
-                                                <div class="input">
-                                                    <div class="input-group">
-                                                        <span>
-                                                            <a class="btn btn-primary" type="button" asp-controller="Posts" asp-action="ById" asp-route-id="@post.Id">
-                                                                Like & Comment
-                                                            </a>
+                                                <div class="timeline-likes">
+                                                    <div class="stats-right">
+                                                        <i class="far fa-comment ml-2"></i> @post.Comments.Count()
+                                                        <i class="far fa-eye ml-2"></i> @post.VisitorsCount
+                                                    </div>
+                                                    <div class="stats">
+                                                        <span class="fa-stack fa-fw stats-icon">
+                                                            <i class="fa fa-circle fa-stack-2x text-danger"></i>
+                                                            <i class="fa fa-heart fa-stack-1x fa-inverse t-plus-1"></i>
                                                         </span>
+                                                        <span class="fa-stack fa-fw stats-icon">
+                                                            <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                                                            <i class="fa fa-thumbs-up fa-stack-1x fa-inverse"></i>
+                                                        </span>
+                                                        <span class="stats-total">@post.VotesCount</span>
+                                                    </div>
+                                                </div>
+                                                <div class="timeline-comment-box">
+                                                    <div class="input">
+                                                        <div class="input-group">
+                                                            <span>
+                                                                <a class="btn btn-primary" type="button" asp-controller="Posts" asp-action="ById" asp-route-id="@post.Id">
+                                                                    Like & Comment
+                                                                </a>
+                                                            </span>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <!-- end timeline-body -->
-                                    </li>
-                                }
-                            </ul>
-                            <!-- end timeline -->
+                                            <!-- end timeline-body -->
+                                        </li>
+                                    }
+                                </ul>
+                                <!-- end timeline -->
+                            </div>
+                            <!-- end #profile-post tab -->
                         </div>
-                        <!-- end #profile-post tab -->
+                        <!-- end tab-content -->
                     </div>
-                    <!-- end tab-content -->
+                    <!-- end profile-content -->
                 </div>
-                <!-- end profile-content -->
             </div>
         </div>
     </div>
-</div>
-@*Pagination*@
-<nav>
-    <ul class="pagination pagination pagination justify-content-center">
-        @if (Model.PageNumber == 1)
-        {
-            <li class="page-item disabled">
-                <a class="page-link" href="#">
-                    <i class="fas fa-angle-double-left"></i>
-                </a>
-            </li>
-        }
-        else
-        {
-            <li class="page-item">
-                <a class="page-link" asp-action="Posts" asp-route-page="@Model.PageNumber - 1">
-                    <i class="fas fa-angle-double-left"></i>
-                </a>
-            </li>
-        }
+    @*Pagination*@
+    <nav>
+        <ul class="pagination pagination pagination justify-content-center">
+            @if (Model.PageNumber == 1)
+            {
+                <li class="page-item disabled">
+                    <a class="page-link" href="#">
+                        <i class="fas fa-angle-double-left"></i>
+                    </a>
+                </li>
+            }
+            else
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-action="Posts" asp-route-page="@(Model.PageNumber - 1)">
+                        <i class="fas fa-angle-double-left"></i>
+                    </a>
+                </li>
+            }
 
-        @for (int i = 1; i <= Model.PageCount; i++)
-        {
-            var active = i == Model.PageNumber ? " active" : string.Empty;
-            <li class="page-item @active">
-                <a class="page-link" asp-action="Posts" asp-route-page="@i">@i</a>
-            </li>
-        }
+            @for (int i = 1; i <= Model.PageCount; i++)
+            {
+                var active = i == Model.PageNumber ? " active" : string.Empty;
+                <li class="page-item @active">
+                    <a class="page-link" asp-action="Posts" asp-route-page="@i">@i</a>
+                </li>
+            }
 
-        @if (Model.PageNumber == Model.PageCount)
-        {
-            <li class="page-item disabled">
-                <a class="page-link" href="#">
-                    <i class="fas fa-angle-double-right"></i>
-                </a>
-            </li>
-        }
-        else
-        {
-            <li class="page-item">
-                <a class="page-link" asp-action="Posts" asp-route-page="@(Model.PageNumber + 1)">
-                    <i class="fas fa-angle-double-right"></i>
-                </a>
-            </li>
-        }
-    </ul>
-</nav>
+            @if (Model.PageNumber == Model.PageCount)
+            {
+                <li class="page-item disabled">
+                    <a class="page-link" href="#">
+                        <i class="fas fa-angle-double-right"></i>
+                    </a>
+                </li>
+            }
+            else
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-action="Posts" asp-route-page="@(Model.PageNumber + 1)">
+                        <i class="fas fa-angle-double-right"></i>
+                    </a>
+                </li>
+            }
+        </ul>
+    </nav>
 </body>

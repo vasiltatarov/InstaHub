@@ -1,5 +1,5 @@
 ﻿@using MyForum.Common
-@model PagedList.IPagedList<MyForum.Web.ViewModels.UserSavedPosts.SavePostViewModel>
+@model IEnumerable<MyForum.Web.ViewModels.UserSavedPosts.SavePostViewModel>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -113,7 +113,7 @@
     </div>
 
     @*Pagination*@
-    <nav>
+    @*<nav>
             <ul class="pagination pagination pagination justify-content-center">
                 @if (Model.PageNumber == 1)
                 {
@@ -126,7 +126,7 @@
                 else
                 {
                     <li class="page-item">
-                        <a class="page-link" asp-action="GetSavedPosts" asp-route-page="@(Model.PageNumber - 1)">
+                        <a class="page-link" asp-action="Posts" asp-route-page="@Model.PageNumber - 1">
                             <i class="fas fa-angle-double-left"></i>
                         </a>
                     </li>
@@ -136,7 +136,7 @@
                 {
                     var active = i == Model.PageNumber ? " active" : string.Empty;
                     <li class="page-item @active">
-                        <a class="page-link" asp-action="GetSavedPosts" asp-route-page="@i">@i</a>
+                        <a class="page-link" asp-action="Posts" asp-route-page="@i">@i</a>
                     </li>
                 }
 
@@ -151,11 +151,11 @@
                 else
                 {
                     <li class="page-item">
-                        <a class="page-link" asp-action="GetSavedPosts" asp-route-page="@(Model.PageNumber + 1)">
+                        <a class="page-link" asp-action="Posts" asp-route-page="@(Model.PageNumber + 1)">
                             <i class="fas fa-angle-double-right"></i>
                         </a>
                     </li>
                 }
             </ul>
-        </nav>
+        </nav>*@
 </body>

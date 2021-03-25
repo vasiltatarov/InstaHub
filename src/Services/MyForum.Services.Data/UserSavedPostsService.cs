@@ -22,14 +22,14 @@
             this.postsRepository = postsRepository;
         }
 
-        public async Task AddAsync(string userId, int postId)
+        public async Task<bool> AddAsync(string userId, int postId)
         {
             if (this.userSavedPostsRepository.All()
                 .Any(x => x.UserId == userId &&
                           x.PostId == postId &&
                           x.IsDeleted == false))
             {
-                return;
+                return false;
             }
 
             var userSavePost = new UserSavedPost()
@@ -41,6 +41,8 @@
 
             await this.userSavedPostsRepository.AddAsync(userSavePost);
             await this.userSavedPostsRepository.SaveChangesAsync();
+
+            return true;
         }
 
         public IEnumerable<T> GetUserSavedPosts<T>(string userId)

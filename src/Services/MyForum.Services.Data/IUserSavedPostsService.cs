@@ -5,7 +5,7 @@
 
     public interface IUserSavedPostsService
     {
-        Task AddAsync(string userId, int postId);
+        Task<bool> AddAsync(string userId, int postId);
 
         IEnumerable<T> GetUserSavedPosts<T>(string userId);
 

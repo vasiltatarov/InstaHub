@@ -71,7 +71,7 @@
             <h1>@this.Model.Title</h1>
             @if (this.User.Identity.IsAuthenticated)
             {
-                <a asp-controller="UserSavedPosts" asp-action="SavePostByUser" asp-route-postId="@this.Model.Id" type="button" class="btn btn-primary">
+                <a onclick="addInSaved(@Model.Id)" class="btn btn-primary">
                     <i class="fas fa-save fa-fw"></i>&nbsp; Add in Saved
                 </a>
             }
@@ -168,6 +168,20 @@
     </div>
     @section Scripts {
         <script>
+            function addInSaved(postId) {
+                var json = { postId: postId };
+                $.ajax({
+                    type: 'GET',
+                    url: "/api/userSavePost/" + postId,
+                    data: JSON.stringify(json),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data) {
+                        alert(data.message);
+                    }
+                });
+            }
+
             function showCommentForm(parentId) {
                 $("#AddCommentForm input[name='ParentId']").val(parentId);
                 $("#AddCommentForm").toggle();

@@ -87,7 +87,7 @@
                                                         <div class="input">
                                                             <div class="input-group">
                                                                 <span>
-                                                                    <a asp-controller="UserSavedPosts" asp-action="DeleteSavedPostById" asp-route-postId="@post.PostId" class="btn btn-danger" type="button">
+                                                                    <a asp-controller="UserSavedPosts" asp-action="DeleteSavedPostById" asp-route-postId="@post.PostId" class="btn btn-danger">
                                                                         Remove from saved!
                                                                     </a>
                                                                 </span>
@@ -114,48 +114,64 @@
 
     @*Pagination*@
     <nav>
-            <ul class="pagination pagination pagination justify-content-center">
-                @if (Model.PageNumber == 1)
-                {
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#">
-                            <i class="fas fa-angle-double-left"></i>
-                        </a>
-                    </li>
-                }
-                else
-                {
-                    <li class="page-item">
-                        <a class="page-link" asp-action="GetSavedPosts" asp-route-page="@(Model.PageNumber - 1)">
-                            <i class="fas fa-angle-double-left"></i>
-                        </a>
-                    </li>
-                }
+        <ul class="pagination pagination pagination justify-content-center">
+            @if (Model.PageNumber == 1)
+            {
+                <li class="page-item disabled">
+                    <a class="page-link" href="#">
+                        <i class="fas fa-angle-double-left"></i>
+                    </a>
+                </li>
+            }
+            else
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-action="GetSavedPosts" asp-route-page="@(this.Model.PageNumber - 1)">
+                        <i class="fas fa-angle-double-left"></i>
+                    </a>
+                </li>
+            }
 
-                @for (int i = 1; i <= Model.PageCount; i++)
-                {
-                    var active = i == Model.PageNumber ? " active" : string.Empty;
-                    <li class="page-item @active">
-                        <a class="page-link" asp-action="GetSavedPosts" asp-route-page="@i">@i</a>
-                    </li>
-                }
+            @for (int i = 1; i <= Model.PageCount; i++)
+            {
+                var active = i == Model.PageNumber ? " active" : string.Empty;
+                <li class="page-item @active">
+                    <a class="page-link" asp-action="GetSavedPosts" asp-route-page="@i">@i</a>
+                </li>
+            }
 
-                @if (Model.PageNumber == Model.PageCount)
-                {
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#">
-                            <i class="fas fa-angle-double-right"></i>
-                        </a>
-                    </li>
-                }
-                else
-                {
-                    <li class="page-item">
-                        <a class="page-link" asp-action="GetSavedPosts" asp-route-page="@(Model.PageNumber + 1)">
-                            <i class="fas fa-angle-double-right"></i>
-                        </a>
-                    </li>
-                }
-            </ul>
-        </nav>
+            @if (Model.PageNumber == Model.PageCount)
+            {
+                <li class="page-item disabled">
+                    <a class="page-link" href="#">
+                        <i class="fas fa-angle-double-right"></i>
+                    </a>
+                </li>
+            }
+            else
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-action="GetSavedPosts" asp-route-page="@(this.Model.PageNumber + 1)">
+                        <i class="fas fa-angle-double-right"></i>
+                    </a>
+                </li>
+            }
+        </ul>
+    </nav>
+
+    @*@section Scripts {
+        <script>
+            function deleteSavedPost(postId) {
+                var json = { postId: postId };
+                $.ajax({
+                    type: 'GET',
+                    url: "/api/userSavePost/delete/" + postId,
+                    data: JSON.stringify(json),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json"
+                });
+            }
+        </script>
+    }*@
+
 </body>

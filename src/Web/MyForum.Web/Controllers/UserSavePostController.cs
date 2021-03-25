@@ -23,7 +23,7 @@
         }
 
         [Authorize]
-        [HttpGet("{postId}")]
+        [HttpGet("save/{postId}")]
         public async Task<ActionResult<SavePostResponseModel>> Save(int postId)
         {
             var message = "Saved Successfully!";
@@ -37,5 +37,13 @@
 
             return new SavePostResponseModel() { Message = message };
         }
+
+        //[Authorize]
+        //[HttpGet("delete/{postId}")]
+        //public async Task Delete(int postId)
+        //{
+        //    var userId = this.userManager.GetUserId(this.User);
+        //    await this.userSavedPostsService.Delete(userId, postId);
+        //}
     }
 }

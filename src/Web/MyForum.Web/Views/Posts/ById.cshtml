@@ -172,7 +172,7 @@
                 var json = { postId: postId };
                 $.ajax({
                     type: 'GET',
-                    url: "/api/userSavePost/" + postId,
+                    url: "/api/userSavePost/save/" + postId,
                     data: JSON.stringify(json),
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",

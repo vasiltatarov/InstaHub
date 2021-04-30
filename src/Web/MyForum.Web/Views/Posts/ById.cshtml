@@ -71,7 +71,7 @@
             <h1>@this.Model.Title</h1>
             @if (this.User.Identity.IsAuthenticated)
             {
-                <a onclick="addInSaved(@Model.Id)" class="btn btn-primary">
+                <a id="savePostBtn" onclick="addInSaved(@Model.Id)" class="btn btn-primary">
                     <i class="fas fa-save fa-fw"></i>&nbsp; Add in Saved
                 </a>
             }
@@ -94,13 +94,13 @@
                                 <div class="text-muted small ml-3">
                                     <form id="votesForm" method="post"></form>
                                     <div>
-                                        <a href="#" onclick="sendVote(@Model.Id, true)">
+                                        <a href="javascript:void(0)" onclick="sendVote(@Model.Id, true)">
                                             <i class="fa fa-thumbs-up"></i>
                                         </a>
                                     </div>
-                                    <div id="votesCount">@Model.VotesCount</div>
+                                    &nbsp;
                                     <div>
-                                        <a href="#" onclick="sendVote(@Model.Id, false)">
+                                        <a href="javascript:void(0)" onclick="sendVote(@Model.Id, false)">
                                             <i class="fa fa-thumbs-down"></i>
                                         </a>
                                     </div>
@@ -115,10 +115,7 @@
                     </div>
                     <div class="card-footer d-flex flex-wrap justify-content-between align-items-center px-0 pt-0 pb-3">
                         <div class="px-4 pt-3">
-                            <a href="javascript:void(0)" class="text-muted d-inline-flex align-items-center align-middle" data-abc="true">
-                                <i class="fa fa-heart text-danger"></i>&nbsp;
-                                <span class="align-middle">@Model.VotesCount</span>
-                            </a>
+                            <i id="votesCount" class="fa fa-heart text-danger"> @Model.VotesCount</i>
                             <span class="text-muted d-inline-flex align-items-center align-middle ml-4">
                                 <i class="fa fa-eye text-muted fsize-3"></i>&nbsp;
                                 <span class="align-middle">@Model.VisitorsCount</span>
@@ -127,7 +124,7 @@
                         @if (this.User.Identity.IsAuthenticated)
                         {
                             <div class="px-4 pt-3">
-                                <button type="button" class="btn btn-primary" onclick="showCommentForm(0)">
+                                <button id="commentBtn" type="button" class="btn btn-primary" onclick="showCommentForm(0)">
                                     <i class="far fa-comment ml-2"></i>&nbsp; Comment
                                 </button>
                             </div>
@@ -162,10 +159,11 @@
                 <textarea name="Content" id="Content" class="form-control"></textarea>
             </div>
             <div>
-                <input type="submit" class="btn btn-primary" value="AddAsync comment" />
+                <input type="submit" class="btn btn-primary" value="Add comment" />
             </div>
         </form>
     </div>
+
     @section Scripts {
         <script>
             function addInSaved(postId) {
@@ -177,7 +175,9 @@
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (data) {
-                        alert(data.message);
+                        if (data.message === 'It is already saved!') {
+                            alert('You have already Saved it');
+                        }
                     }
                 });
             }
@@ -185,6 +185,12 @@
             function showCommentForm(parentId) {
                 $("#AddCommentForm input[name='ParentId']").val(parentId);
                 $("#AddCommentForm").toggle();
+                var commentBtnText = document.getElementById('commentBtn').textContent.trim();
+                if (commentBtnText === 'Comment') {
+                    document.getElementById('commentBtn').textContent = 'Close Comment form';
+                } else {
+                    document.getElementById('commentBtn').textContent = 'Comment';
+                }
                 $('html, body').animate({
                     scrollTop: $("#AddCommentForm").offset().top
                 }, 1000);

@@ -22,13 +22,13 @@
             <h1>Login</h1>
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="textbox">
-                <i class="fas fa-user"></i>
-                <input asp-for="Input.Email" class="form-control" />
+                <i class='fas fa-envelope'></i>
+                <input asp-for="Input.Email" class="form-control" placeholder="Email" />
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
             <div class="textbox">
                 <i class="fas fa-lock"></i>
-                <input asp-for="Input.Password" class="form-control" />
+                <input asp-for="Input.Password" class="form-control" placeholder="Password" />
                 <span asp-validation-for="Input.Password" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -42,8 +42,14 @@
             <div class="form-group">
                 <button type="submit" class="btn btn-primary">Log in</button>
             </div>
-            <p>By creating an account you agree to our <a href="uslovia.html">Terms & Privacy</a>.</p>
-            <p>Dont have an account?                   <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register Here</a>.</p>
+            <p>
+                Dont have an account?
+                <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register Here</a>.
+            </p>
+            <p>
+                By creating an account you agree to our
+                <a href="uslovia.html">Terms & Privacy</a>.
+            </p>
             <div class="form-group">
                 <p>
                     <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>

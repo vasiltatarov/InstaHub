@@ -22,6 +22,8 @@ namespace MyForum.Data.Models
 
         public string ImagePath { get; set; }
 
+        public string Gender { get; set; }
+
         // Audit info
         public DateTime CreatedOn { get; set; }
 

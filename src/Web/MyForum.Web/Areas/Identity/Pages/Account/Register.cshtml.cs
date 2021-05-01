@@ -1,4 +1,6 @@
-﻿namespace MyForum.Web.Areas.Identity.Pages.Account
+﻿using System;
+
+namespace MyForum.Web.Areas.Identity.Pages.Account
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -72,14 +74,17 @@
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
 
-            [Display(Name = "Picture")]
-            [Required]
-            public IFormFile Image { get; set; }
-
             [DataType(DataType.Text)]
             [Display(Name = "Location")]
             [Required]
             public string Location { get; set; }
+
+            [Required]
+            public string Gender { get; set; }
+
+            [Display(Name = "Picture")]
+            [Required]
+            public IFormFile Image { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -101,8 +106,9 @@
                 {
                     UserName = Input.UserName,
                     Email = Input.Email,
-                    ImagePath = Input.Image.FileName,
                     Location = Input.Location,
+                    Gender = Input.Gender,
+                    ImagePath = Input.Image.FileName,
                 };
                 var result = await _userManager.CreateAsync(user, Input.Password);
 

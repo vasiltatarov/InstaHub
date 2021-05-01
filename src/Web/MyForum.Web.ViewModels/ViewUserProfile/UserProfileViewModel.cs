@@ -13,6 +13,8 @@
     {
         public string Username { get; set; }
 
+        public string Location { get; set; }
+
         public DateTime CreatedOn { get; set; }
 
         public string ImagePath { get; set; }

@@ -12,6 +12,8 @@ namespace MyForum.Web.ViewModels.Profiles
     {
         public string Username { get; set; }
 
+        public string Location { get; set; }
+
         public string ImagePath { get; set; }
 
         public int PostsCount { get; set; }

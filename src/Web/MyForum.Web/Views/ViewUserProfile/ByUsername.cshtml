@@ -46,6 +46,7 @@
                                 <div class="profile-header-info">
                                     <h4 class="m-t-10 m-b-5">@Model.Username</h4>
                                     <p class="m-b-10">Joined on -  <time datetime="@this.Model.CreatedOn.ToString("O")"></time></p>
+                                    <p><i class="fa fa-map"></i>&nbsp; @Model.Location</p>
                                     <p class="m-b-10">Posts - @Model.Posts.Count()</p>
                                     @*<a href="#" class="btn btn-sm btn-info mb-2">Edit Profile</a>*@
                                 </div>

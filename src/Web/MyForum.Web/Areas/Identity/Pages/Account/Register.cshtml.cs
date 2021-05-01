@@ -51,9 +51,10 @@
 
         public class InputModel
         {
-            [Display(Name = "Picture")]
+            [DataType(DataType.Text)]
+            [Display(Name = "Username")]
             [Required]
-            public string ImagePath { get; set; }
+            public string UserName { get; set; }
 
             [Required]
             [EmailAddress]
@@ -70,6 +71,15 @@
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            [Display(Name = "Picture")]
+            [Required]
+            public IFormFile Image { get; set; }
+
+            [DataType(DataType.Text)]
+            [Display(Name = "Location")]
+            [Required]
+            public string Location { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -78,16 +88,22 @@
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
 
-        public async Task<IActionResult> OnPostAsync(IFormFile file, string returnUrl = null)
+        public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
             if (ModelState.IsValid)
             {
-                _unitOfWork.UploadImage(file);
+                _unitOfWork.UploadImage(Input.Image);
 
-                var user = new ApplicationUser { UserName = Input.Email, Email = Input.Email, ImagePath = file.FileName };
+                var user = new ApplicationUser
+                {
+                    UserName = Input.UserName,
+                    Email = Input.Email,
+                    ImagePath = Input.Image.FileName,
+                    Location = Input.Location,
+                };
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)

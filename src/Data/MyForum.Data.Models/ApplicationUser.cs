@@ -18,6 +18,8 @@ namespace MyForum.Data.Models
             this.Posts = new HashSet<Post>();
         }
 
+        public string Location { get; set; }
+
         public string ImagePath { get; set; }
 
         // Audit info

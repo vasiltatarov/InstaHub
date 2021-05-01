@@ -1,6 +1,18 @@
-# ForumSystem
-ASP.NET Core MVC Application
+# Forum System
+Система за създадване, четене, управление на постове със свободен достъп.
 
-----
-### This is the current state of database diagrams relations in my app.
+## Функционалност
+* Регистрация на потребители
+* Възможност за разглеждане, създадване, четене на постове
+* Възможност за коментиране, харесване и запазване на постове
+* Възможност за филтриране по категория на постовете и търсене по заглавие
+* Интерактивен, гъвкав UX
+
+## Технологии
+* C#, ASP.NET Core MVC, MSSQL
+* HTML, CSS, JavaScript
+* Auto-Mapper, jQuery
+* TinyMCE, Moment.js
+
+## This is the current state of database diagrams relations in my app.
 ![](DatabaseDiagrams.png)

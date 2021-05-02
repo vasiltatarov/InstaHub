@@ -140,7 +140,7 @@
                 </li>
             }
 
-            @if (Model.PageNumber == Model.PageCount)
+            @if (Model.PageNumber >= Model.PageCount)
             {
                 <li class="page-item disabled">
                     <a class="page-link" href="#">

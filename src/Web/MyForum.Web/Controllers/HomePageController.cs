@@ -34,9 +34,13 @@
         /// In cshtml file use IPagedList<T>.
         /// <returns></returns>
         [HttpGet]
-        public IActionResult Posts(string searchTerm, string searchFor = "latest", int page = 1)
+        public IActionResult Posts(string searchTerm, string searchFor = "Latest", int page = 1)
         {
             var posts = this.postsService.GetAllPosts<HomePostViewModel>();
+
+            this.ViewData.Add("searchFor", searchFor);
+            this.ViewData.Add("searchTerm", searchTerm);
+            this.ViewData.Add("page", page);
 
             if (!string.IsNullOrWhiteSpace(searchTerm))
             {
@@ -56,10 +60,10 @@
         private IEnumerable<HomePostViewModel> OrderHomePostsBy(IEnumerable<HomePostViewModel> posts, string searchFor)
             => (searchFor) switch
             {
-                "latest" => posts.OrderByDescending(x => x.CreatedOn),
-                "earliest" => posts.OrderBy(x => x.CreatedOn),
-                "mostVisited" => posts.OrderByDescending(x => x.VisitorsCount),
-                "mostLiked" => posts.OrderByDescending(x => x.VotesCount),
+                "Latest" => posts.OrderByDescending(x => x.CreatedOn),
+                "Earliest" => posts.OrderBy(x => x.CreatedOn),
+                "Most-Visited" => posts.OrderByDescending(x => x.VisitorsCount),
+                "Most-Liked" => posts.OrderByDescending(x => x.VotesCount),
                 _ => posts
             };
     }

@@ -1,4 +1,5 @@
 ﻿@using MyForum.Common
+@using Microsoft.AspNetCore.Routing
 @model PagedList.IPagedList<MyForum.Web.ViewModels.HomePage.HomePostViewModel>
 
 <!DOCTYPE html>
@@ -24,19 +25,20 @@
 
     <div class="container">
         <div>
-            <form method="get" asp-action="Posts">
+            <form method="get" asp-action="Posts" >
                 <div class="inner-main-header m-2" style="border: 1px solid; border-radius: 25px;">
                     <select id="searchFor" name="searchFor">
-                        <option value="latest" selected="">Latest</option>
-                        <option value="earliest">Earlier</option>
-                        <option value="mostVisited">Most Visited</option>
-                        <option value="mostLiked">Most Liked</option>
+                        <option selected="">@ViewData["searchFor"]</option>
+                        <option value="Latest">Latest</option>
+                        <option value="Earliest">Earlier</option>
+                        <option value="Most-Visited">Most Visited</option>
+                        <option value="Most-Liked">Most Liked</option>
                     </select>
                     <span class="ml-auto w-auto">
                         Results: @this.Model.Count()
                     </span>
                     <span class="ml-auto w-auto">
-                        <input type="search" name="searchTerm" class="form-control form-control shadow-none mb-4 mt-4" placeholder="Search forum" />
+                        <input value="@this.ViewData["searchTerm"]" type="search" name="searchTerm" class="form-control form-control shadow-none mb-4 mt-4" placeholder="Search forum" />
                     </span>
                     <span class="ml-2">
                         <button type="submit" class="fas fa-search btn btn-primary form-control"></button>
@@ -148,7 +150,9 @@
             else
             {
                 <li class="page-item">
-                    <a class="page-link" asp-action="Posts" asp-route-page="@(Model.PageNumber - 1)">
+                    <a class="page-link" asp-action="Posts" 
+                       asp-route-searchFor="@this.ViewData["searchFor"]" asp-route-searchTerm="@this.ViewData["searchTerm"]"
+                       asp-route-page="@(Model.PageNumber - 1)">
                         <i class="fas fa-angle-double-left"></i>
                     </a>
                 </li>
@@ -158,7 +162,9 @@
             {
                 var active = i == Model.PageNumber ? " active" : string.Empty;
                 <li class="page-item @active">
-                    <a class="page-link" asp-action="Posts" asp-route-page="@i">@i</a>
+                    <a class="page-link" asp-action="Posts" 
+                       asp-route-searchFor="@this.ViewData["searchFor"]" asp-route-searchTerm="@this.ViewData["searchTerm"]"
+                       asp-route-page="@i">@i</a>
                 </li>
             }
 
@@ -173,7 +179,9 @@
             else
             {
                 <li class="page-item">
-                    <a class="page-link" asp-action="Posts" asp-route-page="@(Model.PageNumber + 1)">
+                    <a class="page-link" asp-action="Posts" 
+                       asp-route-searchFor="@this.ViewData["searchFor"]" asp-route-searchTerm="@this.ViewData["searchTerm"]"
+                       asp-route-page="@(Model.PageNumber + 1)">
                         <i class="fas fa-angle-double-right"></i>
                     </a>
                 </li>

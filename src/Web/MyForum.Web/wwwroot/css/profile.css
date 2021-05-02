@@ -96,8 +96,8 @@ body {
 
 .profile-header-img {
     float: left;
-    width: 120px;
-    height: 120px;
+    width: 200px;
+    height: 200px;
     overflow: hidden;
     position: relative;
     z-index: 10;

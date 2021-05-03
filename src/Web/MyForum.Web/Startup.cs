@@ -1,4 +1,6 @@
-﻿namespace MyForum.Web
+﻿using MyForum.Web.Hubs;
+
+namespace MyForum.Web
 {
     using System.Reflection;
 
@@ -57,6 +59,7 @@
                 options.HeaderName = "X-CSRF-TOKEN";
             });
 
+            services.AddSignalR();
             services.AddRazorPages();
             services.AddDatabaseDeveloperPageExceptionFilter();
 
@@ -122,6 +125,7 @@
             app.UseEndpoints(
                 endpoints =>
                     {
+                        endpoints.MapHub<ChatHub>("/chat");
                         endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapControllerRoute("default", "{controller=HomePage}/{action=Posts}/{id?}");
                         endpoints.MapControllerRoute("forumCategory", "p/{name:minlength(3)}", new { controller = "Categories", action = "ByName" });

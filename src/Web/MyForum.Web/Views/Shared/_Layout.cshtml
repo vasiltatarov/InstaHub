@@ -46,6 +46,9 @@
                                     </a>
                                     @if (this.User.Identity.IsAuthenticated)
                                     {
+                                        <a asp-area="" asp-controller="Chat" asp-action="Chat" class="text-white nav-link nav-link-faded has-icon">
+                                            <i class="far fa-comment-dots"></i>&nbsp; Live Chat
+                                        </a>
                                         <a asp-area="" asp-controller="Profiles" asp-action="GetProfiles" class="text-white nav-link nav-link-faded has-icon">
                                             <i class="fas fa-users fa-fw"></i>&nbsp; Profiles
                                         </a>

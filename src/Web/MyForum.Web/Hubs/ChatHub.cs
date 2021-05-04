@@ -31,6 +31,7 @@
                 "NewMessage",
                 new Message
                 {
+                    UserUserName = user.UserName,
                     UserImagePath = user.ImagePath,
                     Text = message,
                     CreatedOn = DateTime.UtcNow,

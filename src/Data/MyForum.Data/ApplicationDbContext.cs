@@ -1,6 +1,4 @@
-﻿using MyForum.Data.Configurations;
-
-namespace MyForum.Data
+﻿namespace MyForum.Data
 {
     using System;
     using System.Linq;
@@ -36,6 +34,8 @@ namespace MyForum.Data
         public DbSet<Vote> Votes { get; set; }
 
         public DbSet<UserSavedPost> UserSavedPosts { get; set; }
+
+        public DbSet<ChatMessage> ChatMessages { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
 

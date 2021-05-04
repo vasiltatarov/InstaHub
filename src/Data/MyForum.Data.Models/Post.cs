@@ -20,9 +20,9 @@
         [Required]
         public string UserId { get; set; }
 
-        public int VisitorsCount { get; set; }
-
         public virtual ApplicationUser User { get; set; }
+
+        public int VisitorsCount { get; set; }
 
         public int CategoryId { get; set; }
 

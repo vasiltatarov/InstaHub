@@ -14,6 +14,7 @@
 * HTML, CSS, JavaScript
 * Auto-Mapper, jQuery
 * TinyMCE, Moment.js
+* Bootstrap
 
 ## This is the current state of database diagrams relations in my app.
 ![](DatabaseDiagrams.png)

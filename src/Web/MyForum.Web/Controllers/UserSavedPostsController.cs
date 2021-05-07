@@ -41,6 +41,8 @@
             var userId = this.userManager.GetUserId(this.User);
             await this.userSavedPostsService.Delete(userId, postId);
 
+            this.TempData["InfoMessage"] = "Deleted Successfully";
+
             return this.RedirectToAction("GetSavedPosts");
         }
     }

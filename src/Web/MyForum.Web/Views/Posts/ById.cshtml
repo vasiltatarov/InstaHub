@@ -20,6 +20,16 @@
     <link href="~/lib/fontawesome/css/all.css" rel="stylesheet" asp-append-version="true" />
 </head>
 <body style="background: aliceblue">
+    @if (this.TempData.ContainsKey("InfoMessage"))
+    {
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>@this.TempData["InfoMessage"]</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+
     @{
         this.ViewData["Title"] = this.Model.Title;
 

@@ -22,6 +22,17 @@
 </head>
 <body style="background: aliceblue">
 
+    @if (this.TempData.ContainsKey("InfoMessage"))
+    {
+        <br />
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>@this.TempData["InfoMessage"]</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+
     <div class="container">
         @if (!this.Model.Any())
         {
@@ -160,18 +171,18 @@
     </nav>
 
     @*@section Scripts {
-        <script>
-            function deleteSavedPost(postId) {
-                var json = { postId: postId };
-                $.ajax({
-                    type: 'GET',
-                    url: "/api/userSavePost/delete/" + postId,
-                    data: JSON.stringify(json),
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json"
-                });
-            }
-        </script>
-    }*@
+            <script>
+                function deleteSavedPost(postId) {
+                    var json = { postId: postId };
+                    $.ajax({
+                        type: 'GET',
+                        url: "/api/userSavePost/delete/" + postId,
+                        data: JSON.stringify(json),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json"
+                    });
+                }
+            </script>
+        }*@
 
 </body>

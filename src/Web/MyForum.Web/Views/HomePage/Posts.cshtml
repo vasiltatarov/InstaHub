@@ -67,13 +67,9 @@
                                                     <time datetime="@post.CreatedOn.ToString("O")"></time>
                                                 </span>
                                             </div>
-                                            <!-- end timeline-time -->
-                                            <!-- begin timeline-icon -->
                                             <div class="timeline-icon">
                                                 <a href="javascript:;">&nbsp;</a>
                                             </div>
-                                            <!-- end timeline-icon -->
-                                            <!-- begin timeline-body -->
                                             <div class="timeline-body">
                                                 <div class="timeline-header">
                                                     <span class="userimage"><img src="~/uploads/@post.UserImagePath" alt=""></span>
@@ -102,10 +98,10 @@
                                                             <i class="fa fa-circle fa-stack-2x text-danger"></i>
                                                             <i class="fa fa-heart fa-stack-1x fa-inverse t-plus-1"></i>
                                                         </span>
-                                                        <span class="fa-stack fa-fw stats-icon">
+                                                        @*<span class="fa-stack fa-fw stats-icon">
                                                             <i class="fa fa-circle fa-stack-2x text-primary"></i>
                                                             <i class="fa fa-thumbs-up fa-stack-1x fa-inverse"></i>
-                                                        </span>
+                                                        </span>*@
                                                         <span class="stats-total">@post.VotesCount</span>
                                                     </div>
                                                 </div>

@@ -101,20 +101,21 @@
                             </div>
                             @if (this.User.Identity.IsAuthenticated)
                             {
-                                <div class="text-muted small ml-3">
-                                    <form id="votesForm" method="post"></form>
-                                    <div>
-                                        <a href="javascript:void(0)" onclick="sendVote(@Model.Id, true)">
-                                            <i class="fa fa-thumbs-up"></i>
-                                        </a>
-                                    </div>
-                                    &nbsp;
-                                    <div>
-                                        <a href="javascript:void(0)" onclick="sendVote(@Model.Id, false)">
-                                            <i class="fa fa-thumbs-down"></i>
-                                        </a>
-                                    </div>
-                                </div>
+                        <div class="text-muted small ml-3">
+                            <form id="votesForm" method="post"></form>
+                            <div>
+                                <a href="javascript:void(0)" onclick="sendVote(@Model.Id, true)">
+                                    <i class="fa fa-thumbs-up"></i>
+                                </a>
+                            </div>
+                            <i id="votesCount">@Model.VotesCount</i>
+                            &nbsp;
+                            <div>
+                                <a href="javascript:void(0)" onclick="sendVote(@Model.Id, false)">
+                                    <i class="fa fa-thumbs-down"></i>
+                                </a>
+                            </div>
+                        </div>
                             }
                         </div>
                     </div>
@@ -125,7 +126,7 @@
                     </div>
                     <div class="card-footer d-flex flex-wrap justify-content-between align-items-center px-0 pt-0 pb-3">
                         <div class="px-4 pt-3">
-                            <i id="votesCount" class="fa fa-heart text-danger"> @Model.VotesCount</i>
+                            @*<i id="votesCount" class="fa fa-heart text-danger"> @Model.VotesCount</i>*@
                             <span class="text-muted d-inline-flex align-items-center align-middle ml-4">
                                 <i class="fa fa-eye text-muted fsize-3"></i>&nbsp;
                                 <span class="align-middle">@Model.VisitorsCount</span>

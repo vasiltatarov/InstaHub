@@ -23,8 +23,8 @@
         public string SanitizedContent => new HtmlSanitizer().Sanitize(this.Content);
 
         public string ShortContent => new HtmlParser().ParseDocument(
-                this.SanitizedContent.Length >= 550
-                    ? this.SanitizedContent.Substring(0, 550) + "..."
+                this.SanitizedContent.Length >= 5000
+                    ? this.SanitizedContent.Substring(0, 5000) + "..."
                     : this.SanitizedContent)
             .Body
             .Text();

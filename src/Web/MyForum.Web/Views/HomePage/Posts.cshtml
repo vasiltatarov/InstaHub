@@ -1,5 +1,4 @@
 ﻿@using MyForum.Common
-@using Microsoft.AspNetCore.Routing
 @model PagedList.IPagedList<MyForum.Web.ViewModels.HomePage.HomePostViewModel>
 
 <!DOCTYPE html>
@@ -84,7 +83,7 @@
                                                 </div>
                                                 <div class="timeline-content">
                                                     <p>
-                                                        @post.ShortContent
+                                                        @Html.Raw(post.Content)
                                                     </p>
                                                 </div>
 

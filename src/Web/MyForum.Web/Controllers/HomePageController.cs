@@ -13,7 +13,7 @@
     [Authorize]
     public class HomePageController : Controller
     {
-        private const int ItemsPerPage = 10;
+        private const int ItemsPerPage = 5;
 
         private readonly IPostsService postsService;
 

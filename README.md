@@ -8,11 +8,13 @@
 * Възможност за филтриране по категория на постовете и търсене по заглавие
 * Чат стая позволяваща на потребителите да обменят съобщения
 * Интерактивен, гъвкав UX
+* Кеширане на данните в 'Home' страницата, с цел намаляване на заявките към сървъра
 
 ## Технологии
 * C#, ASP.NET Core MVC
 * MS SQL, Entity Framework Core
 * HTML, CSS, JavaScript
+* Distributed Cache
 * Auto-Mapper, jQuery
 * TinyMCE, Moment.js
 * Bootstrap

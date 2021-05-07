@@ -10,11 +10,14 @@
 * Интерактивен, гъвкав UX
 
 ## Технологии
-* C#, ASP.NET Core MVC, MSSQL
+* C#, ASP.NET Core MVC
+* MS SQL, Entity Framework Core
 * HTML, CSS, JavaScript
 * Auto-Mapper, jQuery
 * TinyMCE, Moment.js
-* Bootstrap, Font Awesome Icons
+* Bootstrap
+* Font Awesome Icons
 
 ## This is the current state of database diagrams relations in my app.
+
 ![](DatabaseDiagrams.png)

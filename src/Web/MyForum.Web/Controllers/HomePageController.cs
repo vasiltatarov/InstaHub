@@ -1,11 +1,13 @@
 ﻿namespace MyForum.Web.Controllers
 {
+    using System;
     using System.Collections.Generic;
     using System.Globalization;
     using System.Linq;
 
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Caching.Memory;
     using MyForum.Services.Data;
     using MyForum.Web.ViewModels.HomePage;
     using PagedList;
@@ -16,10 +18,12 @@
         private const int ItemsPerPage = 5;
 
         private readonly IPostsService postsService;
+        private readonly IMemoryCache cache;
 
-        public HomePageController(IPostsService postsService)
+        public HomePageController(IPostsService postsService, IMemoryCache memoryCache)
         {
             this.postsService = postsService;
+            this.cache = memoryCache;
         }
 
         /// <summary>
@@ -36,7 +40,15 @@
         [HttpGet]
         public IActionResult Posts(string searchTerm, string searchFor = "Latest", int page = 1)
         {
-            var posts = this.postsService.GetAllPosts<HomePostViewModel>();
+            if (!this.cache.TryGetValue<IEnumerable<HomePostViewModel>>("Posts", out var posts))
+            {
+                posts = this.postsService.GetAllPosts<HomePostViewModel>();
+
+                var cacheEntryOptions = new MemoryCacheEntryOptions()
+                    .SetAbsoluteExpiration(TimeSpan.FromSeconds(100));
+
+                this.cache.Set("Posts", posts, cacheEntryOptions);
+            }
 
             this.ViewData.Add("searchFor", searchFor);
             this.ViewData.Add("searchTerm", searchTerm);
@@ -58,13 +70,13 @@
         }
 
         private IEnumerable<HomePostViewModel> OrderHomePostsBy(IEnumerable<HomePostViewModel> posts, string searchFor)
-            => (searchFor) switch
+            => searchFor switch
             {
                 "Latest" => posts.OrderByDescending(x => x.CreatedOn),
                 "Earliest" => posts.OrderBy(x => x.CreatedOn),
                 "Most-Visited" => posts.OrderByDescending(x => x.VisitorsCount),
                 "Most-Liked" => posts.OrderByDescending(x => x.VotesCount),
-                _ => posts
+                _ => posts,
             };
     }
 }

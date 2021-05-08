@@ -1,14 +1,10 @@
-﻿using System.Security.Claims;
-using System.Threading.Tasks;
-
-namespace MyForum.Web.Controllers
+﻿namespace MyForum.Web.Controllers
 {
     using System.Linq;
 
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
-    using MyForum.Data.Common.Repositories;
     using MyForum.Data.Models;
     using MyForum.Services.Mapping;
     using MyForum.Web.ViewModels.ViewUserProfile;
@@ -19,14 +15,11 @@ namespace MyForum.Web.Controllers
         private const int PagedOnList = 5;
 
         private readonly UserManager<ApplicationUser> userManager;
-        private readonly IDeletableEntityRepository<Post> postRepository;
 
         public ViewUserProfileController(
-            UserManager<ApplicationUser> userManager,
-            IDeletableEntityRepository<Post> postRepository)
+            UserManager<ApplicationUser> userManager)
         {
             this.userManager = userManager;
-            this.postRepository = postRepository;
         }
 
         [Authorize]

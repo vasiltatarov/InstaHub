@@ -1,22 +1,23 @@
-﻿@model MyForum.Web.ViewModels.Posts.PostCreateInputModel
+﻿@using MyForum.Common
+@model MyForum.Web.ViewModels.Posts.PostCreateInputModel
 @{
-    this.ViewData["Title"] = "New Blog Post";
+    this.ViewData["Title"] = "New Publication";
     var categories = this.Model.Categories.Select(x => new SelectListItem(x.Name, x.Id.ToString()));
 }
 
-<script src="/lib/tinymce/tinymce.min.js" type="text/javascript"></script>
-<script type="text/javascript">
-    tinymce.init({
-        selector: "textarea",
-        relative_urls: false,
-        remove_script_host: false,
-        convert_urls: true,
-        plugins: [
-            "image paste table link code media fullscreen wordcount searchreplace lists"
-        ]
-    });
-</script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@this.ViewData["Title"] - @GlobalConstants.SystemName</title>
 
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+
+    <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css" />
+</head>
 <body style="background: aliceblue">
     <div class="container">
         <div class="row">
@@ -37,7 +38,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label asp-for="Content">Content <span>*</span> </label>
+                        <label asp-for="Content">Content <span>* <small>(image, video...)</small></span> </label>
                         <textarea asp-for="Content" rows="5" class="form-control"></textarea>
                         <span asp-validation-for="Content" class="text-danger"></span>
                     </div>
@@ -53,10 +54,10 @@
                     </div>
 
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit" class="btn btn-success">
                             Create
                         </button>
-                        <a asp-controller="Home" asp-action="Index" class="btn btn-default">
+                        <a asp-controller="HomePage" asp-action="Posts" class="btn btn-danger">
                             Cancel
                         </a>
                     </div>
@@ -66,4 +67,19 @@
 
         </div>
     </div>
+
+    <script src="/lib/tinymce/tinymce.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        tinymce.init({
+            selector: "textarea",
+            relative_urls: false,
+            remove_script_host: false,
+            convert_urls: true,
+            plugins: [
+                "image paste table link code media fullscreen wordcount searchreplace lists"
+            ]
+        });
+    </script>
+
 </body>
+</html>

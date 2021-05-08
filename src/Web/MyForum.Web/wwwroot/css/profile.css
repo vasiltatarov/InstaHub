@@ -96,15 +96,14 @@ body {
 
 .profile-header-img {
     float: left;
-    width: 200px;
-    height: 200px;
+    width: 15%;
+    height: 150px;
     overflow: hidden;
     position: relative;
     z-index: 10;
     margin: 0 0 -20px;
-    padding: 3px;
+    padding: 1px;
     border-radius: 4px;
-    background: #fff
 }
 
     .profile-header-img img {
@@ -117,7 +116,7 @@ body {
 }
 
 .profile-header-img + .profile-header-info {
-    margin-left: 140px
+    margin-left: 200px
 }
 
 .profile-header .profile-header-content,

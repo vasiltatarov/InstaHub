@@ -16,7 +16,6 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true" />
-    <link href="~/css/home.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
 
     <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
@@ -29,18 +28,13 @@
         <div class="row">
             <div class="col-md-12">
                 <div id="content">
-                    <!-- begin profile -->
                     <div class="profile">
                         <div class="profile-header">
                             <div class="profile-header-cover"></div>
-                            <!-- BEGIN profile-header-content -->
                             <div class="profile-header-content">
-                                <!-- BEGIN profile-header-img -->
                                 <div class="profile-header-img">
                                     <img src="~/uploads/@Model.ImagePath" alt="">
                                 </div>
-                                <!-- END profile-header-img -->
-                                <!-- BEGIN profile-header-info -->
                                 <div class="profile-header-info">
                                     <h4 class="m-t-10 m-b-5">@Model.Username</h4>
                                     <p class="m-b-10">Joined on -  <time datetime="@this.Model.CreatedOn.ToString("O")"></time></p>
@@ -48,10 +42,7 @@
                                     <p class="m-b-10">Posts - @Model.Posts.Count()</p>
                                     @*<a href="#" class="btn btn-sm btn-info mb-2">Edit Profile</a>*@
                                 </div>
-                                <!-- END profile-header-info -->
                             </div>
-                            <!-- END profile-header-content -->
-                            <!-- BEGIN profile-header-tab -->
                             <ul class="profile-header-tab nav nav-tabs">
                                 <li class="nav-item"><a href="#profile-post" class="nav-link active show" data-toggle="tab">POSTS</a></li>
                                 <li class="nav-item"><a href="#profile-about" class="nav-link" data-toggle="tab">ABOUT</a></li>
@@ -59,22 +50,15 @@
                                 <li class="nav-item"><a href="#profile-videos" class="nav-link" data-toggle="tab">VIDEOS</a></li>
                                 <li class="nav-item"><a href="#profile-friends" class="nav-link" data-toggle="tab">FRIENDS</a></li>
                             </ul>
-                            <!-- END profile-header-tab -->
                         </div>
                     </div>
-                    <!-- end profile -->
-                    <!-- begin profile-content -->
                     <div class="profile-content">
-                        <!-- begin tab-content -->
                         <div class="tab-content p-0">
-                            <!-- begin #profile-post tab -->
                             <div class="tab-pane fade active show" id="profile-post">
-                                <!-- begin timeline -->
                                 <ul class="timeline">
                                     @foreach (var post in Model.Posts)
                                     {
                                         <li>
-                                            <!-- begin timeline-time -->
                                             <div class="timeline-time">
                                                 <span>
                                                     <time datetime="@post.CreatedOn.ToString("O")"></time>

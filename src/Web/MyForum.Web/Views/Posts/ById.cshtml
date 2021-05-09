@@ -18,6 +18,7 @@
     <link href="~/lib/fontawesome/css/all.css" rel="stylesheet" asp-append-version="true" />
 </head>
 <body style="background: aliceblue">
+
     @if (this.TempData.ContainsKey("InfoMessage"))
     {
         <div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -74,13 +75,18 @@
         }
     }
 
-    <div class="container-fluid mt-100">
-        <div class="card-footer d-flex flex-wrap justify-content-between align-items-center px-0 pt-0 pb-3">
+    <div class="container-fluid">
+        <div style="text-align: center; margin: 10px">
             <h1>@this.Model.Title</h1>
+        </div>
+        <div class="card-footer p-lg-2">
             @if (this.User.Identity.IsAuthenticated)
             {
-                <a id="savePostBtn" onclick="addInSaved(@Model.Id)" class="btn btn-primary">
+                <a id="savePostBtn" onclick="addInSaved(@Model.Id)" class="btn btn-warning">
                     <i class="fas fa-save fa-fw"></i>&nbsp; Add in Saved
+                </a>
+                <a onclick="window.print()" class="btn btn-warning">
+                    <i class="fas fa-print"></i>&nbsp; Print
                 </a>
             }
         </div>
@@ -99,21 +105,21 @@
                             </div>
                             @if (this.User.Identity.IsAuthenticated)
                             {
-                        <div class="text-muted small ml-3">
-                            <form id="votesForm" method="post"></form>
-                            <div>
-                                <a href="javascript:void(0)" onclick="sendVote(@Model.Id, true)">
-                                    <i class="fa fa-thumbs-up"></i>
-                                </a>
-                            </div>
-                            <i id="votesCount">@Model.VotesCount</i>
-                            &nbsp;
-                            <div>
-                                <a href="javascript:void(0)" onclick="sendVote(@Model.Id, false)">
-                                    <i class="fa fa-thumbs-down"></i>
-                                </a>
-                            </div>
-                        </div>
+                                <div class="text-muted small ml-3">
+                                    <form id="votesForm" method="post"></form>
+                                    <div>
+                                        <a href="javascript:void(0)" onclick="sendVote(@Model.Id, true)">
+                                            <i class="fa fa-thumbs-up"></i>
+                                        </a>
+                                    </div>
+                                    <i id="votesCount">@Model.VotesCount</i>
+                                    &nbsp;
+                                    <div>
+                                        <a href="javascript:void(0)" onclick="sendVote(@Model.Id, false)">
+                                            <i class="fa fa-thumbs-down"></i>
+                                        </a>
+                                    </div>
+                                </div>
                             }
                         </div>
                     </div>
@@ -202,7 +208,8 @@
                 }
                 $('html, body').animate({
                     scrollTop: $("#AddCommentForm").offset().top
-                }, 1000);
+                },
+                    1000);
             }
 
             function sendVote(postId, isUpVote) {
@@ -222,4 +229,5 @@
             }
         </script>
     }
+
 </body>

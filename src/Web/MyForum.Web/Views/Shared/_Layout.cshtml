@@ -18,9 +18,7 @@
 <body>
 
     <header>
-        <!-- Inner sidebar -->
         <div class="inner-sidebar bg-dark">
-            <!-- Inner sidebar header -->
             <div class="inner-sidebar-header justify-content-center">
                 <a asp-area="" asp-controller="Posts" asp-action="Create" class="btn btn-primary has-icon btn-block" type="button">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus mr-2">
@@ -30,8 +28,6 @@
                     New Publication
                 </a>
             </div>
-            <!-- /Inner sidebar header -->
-            <!-- Inner sidebar body -->
             <div class="inner-sidebar-body p-0">
                 <div class="p-3 h-100" data-simplebar="init">
                     <div class="simplebar-wrapper" style="margin: -16px;">
@@ -69,16 +65,16 @@
                     </div>
                 </div>
             </div>
-            <!-- /Inner sidebar body -->
-        </div>
-        <!-- /Inner sidebar -->
-        <div class="container">
-            <partial name="_CookieConsentPartial" />
-            <main role="main" class="pb-3">
-                @this.RenderBody()
-            </main>
         </div>
     </header>
+
+    <div class="container">
+        <partial name="_CookieConsentPartial" />
+        <main role="main" class="pb-3">
+            @this.RenderBody()
+        </main>
+    </div>
+
     <footer class="border-top footer text-muted bg-dark">
         <div class="container">
             <div class="row text-white">

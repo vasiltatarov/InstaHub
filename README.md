@@ -23,7 +23,9 @@
 
 ![](DatabaseDiagrams.png)
 
-* Memory Cache - Implementation
+## Имплементация
+
+* Memory Cache
 ```javascript
 if (!this.cache.TryGetValue<IEnumerable<HomePostViewModel>>("Posts",
 out var posts))
@@ -35,6 +37,12 @@ out var posts))
 
     this.cache.Set("Posts", posts, cacheEntryOptions);
 }
+```
+* Print
+```javascript
+<a onclick="window.print()" class="btn btn-warning">
+    <i class="fas fa-print"></i>&nbsp; Print
+</a>
 ```
 
 ### Контрол на достъпа

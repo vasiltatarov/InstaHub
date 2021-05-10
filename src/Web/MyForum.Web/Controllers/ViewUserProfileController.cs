@@ -1,6 +1,7 @@
 ﻿namespace MyForum.Web.Controllers
 {
     using System.Linq;
+    using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
@@ -24,24 +25,26 @@
         }
 
         [Authorize]
-        public IActionResult ByUsername(string username, int page = 1)
+        public async Task<IActionResult> ByUsername(string username, int page = 1)
         {
-            var user = this.userManager.Users
+            var userViewModel = this.userManager.Users
                 .To<UserProfileViewModel>()
                 .FirstOrDefault(x => x.Username == username);
 
-            var currentUserImagePath = this.userManager.GetUserAsync(this.User).Result.ImagePath;
+            var currentUser = await this.userManager.GetUserAsync(this.User);
+            var followedUser = this.userManager.Users
+                .FirstOrDefault(x => x.UserName == username);
 
-            if (user == null)
+            if (userViewModel == null)
             {
                 return this.BadRequest();
             }
 
-            user.CurrentUserImagePath = currentUserImagePath;
+            userViewModel.CurrentUserImagePath = currentUser.ImagePath;
 
-            user.Posts = user.Posts.ToPagedList(page, PagedOnList);
+            userViewModel.Posts = userViewModel.Posts.ToPagedList(page, PagedOnList);
 
-            return this.View(user);
+            return this.View(userViewModel);
         }
     }
 }

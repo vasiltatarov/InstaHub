@@ -5,6 +5,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.EntityFrameworkCore;
     using MyForum.Data.Models;
     using MyForum.Services.Data;
 
@@ -21,21 +22,23 @@
         }
 
         [Authorize]
-        public async Task<IActionResult> Follow(string followedUserId, string username)
+        public async Task<IActionResult> Follow(string username)
         {
             var currentUser = await this.userManager.GetUserAsync(this.User);
+            var followedUser = await this.userManager.Users.FirstOrDefaultAsync(x => x.UserName == username);
 
-            await this.followService.Follow(currentUser.Id, followedUserId);
+            await this.followService.Follow(currentUser.Id, followedUser.Id);
 
             return this.RedirectToAction("ByUsername", "ViewUserProfile", new { username });
         }
 
         [Authorize]
-        public async Task<IActionResult> Unfollow(string followedUserId, string username)
+        public async Task<IActionResult> Unfollow(string username)
         {
             var currentUser = await this.userManager.GetUserAsync(this.User);
+            var followedUser = await this.userManager.Users.FirstOrDefaultAsync(x => x.UserName == username);
 
-            await this.followService.Unfollow(currentUser.Id, followedUserId);
+            await this.followService.Unfollow(currentUser.Id, followedUser.Id);
 
             return this.RedirectToAction("ByUsername", "ViewUserProfile", new { username });
         }

@@ -6,7 +6,9 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.EntityFrameworkCore;
     using MyForum.Data.Models;
+    using MyForum.Services.Data;
     using MyForum.Services.Mapping;
     using MyForum.Web.ViewModels.ViewUserProfile;
     using PagedList;
@@ -17,11 +19,14 @@
         private const int PagedOnList = 5;
 
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly IFollowService followService;
 
         public ViewUserProfileController(
-            UserManager<ApplicationUser> userManager)
+            UserManager<ApplicationUser> userManager,
+            IFollowService followService)
         {
             this.userManager = userManager;
+            this.followService = followService;
         }
 
         [Authorize]
@@ -31,15 +36,16 @@
                 .To<UserProfileViewModel>()
                 .FirstOrDefault(x => x.Username == username);
 
-            var currentUser = await this.userManager.GetUserAsync(this.User);
-            var followedUser = this.userManager.Users
-                .FirstOrDefault(x => x.UserName == username);
-
             if (userViewModel == null)
             {
                 return this.BadRequest();
             }
 
+            var currentUser = await this.userManager.GetUserAsync(this.User);
+            var followedUser = await this.userManager.Users
+                .FirstOrDefaultAsync(x => x.UserName == username);
+
+            userViewModel.IsUserFollowed = await this.followService.CheckIfFollowExist(currentUser.Id, followedUser.Id);
             userViewModel.CurrentUserImagePath = currentUser.ImagePath;
 
             userViewModel.Posts = userViewModel.Posts.ToPagedList(page, PagedOnList);

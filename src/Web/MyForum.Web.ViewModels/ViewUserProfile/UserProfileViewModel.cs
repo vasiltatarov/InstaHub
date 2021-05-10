@@ -11,8 +11,6 @@
 
     public class UserProfileViewModel : IMapFrom<ApplicationUser>, IHaveCustomMappings
     {
-        public string Id { get; set; }
-
         public string Username { get; set; }
 
         public string Location { get; set; }
@@ -23,6 +21,9 @@
 
         [NotMapped]
         public string CurrentUserImagePath { get; set; }
+
+        [NotMapped]
+        public bool IsUserFollowed { get; set; }
 
         public IEnumerable<UserProfilePostViewModel> Posts { get; set; }
 

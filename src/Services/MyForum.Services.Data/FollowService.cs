@@ -69,5 +69,11 @@
         {
             throw new System.NotImplementedException();
         }
+
+        public async Task<bool> CheckIfFollowExist(string followerId, string followedId)
+            => await this.userFollows.All()
+                .AnyAsync(x => x.FollowerId == followerId &&
+                               x.FollowedId == followedId &&
+                               x.IsFollowActive);
     }
 }

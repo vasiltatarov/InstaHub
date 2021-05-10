@@ -12,5 +12,7 @@
         IEnumerable<T> GetFollowersByUserId<T>(string userId);
 
         IEnumerable<T> GetFollowingByUserId<T>(string userId);
+
+        Task<bool> CheckIfFollowExist(string followerId, string followedId);
     }
 }

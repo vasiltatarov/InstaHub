@@ -4,7 +4,8 @@
 ## Функционалност
 * Регистрация на потребители
 * Възможност за разглеждане, създадване, четене на постове
-* Възможност за коментиране, харесване и запазване на постове
+* Възможност за коментиране, харесване, запазване и принтиране на постове
+* Възможност за последване на потребители, както и да бъдете последвани от други потребители
 * Възможност за филтриране по категория на постовете и търсене по заглавие
 * Чат стая позволяваща на потребителите да обменят съобщения
 * Кеширане на данните 'Memory Cache'(see below) в 'Home' страницата, с цел намаляне на заявките към базата данни
@@ -24,6 +25,19 @@
 ![](DatabaseDiagrams.png)
 
 ## Имплементация
+
+* Followings / Followers (Model)
+```javascript
+class UserFollow
+{
+    public string FollowerId { get; set; }
+
+    public string FollowedId { get; set; }
+
+    public bool IsFollowActive { get; set; }
+}
+// To see the rest of the functionality go on Follow(Service/Controller)
+```
 
 * Memory Cache
 ```javascript

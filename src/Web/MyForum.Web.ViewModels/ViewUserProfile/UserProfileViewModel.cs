@@ -11,6 +11,8 @@
 
     public class UserProfileViewModel : IMapFrom<ApplicationUser>, IHaveCustomMappings
     {
+        public string Id { get; set; }
+
         public string Username { get; set; }
 
         public string Location { get; set; }

@@ -12,14 +12,11 @@
     public class UserSavedPostsService : IUserSavedPostsService
     {
         private readonly IDeletableEntityRepository<UserSavedPost> userSavedPostsRepository;
-        private readonly IDeletableEntityRepository<Post> postsRepository;
 
         public UserSavedPostsService(
-            IDeletableEntityRepository<UserSavedPost> userSavedPostsRepository,
-            IDeletableEntityRepository<Post> postsRepository)
+            IDeletableEntityRepository<UserSavedPost> userSavedPostsRepository)
         {
             this.userSavedPostsRepository = userSavedPostsRepository;
-            this.postsRepository = postsRepository;
         }
 
         public async Task<bool> AddAsync(string userId, int postId)

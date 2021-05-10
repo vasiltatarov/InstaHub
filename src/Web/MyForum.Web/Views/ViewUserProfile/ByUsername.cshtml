@@ -41,7 +41,8 @@
                                     <p><i class="fa fa-map"></i>&nbsp; @Model.Location</p>
                                     @if (this.Model.Username != this.User.Identity.Name)
                                     {
-                                        <a class="btn btn-warning float-right">Follow</a>
+                                        <a asp-area="" asp-controller="Follow" asp-action="Follow" asp-route-followedUserId="@this.Model.Id" asp-route-username="@this.Model.Username" class="btn btn-warning float-right">Follow</a>
+                                        <a asp-area="" asp-controller="Follow" asp-action="Unfollow" asp-route-followedUserId="@this.Model.Id" asp-route-username="@this.Model.Username" class="btn btn-dark float-right">Unfollow</a>
                                     }
                                     <p>Posts - @Model.Posts.Count()</p>
                                 </div>

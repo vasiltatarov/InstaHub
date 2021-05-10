@@ -37,6 +37,8 @@
 
         public DbSet<ChatMessage> ChatMessages { get; set; }
 
+        public DbSet<UserFollow> UserFollows { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
@@ -60,6 +62,10 @@
         {
             // Needed for Identity models configuration
             base.OnModelCreating(builder);
+
+            // Custom UserFollow configuration
+            builder.Entity<UserFollow>()
+                .HasKey(x => new { x.FollowerId, x.FollowedId });
 
             this.ConfigureUserIdentityRelations(builder);
 

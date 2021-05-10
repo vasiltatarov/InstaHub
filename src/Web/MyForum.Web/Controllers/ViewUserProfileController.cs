@@ -10,6 +10,7 @@
     using MyForum.Web.ViewModels.ViewUserProfile;
     using PagedList;
 
+    [Authorize]
     public class ViewUserProfileController : Controller
     {
         private const int PagedOnList = 5;

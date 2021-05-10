@@ -36,11 +36,14 @@
                                     <img src="~/uploads/@Model.ImagePath" alt="">
                                 </div>
                                 <div class="profile-header-info">
-                                    <h4 class="m-t-10 m-b-5">@Model.Username</h4>
-                                    <p class="m-b-10">Joined on -  <time datetime="@this.Model.CreatedOn.ToString("O")"></time></p>
+                                    <h4>@Model.Username</h4>
+                                    <p>Joined on -  <time datetime="@this.Model.CreatedOn.ToString("O")"></time></p>
                                     <p><i class="fa fa-map"></i>&nbsp; @Model.Location</p>
-                                    <p class="m-b-10">Posts - @Model.Posts.Count()</p>
-                                    @*<a href="#" class="btn btn-sm btn-info mb-2">Edit Profile</a>*@
+                                    @if (this.Model.Username != this.User.Identity.Name)
+                                    {
+                                        <a class="btn btn-warning float-right">Follow</a>
+                                    }
+                                    <p>Posts - @Model.Posts.Count()</p>
                                 </div>
                             </div>
                             <ul class="profile-header-tab nav nav-tabs">
@@ -81,18 +84,15 @@
                                                         @Html.Raw(post.Content)
                                                     </p>
                                                 </div>
+                                                <hr />
                                                 <div class="timeline-likes">
                                                     <div class="stats-right">
                                                         <span class="stats-text">@post.Comments.Count Comments</span>
                                                     </div>
-                                                    <div class="stats">
+                                                    <div>
                                                         <span class="fa-stack fa-fw stats-icon">
                                                             <i class="fa fa-circle fa-stack-2x text-danger"></i>
                                                             <i class="fa fa-heart fa-stack-1x fa-inverse t-plus-1"></i>
-                                                        </span>
-                                                        <span class="fa-stack fa-fw stats-icon">
-                                                            <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                                                            <i class="fa fa-thumbs-up fa-stack-1x fa-inverse"></i>
                                                         </span>
                                                         <span class="stats-total">@post.Votes.Count</span>
                                                     </div>

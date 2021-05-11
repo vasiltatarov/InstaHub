@@ -1,0 +1,99 @@
+﻿@using MyForum.Common
+@model MyForum.Web.ViewModels.ViewUserProfile.UserProfileViewModel
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@this.ViewData["Title"] - @GlobalConstants.SystemName</title>
+
+    <link href="~/css/profile.css" rel="stylesheet" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+
+    <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css" />
+
+    <link href="~/lib/fontawesome/css/all.css" rel="stylesheet" asp-append-version="true" />
+</head>
+<body style="background: aliceblue">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div id="content">
+                    <div class="profile">
+                        <div class="profile-header">
+                            <div class="profile-header-cover"></div>
+                            <div class="profile-header-content">
+                                <div class="profile-header-img">
+                                    <img src="~/uploads/@Model.ImagePath" alt="">
+                                </div>
+                                <div class="profile-header-info">
+                                    <h4>@Model.Username</h4>
+                                    <p>Joined on -  <time datetime="@this.Model.CreatedOn.ToString("O")"></time></p>
+                                    <p><i class="fa fa-map"></i>&nbsp; @Model.Location</p>
+                                    @if (this.Model.Username != this.User.Identity.Name)
+                                    {
+                                        @if (this.Model.IsUserFollowed)
+                                        {
+                                            <a asp-area="" asp-controller="Follow" asp-action="Unfollow" asp-route-username="@this.Model.Username" class="btn btn-dark float-right">Unfollow</a>
+                                        }
+                                        else
+                                        {
+                                            <a asp-area="" asp-controller="Follow" asp-action="Follow" asp-route-username="@this.Model.Username" class="btn btn-warning float-right">Follow</a>
+                                        }
+                                        <a class="btn btn-warning float-right" style="margin-right: 10px;">Message</a>
+                                    }
+                                    <p>Posts - @Model.Posts.Count()</p>
+                                </div>
+                            </div>
+                            <ul class="profile-header-tab nav nav-tabs">
+                                <li class="nav-item">
+                                    <a asp-area="" asp-controller="ViewUserProfile" asp-action="ByUsername" asp-route-username="@this.Model.Username" class="nav-link">POSTS ( @this.Model.Posts.Count() )</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-area="" asp-controller="ViewUserProfile" asp-action="GetFollowers" asp-route-username="@this.Model.Username" class="nav-link active show">FOLLOWERS ( @this.Model.Followers.Count() )</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#profile-videos" class="nav-link" data-toggle="tab">FOLLOWED ( @this.Model.Followed.Count() )</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#profile-about" class="nav-link" data-toggle="tab">ABOUT</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="profile-content">
+                        <div class="container mt-5">
+                            <div class="d-flex justify-content-center row">
+                                <div class="col-md-6">
+                                    <div class="p-3 bg-white text-center">
+                                        @foreach (var follower in this.Model.Followers)
+                                        {
+                                            <div class="d-flex flex-row justify-content-between align-items-center">
+                                                <div class="d-flex flex-row align-items-center">
+                                                    <img class="rounded-circle" src="~/uploads/@follower.FollowerImagePath" width="60" style="height: 60px;">
+                                                    <div class="d-flex flex-column align-items-start ml-2">
+                                                        <span class="font-weight-bold">@follower.FollowerUserName</span>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex flex-row align-items-center mt-2">
+                                                    <a asp-area="" asp-controller="ViewUserProfile" asp-action="ByUsername" asp-route-username="@follower.FollowerUserName" class="btn btn-outline-primary btn-sm" type="button">View Profile</a>
+                                                </div>
+                                            </div>
+                                            <hr />
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>

@@ -20,7 +20,7 @@
             this.userRepository = userRepository;
         }
 
-        public async Task Follow(string followerId, string followedId)
+        public async Task FollowAsync(string followerId, string followedId)
         {
             var userFollow = await this.userFollows.All()
                 .FirstOrDefaultAsync(x => x.FollowerId == followerId && x.FollowedId == followedId);
@@ -50,7 +50,7 @@
             await this.userFollows.SaveChangesAsync();
         }
 
-        public async Task Unfollow(string followerId, string followedId)
+        public async Task UnfollowAsync(string followerId, string followedId)
         {
             var userFollow = await this.userFollows.All()
                 .FirstOrDefaultAsync(x => x.FollowerId == followerId && x.FollowedId == followedId && x.IsFollowActive);
@@ -64,17 +64,17 @@
 
         public IEnumerable<T> GetFollowersByUserId<T>(string userId)
             => this.userFollows.All()
-                .Where(x => x.FollowedId == userId)
+                .Where(x => x.FollowedId == userId && x.IsFollowActive)
                 .To<T>()
                 .ToList();
 
         public IEnumerable<T> GetFollowedByUserId<T>(string userId)
             => this.userFollows.All()
-                .Where(x => x.FollowerId == userId)
+                .Where(x => x.FollowerId == userId && x.IsFollowActive)
                 .To<T>()
                 .ToList();
 
-        public async Task<bool> CheckIfFollowExist(string followerId, string followedId)
+        public async Task<bool> CheckIfFollowExistAsync(string followerId, string followedId)
             => await this.userFollows.All()
                 .AnyAsync(x => x.FollowerId == followerId &&
                                x.FollowedId == followedId &&

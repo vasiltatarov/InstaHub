@@ -27,7 +27,7 @@
             var currentUser = await this.userManager.GetUserAsync(this.User);
             var followedUser = await this.userManager.Users.FirstOrDefaultAsync(x => x.UserName == username);
 
-            await this.followService.Follow(currentUser.Id, followedUser.Id);
+            await this.followService.FollowAsync(currentUser.Id, followedUser.Id);
 
             return this.RedirectToAction("ByUsername", "ViewUserProfile", new { username });
         }
@@ -38,7 +38,7 @@
             var currentUser = await this.userManager.GetUserAsync(this.User);
             var followedUser = await this.userManager.Users.FirstOrDefaultAsync(x => x.UserName == username);
 
-            await this.followService.Unfollow(currentUser.Id, followedUser.Id);
+            await this.followService.UnfollowAsync(currentUser.Id, followedUser.Id);
 
             return this.RedirectToAction("ByUsername", "ViewUserProfile", new { username });
         }

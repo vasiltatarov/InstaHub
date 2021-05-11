@@ -59,7 +59,7 @@
                                     <a asp-area="" asp-controller="ViewUserProfile" asp-action="ByUsername" asp-route-username="@this.Model.Username" class="nav-link active show">POSTS ( @this.Model.Posts.Count() )</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#profile-photos" class="nav-link" data-toggle="tab">FOLLOWERS ( @this.Model.Followers.Count() )</a>
+                                    <a asp-area="" asp-controller="ViewUserProfile" asp-action="GetFollowers" asp-route-username="@this.Model.Username" class="nav-link">FOLLOWERS ( @this.Model.Followers.Count() )</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="#profile-videos" class="nav-link" data-toggle="tab">FOLLOWED ( @this.Model.Followed.Count() )</a>
@@ -125,22 +125,17 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <!-- end timeline-body -->
                                         </li>
                                     }
                                 </ul>
-                                <!-- end timeline -->
                             </div>
-                            <!-- end #profile-post tab -->
                         </div>
-                        <!-- end tab-content -->
                     </div>
-                    <!-- end profile-content -->
                 </div>
             </div>
         </div>
     </div>
-    @*Pagination*@
+
     <nav>
         <ul class="pagination pagination pagination justify-content-center">
             @if (posts.PageNumber == 1)
@@ -186,4 +181,5 @@
             }
         </ul>
     </nav>
+
 </body>

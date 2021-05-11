@@ -8,7 +8,5 @@
         public string FollowerUserName { get; set; }
 
         public string FollowerImagePath { get; set; }
-
-        //public bool IsFollowActive { get; set; }
     }
 }

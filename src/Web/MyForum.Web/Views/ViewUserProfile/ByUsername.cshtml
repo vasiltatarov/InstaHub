@@ -62,7 +62,7 @@
                                     <a asp-area="" asp-controller="ViewUserProfile" asp-action="GetFollowers" asp-route-username="@this.Model.Username" class="nav-link">FOLLOWERS ( @this.Model.Followers.Count() )</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#profile-videos" class="nav-link" data-toggle="tab">FOLLOWED ( @this.Model.Followed.Count() )</a>
+                                    <a asp-area="" asp-controller="ViewUserProfile" asp-action="GetFollowing" asp-route-username="@this.Model.Username">FOLLOWING ( @this.Model.Followed.Count() )</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="#profile-about" class="nav-link" data-toggle="tab">ABOUT</a>

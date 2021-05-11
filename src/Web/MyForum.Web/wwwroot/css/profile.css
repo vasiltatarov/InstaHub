@@ -707,3 +707,14 @@ select.form-control:not([size]):not([multiple]) {
 .text-danger, .text-red {
     color: #ff5b57 !important;
 }
+
+.image-content img {
+    border: 2px solid #000;
+    border-radius: 25px;
+    width: 80%;
+    height: 500px;
+}
+
+.about-info {
+    font-size: 24px;
+}

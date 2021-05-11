@@ -20,6 +20,8 @@
 
         public string ImagePath { get; set; }
 
+        public string Gender { get; set; }
+
         [NotMapped]
         public string CurrentUserImagePath { get; set; }
 

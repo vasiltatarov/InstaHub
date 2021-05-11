@@ -104,5 +104,29 @@
 
             return this.View(userViewModel);
         }
+
+        public async Task<IActionResult> About(string username)
+        {
+            var userViewModel = this.userManager.Users
+                .To<UserProfileViewModel>()
+                .FirstOrDefault(x => x.Username == username);
+
+            if (userViewModel == null)
+            {
+                return this.BadRequest();
+            }
+
+            var currentUser = await this.userManager.GetUserAsync(this.User);
+            var followedUser = await this.userManager.Users
+                .FirstOrDefaultAsync(x => x.UserName == username);
+
+            userViewModel.IsUserFollowed = await this.followService.CheckIfFollowExistAsync(currentUser.Id, followedUser.Id);
+            userViewModel.Followers = this.followService.GetFollowersByUserId<FollowerViewModel>(followedUser.Id);
+            userViewModel.Followed = this.followService.GetFollowedByUserId<FollowedViewModel>(followedUser.Id);
+
+            userViewModel.CurrentUserImagePath = currentUser.ImagePath;
+
+            return this.View(userViewModel);
+        }
     }
 }

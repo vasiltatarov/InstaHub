@@ -90,6 +90,7 @@ body {
         }
 
     .profile-header .profile-header-content {
+        height: 200px;
         color: #fff;
         padding: 25px
     }

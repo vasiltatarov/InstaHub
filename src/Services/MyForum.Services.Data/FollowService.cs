@@ -1,21 +1,23 @@
 ﻿namespace MyForum.Services.Data
 {
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
 
     using Microsoft.EntityFrameworkCore;
     using MyForum.Data.Common.Repositories;
     using MyForum.Data.Models;
+    using MyForum.Services.Mapping;
 
     public class FollowService : IFollowService
     {
         private readonly IRepository<UserFollow> userFollows;
-        private readonly IRepository<ApplicationUser> useRepository;
+        private readonly IRepository<ApplicationUser> userRepository;
 
-        public FollowService(IRepository<UserFollow> userFollows, IRepository<ApplicationUser> useRepository)
+        public FollowService(IRepository<UserFollow> userFollows, IRepository<ApplicationUser> userRepository)
         {
             this.userFollows = userFollows;
-            this.useRepository = useRepository;
+            this.userRepository = userRepository;
         }
 
         public async Task Follow(string followerId, string followedId)
@@ -37,9 +39,9 @@
                 userFollow = new UserFollow
                 {
                     FollowerId = followerId,
-                    Follower = await this.useRepository.All().FirstOrDefaultAsync(x => x.Id == followerId),
+                    Follower = await this.userRepository.All().FirstOrDefaultAsync(x => x.Id == followerId),
                     FollowedId = followedId,
-                    Followed = await this.useRepository.All().FirstOrDefaultAsync(x => x.Id == followedId),
+                    Followed = await this.userRepository.All().FirstOrDefaultAsync(x => x.Id == followedId),
                     IsFollowActive = true,
                 };
                 await this.userFollows.AddAsync(userFollow);
@@ -61,14 +63,16 @@
         }
 
         public IEnumerable<T> GetFollowersByUserId<T>(string userId)
-        {
-            throw new System.NotImplementedException();
-        }
+            => this.userFollows.All()
+                .Where(x => x.FollowedId == userId)
+                .To<T>()
+                .ToList();
 
-        public IEnumerable<T> GetFollowingByUserId<T>(string userId)
-        {
-            throw new System.NotImplementedException();
-        }
+        public IEnumerable<T> GetFollowedByUserId<T>(string userId)
+            => this.userFollows.All()
+                .Where(x => x.FollowerId == userId)
+                .To<T>()
+                .ToList();
 
         public async Task<bool> CheckIfFollowExist(string followerId, string followedId)
             => await this.userFollows.All()

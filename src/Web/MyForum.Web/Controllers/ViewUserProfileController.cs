@@ -10,6 +10,7 @@
     using MyForum.Data.Models;
     using MyForum.Services.Data;
     using MyForum.Services.Mapping;
+    using MyForum.Web.ViewModels.Follow;
     using MyForum.Web.ViewModels.ViewUserProfile;
     using PagedList;
 
@@ -46,6 +47,9 @@
                 .FirstOrDefaultAsync(x => x.UserName == username);
 
             userViewModel.IsUserFollowed = await this.followService.CheckIfFollowExist(currentUser.Id, followedUser.Id);
+            userViewModel.Followers = this.followService.GetFollowersByUserId<FollowerViewModel>(currentUser.Id);
+            userViewModel.Followed = this.followService.GetFollowedByUserId<FollowedViewModel>(followedUser.Id);
+
             userViewModel.CurrentUserImagePath = currentUser.ImagePath;
 
             userViewModel.Posts = userViewModel.Posts.ToPagedList(page, PagedOnList);

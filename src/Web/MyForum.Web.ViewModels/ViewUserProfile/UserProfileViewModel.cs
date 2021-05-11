@@ -7,6 +7,7 @@
     using AutoMapper;
     using MyForum.Data.Models;
     using MyForum.Services.Mapping;
+    using MyForum.Web.ViewModels.Follow;
     using MyForum.Web.ViewModels.Profiles;
 
     public class UserProfileViewModel : IMapFrom<ApplicationUser>, IHaveCustomMappings
@@ -24,6 +25,12 @@
 
         [NotMapped]
         public bool IsUserFollowed { get; set; }
+
+        [NotMapped]
+        public IEnumerable<FollowerViewModel> Followers { get; set; }
+
+        [NotMapped]
+        public IEnumerable<FollowedViewModel> Followed { get; set; }
 
         public IEnumerable<UserProfilePostViewModel> Posts { get; set; }
 

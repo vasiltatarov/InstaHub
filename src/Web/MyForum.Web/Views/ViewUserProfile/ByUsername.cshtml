@@ -55,11 +55,18 @@
                                 </div>
                             </div>
                             <ul class="profile-header-tab nav nav-tabs">
-                                <li class="nav-item"><a href="#profile-post" class="nav-link active show" data-toggle="tab">POSTS</a></li>
-                                <li class="nav-item"><a href="#profile-about" class="nav-link" data-toggle="tab">ABOUT</a></li>
-                                <li class="nav-item"><a href="#profile-photos" class="nav-link" data-toggle="tab">PHOTOS</a></li>
-                                <li class="nav-item"><a href="#profile-videos" class="nav-link" data-toggle="tab">VIDEOS</a></li>
-                                <li class="nav-item"><a href="#profile-friends" class="nav-link" data-toggle="tab">FRIENDS</a></li>
+                                <li class="nav-item">
+                                    <a asp-area="" asp-controller="ViewUserProfile" asp-action="ByUsername" asp-route-username="@this.Model.Username" class="nav-link active show">POSTS ( @this.Model.Posts.Count() )</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#profile-photos" class="nav-link" data-toggle="tab">FOLLOWERS ( @this.Model.Followers.Count() )</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#profile-videos" class="nav-link" data-toggle="tab">FOLLOWED ( @this.Model.Followed.Count() )</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#profile-about" class="nav-link" data-toggle="tab">ABOUT</a>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -83,7 +90,7 @@
                                                     <span class="userimage"><img src="~/uploads/@Model.ImagePath" alt=""></span>
                                                     <span class="username">
                                                         <b>
-                                                            <a asp-controller="Posts" asp-action="ById" asp-route-id="@post.Id">@post.Title</a>
+                                                            <a asp-area="" asp-controller="Posts" asp-action="ById" asp-route-id="@post.Id">@post.Title</a>
                                                         </b>
                                                     </span>
                                                 </div>
@@ -105,11 +112,6 @@
                                                         <span class="stats-total">@post.Votes.Count</span>
                                                     </div>
                                                 </div>
-                                                @*<div class="timeline-footer">
-                                                        <a href="javascript:;" class="m-r-15 text-inverse-lighter"><i class="fa fa-thumbs-up fa-fw fa-lg m-r-3"></i> Like</a>
-                                                        <a href="javascript:;" class="m-r-15 text-inverse-lighter"><i class="fa fa-comments fa-fw fa-lg m-r-3"></i> Comment</a>
-                                                        <a href="javascript:;" class="m-r-15 text-inverse-lighter"><i class="fa fa-share fa-fw fa-lg m-r-3"></i> Share</a>
-                                                    </div>*@
                                                 <div class="timeline-comment-box">
                                                     <div class="user"><img src="~/uploads/@Model.CurrentUserImagePath" style="width: 50px;"></div>
                                                     <div class="input">

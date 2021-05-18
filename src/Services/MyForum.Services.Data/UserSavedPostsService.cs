@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    using Microsoft.EntityFrameworkCore;
     using MyForum.Data.Common.Repositories;
     using MyForum.Data.Models;
     using MyForum.Services.Mapping;
@@ -51,10 +52,14 @@
 
         public async Task Delete(string userId, int postId)
         {
-            var userPost = this.userSavedPostsRepository.All()
-                .FirstOrDefault(x => x.UserId == userId && x.PostId == postId && x.IsDeleted == false);
+            var userPost = await this.userSavedPostsRepository.All()
+                .FirstOrDefaultAsync(x => x.UserId == userId && x.PostId == postId && x.IsDeleted == false);
             this.userSavedPostsRepository.Delete(userPost);
             await this.userSavedPostsRepository.SaveChangesAsync();
         }
+
+        public async Task<bool> IsPostSaved(string userId, int postId)
+            => await this.userSavedPostsRepository.All()
+                .AnyAsync(x => x.UserId == userId && x.PostId == postId);
     }
 }

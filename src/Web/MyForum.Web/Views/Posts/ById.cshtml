@@ -82,9 +82,18 @@
         <div class="card-footer p-lg-2">
             @if (this.User.Identity.IsAuthenticated)
             {
-                <a id="savePostBtn" onclick="addInSaved(@Model.Id)" class="btn btn-warning">
-                    <i class="fas fa-save fa-fw"></i>&nbsp; Add in Saved
-                </a>
+                @if ((bool)this.TempData["IsPostSaved"])
+                {
+                    <a onclick="addInSaved(@Model.Id)" class="btn btn-dark">
+                        <i class="fas fa-save fa-fw"></i>&nbsp; Saved
+                    </a>
+                }
+                else
+                {
+                    <a id="savePostBtn" onclick="addInSaved(@Model.Id)" class="btn btn-warning">
+                        <i class="fas fa-save fa-fw"></i>&nbsp; Save It
+                    </a>
+                }
                 <a onclick="window.print()" class="btn btn-warning">
                     <i class="fas fa-print"></i>&nbsp; Print
                 </a>
@@ -193,6 +202,8 @@
                         if (data.message === 'It is already saved!') {
                             alert('You have already Saved it');
                         }
+                        const btn = document.getElementById('savePostBtn');
+                        btn.textContent = 'Saved';
                     }
                 });
             }

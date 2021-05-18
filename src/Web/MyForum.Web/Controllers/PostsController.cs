@@ -15,12 +15,18 @@
         private readonly IPostsService postsService;
         private readonly ICategoriesService categoriesService;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly IUserSavedPostsService userSavedPostsService;
 
-        public PostsController(IPostsService postsService, ICategoriesService categoriesService, UserManager<ApplicationUser> userManager)
+        public PostsController(
+            IPostsService postsService,
+            ICategoriesService categoriesService,
+            UserManager<ApplicationUser> userManager,
+            IUserSavedPostsService userSavedPostsService)
         {
             this.postsService = postsService;
             this.categoriesService = categoriesService;
             this.userManager = userManager;
+            this.userSavedPostsService = userSavedPostsService;
         }
 
         [Authorize]
@@ -55,6 +61,10 @@
         public async Task<IActionResult> ById(int id)
         {
             var postViewModel = await this.postsService.GetById<PostViewModel>(id);
+
+            var user = await this.userManager.GetUserAsync(this.User);
+            this.TempData["IsPostSaved"] = await this.userSavedPostsService.IsPostSaved(user.Id, id);
+
             return this.View(postViewModel);
         }
     }

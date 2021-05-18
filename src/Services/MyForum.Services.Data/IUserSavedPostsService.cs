@@ -10,5 +10,7 @@
         IEnumerable<T> GetUserSavedPosts<T>(string userId);
 
         Task Delete(string userId, int postId);
+
+        Task<bool> IsPostSaved(string userId, int postId);
     }
 }

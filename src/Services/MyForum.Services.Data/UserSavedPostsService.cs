@@ -22,24 +22,32 @@
 
         public async Task<bool> AddAsync(string userId, int postId)
         {
-            if (this.userSavedPostsRepository.All()
-                .Any(x => x.UserId == userId &&
-                          x.PostId == postId &&
-                          x.IsDeleted == false))
+            var userSavePost = await this.userSavedPostsRepository.AllWithDeleted()
+                .FirstOrDefaultAsync(x => x.UserId == userId && x.PostId == postId);
+
+            if (userSavePost != null)
             {
-                return false;
+                if (userSavePost.IsDeleted)
+                {
+                    userSavePost.IsDeleted = false;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                userSavePost = new UserSavedPost()
+                {
+                    UserId = userId,
+                    PostId = postId,
+                    CreatedOn = DateTime.UtcNow,
+                };
+                await this.userSavedPostsRepository.AddAsync(userSavePost);
             }
 
-            var userSavePost = new UserSavedPost()
-            {
-                UserId = userId,
-                PostId = postId,
-                CreatedOn = DateTime.UtcNow,
-            };
-
-            await this.userSavedPostsRepository.AddAsync(userSavePost);
             await this.userSavedPostsRepository.SaveChangesAsync();
-
             return true;
         }
 

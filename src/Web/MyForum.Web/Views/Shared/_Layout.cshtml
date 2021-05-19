@@ -7,7 +7,6 @@
     <title>@this.ViewData["Title"] - @GlobalConstants.SystemName</title>
 
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true" />
-    <link href="~/css/home.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
 
     <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
@@ -16,64 +15,73 @@
     <link href="~/lib/fontawesome/css/all.css" rel="stylesheet" asp-append-version="true" />
 </head>
 <body>
-
     <header>
-        <div class="inner-sidebar bg-dark">
-            <div class="inner-sidebar-header justify-content-center">
-                <a asp-area="" asp-controller="Posts" asp-action="Create" class="btn btn-primary has-icon btn-block" type="button">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus mr-2">
-                        <line x1="12" y1="5" x2="12" y2="19"></line>
-                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                    </svg>
-                    New Publication
-                </a>
-            </div>
-            <div class="inner-sidebar-body p-0">
-                <div class="p-3 h-100" data-simplebar="init">
-                    <div class="simplebar-wrapper" style="margin: -16px;">
-                        <div style="height: 100%;">
-                            <div style="padding: 16px;">
-                                <nav class="nav nav-pills flex-column btn-group btn-group-toggle">
-                                    <a asp-area="" asp-controller="HomePage" asp-action="Posts" class="text-white nav-link nav-link-faded has-icon">
-                                        <i class="fas fa-home fa-fw"></i>&nbsp; Home
-                                    </a>
-                                    <a asp-area="" asp-controller="Categories" asp-action="GetCategories" class="text-white nav-link nav-link-faded has-icon">
-                                        <i class="fas fa-passport fa-fw"></i>&nbsp; Categories
-                                    </a>
-                                    @if (this.User.Identity.IsAuthenticated)
-                                    {
-                                        <a asp-area="" asp-controller="Chat" asp-action="Chat" class="text-white nav-link nav-link-faded has-icon">
-                                            <i class="far fa-comment-dots"></i>&nbsp; Live Chat
-                                        </a>
-                                        <a asp-area="" asp-controller="ViewUserProfile" asp-action="ByUsername" asp-route-username="@User.Identity.Name" class="text-white nav-link nav-link-faded has-icon">
-                                            <i class="fas fa-user-tie fa-fw"></i>&nbsp; Profile
-                                        </a>
-                                        <a asp-area="" asp-controller="Profiles" asp-action="GetProfiles" class="text-white nav-link nav-link-faded has-icon">
-                                            <i class="fas fa-users fa-fw"></i>&nbsp; Profiles
-                                        </a>
-                                        <a asp-area="" asp-controller="UserSavedPosts" asp-action="GetSavedPosts" class="text-white nav-link nav-link-faded has-icon">
-                                            <i class="fas fa-save fa-fw"></i>&nbsp; Saved
-                                        </a>
-                                    }
-                                    <a asp-area="" asp-controller="Home" asp-action="Privacy" class="text-white nav-link nav-link-faded has-icon">
-                                        <i class="fas fa-user-secret fa-fw"></i>&nbsp; Privacy
-                                    </a>
-                                    <partial name="_LoginPartial" />
-                                </nav>
-                            </div>
-                        </div>
-                    </div>
+        <nav class="navbar navbar-expand-sm navbar-light bg-info border-bottom box-shadow mb-3">
+            <div class="container">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <partial name="_LoginPartial" />
+                    <ul class="navbar-nav flex-grow-1">
+                        <li>
+                            <a asp-area="" asp-controller="Posts" asp-action="Create" class="btn btn-primary" type="button">
+                                <i class="fas fa-plus"></i>&nbsp; Publication
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-area="" asp-controller="HomePage" asp-action="Posts" class="text-white nav-link nav-link-faded has-icon">
+                                <i class="fas fa-home fa-fw"></i>&nbsp; Home
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-area="" asp-controller="Categories" asp-action="GetCategories" class="text-white nav-link nav-link-faded has-icon">
+                                <i class="fas fa-passport fa-fw"></i>&nbsp; Categories
+                            </a>
+                        </li>
+                        @if (this.User.Identity.IsAuthenticated)
+                        {
+                            <li>
+                                <a asp-area="" asp-controller="Chat" asp-action="Chat" class="text-white nav-link nav-link-faded has-icon">
+                                    <i class="far fa-comment-dots"></i>&nbsp; Chat
+                                </a>
+                            </li>
+                            <li>
+                                <a asp-area="" asp-controller="ViewUserProfile" asp-action="ByUsername" asp-route-username="@User.Identity.Name" class="text-white nav-link nav-link-faded has-icon">
+                                    <i class="fas fa-user-tie fa-fw"></i>&nbsp; Profile
+                                </a>
+                            </li>
+                            <li>
+                                <a asp-area="" asp-controller="Profiles" asp-action="GetProfiles" class="text-white nav-link nav-link-faded has-icon">
+                                    <i class="fas fa-users fa-fw"></i>&nbsp; Profiles
+                                </a>
+                            </li>
+                            <li>
+                                <a asp-area="" asp-controller="UserSavedPosts" asp-action="GetSavedPosts" class="text-white nav-link nav-link-faded has-icon">
+                                    <i class="fas fa-save fa-fw"></i>&nbsp; Saved
+                                </a>
+                            </li>
+                        }
+                        <li class="nav-item">
+                            <a asp-area="" asp-controller="Home" asp-action="Privacy" class="text-white nav-link nav-link-faded has-icon">
+                                <i class="fas fa-user-secret fa-fw"></i>&nbsp; Privacy
+                            </a>
+                        </li>
+                    </ul>
                 </div>
             </div>
-        </div>
+        </nav>
     </header>
 
     <div class="container">
         <partial name="_CookieConsentPartial" />
-        @this.RenderBody()
+        <main role="main" class="pb-3">
+            @this.RenderBody()
+        </main>
     </div>
 
-    <footer class="border-top footer text-muted bg-dark">
+    <footer class="border-top footer text-muted bg-info">
         <div class="container">
             <div class="row text-white">
                 <div class="col-md-6">
@@ -87,7 +95,6 @@
                 <a class="text-white" href="https://github.com/vasiltatarov/ForumSystem" target="_blank">
                     <i class="fab fa-github"></i> &nbsp; Forum - Open Source  Project
                 </a>
-                </p>
             </div>
         </div>
     </footer>

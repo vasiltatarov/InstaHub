@@ -32,6 +32,11 @@ for details on configuring this project to bundle and minify static web assets. 
     --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
+.navbar-nav li a:hover {
+    background-color: blue;
+    border-radius: 10px;
+}
+
 *,
 *::before,
 *::after {

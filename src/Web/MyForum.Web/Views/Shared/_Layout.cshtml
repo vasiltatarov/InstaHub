@@ -24,7 +24,7 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <partial name="_LoginPartial" />
-                    <ul class="navbar-nav flex-grow-1">
+                    <ul class="navbar-nav flex-grow-1 m-2">
                         <li>
                             <a asp-area="" asp-controller="Posts" asp-action="Create" class="btn btn-primary" type="button">
                                 <i class="fas fa-plus"></i>&nbsp; Publication
@@ -32,40 +32,40 @@
                         </li>
                         <li class="nav-item">
                             <a asp-area="" asp-controller="HomePage" asp-action="Posts" class="text-white nav-link nav-link-faded has-icon">
-                                <i class="fas fa-home fa-fw"></i>&nbsp; Home
+                                <i class="fas fa-home fa-fw"></i>Home
                             </a>
                         </li>
                         <li class="nav-item">
                             <a asp-area="" asp-controller="Categories" asp-action="GetCategories" class="text-white nav-link nav-link-faded has-icon">
-                                <i class="fas fa-passport fa-fw"></i>&nbsp; Categories
+                                <i class="fas fa-passport fa-fw"></i>Categories
                             </a>
                         </li>
                         @if (this.User.Identity.IsAuthenticated)
                         {
                             <li>
                                 <a asp-area="" asp-controller="Chat" asp-action="Chat" class="text-white nav-link nav-link-faded has-icon">
-                                    <i class="far fa-comment-dots"></i>&nbsp; Chat
+                                    <i class="far fa-comment-dots"></i> Chat
                                 </a>
                             </li>
                             <li>
                                 <a asp-area="" asp-controller="ViewUserProfile" asp-action="ByUsername" asp-route-username="@User.Identity.Name" class="text-white nav-link nav-link-faded has-icon">
-                                    <i class="fas fa-user-tie fa-fw"></i>&nbsp; Profile
+                                    <i class="fas fa-user-tie fa-fw"></i>Profile
                                 </a>
                             </li>
                             <li>
                                 <a asp-area="" asp-controller="Profiles" asp-action="GetProfiles" class="text-white nav-link nav-link-faded has-icon">
-                                    <i class="fas fa-users fa-fw"></i>&nbsp; Profiles
+                                    <i class="fas fa-users fa-fw"></i>Profiles
                                 </a>
                             </li>
                             <li>
                                 <a asp-area="" asp-controller="UserSavedPosts" asp-action="GetSavedPosts" class="text-white nav-link nav-link-faded has-icon">
-                                    <i class="fas fa-save fa-fw"></i>&nbsp; Saved
+                                    <i class="fas fa-save fa-fw"></i>Saved
                                 </a>
                             </li>
                         }
                         <li class="nav-item">
                             <a asp-area="" asp-controller="Home" asp-action="Privacy" class="text-white nav-link nav-link-faded has-icon">
-                                <i class="fas fa-user-secret fa-fw"></i>&nbsp; Privacy
+                                <i class="fas fa-user-secret fa-fw"></i>Privacy
                             </a>
                         </li>
                     </ul>

@@ -4,49 +4,157 @@
 <!DOCTYPE html>
 <html class=''>
 <head>
-    <link rel="stylesheet" href="~/css/chat.css"/>
-
     <meta charset='UTF-8'>
 
-    <link rel="canonical" href="https://codepen.io/emilcarlsson/pen/ZOQZaV?limit=all&page=74&q=contact+"/>
-    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="~/css/chat.css" />
 </head>
 <body>
+    <div class="container">
+        <h3 class=" text-center">Messaging</h3>
+        <div class="messaging">
+            <div class="inbox_msg">
+                <div class="inbox_people">
+                    <div class="headind_srch">
+                        <div class="recent_heading">
+                            <h4>Recent</h4>
+                        </div>
+                        <div class="srch_bar">
+                            <div class="stylish-input-group">
+                                <input type="text" class="search-bar" placeholder="Search">
+                                <span class="input-group-addon">
+                                    <button type="button"> <i class="fa fa-search" aria-hidden="true"></i> </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="inbox_chat">
+                        <div class="chat_list active_chat">
+                            <div class="chat_people">
+                                <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+                                <div class="chat_ib">
+                                    <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
+                                    <p>
+                                        Test, which is a new approach to have all solutions
+                                        astrology under one roof.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chat_list">
+                            <div class="chat_people">
+                                <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+                                <div class="chat_ib">
+                                    <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
+                                    <p>
+                                        Test, which is a new approach to have all solutions
+                                        astrology under one roof.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chat_list">
+                            <div class="chat_people">
+                                <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+                                <div class="chat_ib">
+                                    <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
+                                    <p>
+                                        Test, which is a new approach to have all solutions
+                                        astrology under one roof.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chat_list">
+                            <div class="chat_people">
+                                <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+                                <div class="chat_ib">
+                                    <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
+                                    <p>
+                                        Test, which is a new approach to have all solutions
+                                        astrology under one roof.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chat_list">
+                            <div class="chat_people">
+                                <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+                                <div class="chat_ib">
+                                    <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
+                                    <p>
+                                        Test, which is a new approach to have all solutions
+                                        astrology under one roof.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chat_list">
+                            <div class="chat_people">
+                                <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+                                <div class="chat_ib">
+                                    <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
+                                    <p>
+                                        Test, which is a new approach to have all solutions
+                                        astrology under one roof.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chat_list">
+                            <div class="chat_people">
+                                <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+                                <div class="chat_ib">
+                                    <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
+                                    <p>
+                                        Test, which is a new approach to have all solutions
+                                        astrology under one roof.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mesgs">
+                    <div id="messagesList" class="msg_history messages">
+                        @foreach (var message in this.Model.Messages)
+                        {
+                            <br />
+                            <div class="incoming_msg">
+                                <div class="incoming_msg_img">
+                                    <img class="rounded-circle" src="~/uploads/@message.UserImagePath" alt="" />
+                                </div>
+                                <div class="received_msg">
+                                    <div class="received_withd_msg">
+                                        <p>@message.Text</p>
+                                        <span style="color: red">@message.UserUserName</span>:<time datetime="@message.CreatedOn.ToString("O")"></time>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        @*<div class="outgoing_msg">
+                                <div class="incoming_msg_img">
+                                    <img class="rounded-circle" src="~/uploads" alt="sunil">
+                                </div>
+                                <div class="sent_msg">
+                                    <p>
+                                        Test which is a new approach to have all
+                                        solutions
+                                    </p>
+                                    <span class="time_date"> 11:01 AM | June 9</span>
+                                </div>
+                            </div>*@
+                    </div>
+                    <div class="type_msg">
+                        <div id="message-holder" class="input_msg_write">
+                            <input id="messageInput" type="text" class="write_msg" placeholder="Type a message" />
+                            <button id="sendButton" class="msg_send_btn" type="button">
+                                <i class="fa fa-paper-plane" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-    <div id="frame">
-        <div class="content">
-            <div class="contact-profile">
-                <img src="~/uploads/@Model.UserImagePath" alt="" />
-                <p>@this.Model.UserName</p>
-                <div class="social-media">
-                    <i class="fa fa-facebook" aria-hidden="true"></i>
-                    <i class="fa fa-twitter" aria-hidden="true"></i>
-                    <i class="fa fa-instagram" aria-hidden="true"></i>
-                </div>
-            </div>
-            <div class="messages">
-                <ul id="messagesList">
-                    @foreach (var message in this.Model.Messages)
-                    {
-                        <li class="sent">
-                            <img src="~/uploads/@message.UserImagePath" alt="" />
-                            <p>@message.Text</p><br />
-                            <time datetime="@message.CreatedOn.ToString("O")"></time>, From: <span style="color: red">@message.UserUserName</span>
-                        </li>
-                    }
-                    @*<li class="replies">
-                            <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-                            <p>No, I told him that.</p>
-                        </li>*@
-                </ul>
-            </div>
-            <div class="message-input">
-                <div id="message-holder" class="wrap">
-                    <textarea id="messageInput" type="text" placeholder="Write your message..." style="width: 90%"></textarea>
-                    <i class="fa fa-paperclip attachment" aria-hidden="true"></i>
-                    <button id="sendButton"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
-                </div>
-            </div>
         </div>
     </div>
 
@@ -67,13 +175,20 @@
                 function (message) {
                     if (message.text.trim() !== '') {
                         var chatInfo = `
-                        <li class="sent">
-                            <img src="/uploads/${message.userImagePath}" alt="" />
-                            <p>${message.text}</p><br />
-                            ${moment().format('llll')}, From: <span style="color: red">${message.userUserName}</span>
-                        </li>`;
+<br />
+<div class="incoming_msg">
+    <div class="incoming_msg_img">
+        <img class="rounded-circle" src="/uploads/${message.userImagePath}" alt="" />
+    </div>
+    <div class="received_msg">
+        <div class="received_withd_msg">
+            <p>${message.text}</p>
+           <span style="color: red">${message.userUserName}</span>:${moment().format('llll')}
+        </div>
+    </div>
+</div>`;
                         $("#messagesList").append(chatInfo);
-                        $(".messages").animate({ scrollTop: $(document).height() }, "fast");
+                        $(".messages").animate({ scrollTop: "99999" }, "fast");
                     }
                 });
 
@@ -96,9 +211,10 @@
                     .replace(/'/g, "&#039;");
             }
 
+
             //Aplication logic HERE
 
-            $(".messages").animate({ scrollTop: $(document).height() }, "fast");
+            $(".messages").animate({ scrollTop: "99999" }, "fast");
 
             $("#profile-img").click(function () {
                 $("#status-options").toggleClass("active");

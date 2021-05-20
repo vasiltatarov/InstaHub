@@ -8,12 +8,10 @@
 <html>
 <head>
     <link rel="stylesheet" href="~/css/login.css">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
     <meta charset="utf-8">
     <title>@ViewData["Title"]</title>
 </head>
-<body class="bg-dark">
-    <img src="~/images/login.jpg" style="width: 1350px; height: 890px;" />
+<body>
 
     <div class="login-box">
 
@@ -60,7 +58,9 @@
             <input asp-for="Input.Image" />
             <span asp-validation-for="Input.Image" class="text-danger"></span>
 
-            <button type="submit" class="btn btn-primary">Register</button>
+            <div class="form-group">
+                <button type="submit">Register</button>
+            </div>
 
             <p>
                 Already have an account?
@@ -73,8 +73,6 @@
 
 </body>
 </html>
-
-<h1>@ViewData["Title"]</h1>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

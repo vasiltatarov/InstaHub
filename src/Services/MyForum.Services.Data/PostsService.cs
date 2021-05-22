@@ -24,18 +24,18 @@
         {
             await this.IncreaseVisitorsCount(id);
 
-            var posts = this.postRepository
+            var post = this.postRepository
                 .All()
                 .Where(x => x.Id == id)
                 .To<T>()
                 .FirstOrDefault();
 
-            return posts;
+            return post;
         }
 
         public async Task<int> CreateAsync(string title, string content, int categoryId, string userId)
         {
-            var post = new Post()
+            var post = new Post
             {
                 Title = title,
                 Content = content,

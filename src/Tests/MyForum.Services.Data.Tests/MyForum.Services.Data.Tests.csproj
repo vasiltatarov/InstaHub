@@ -31,4 +31,8 @@
     <ProjectReference Include="..\..\Services\MyForum.Services.Data\MyForum.Services.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
+
 </Project>

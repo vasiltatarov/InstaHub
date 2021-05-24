@@ -86,6 +86,11 @@
                 .All()
                 .FirstOrDefault(x => x.Id == id);
 
+            if (post == null)
+            {
+                return;
+            }
+
             post.VisitorsCount++;
             await this.postRepository.SaveChangesAsync();
         }

@@ -23,7 +23,7 @@
             this.browser = new ChromeDriver(opts);
         }
 
-        [Fact(Skip = "Example test. Disabled for CI.")]
+        [Fact]
         public void FooterOfThePageContainsPrivacyLink()
         {
             this.browser.Navigate().GoToUrl(this.server.RootUri);

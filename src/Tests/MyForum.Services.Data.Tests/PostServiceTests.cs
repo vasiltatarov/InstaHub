@@ -2,15 +2,24 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+    using System.Reflection;
     using System.Threading.Tasks;
 
     using Moq;
     using MyForum.Data.Common.Repositories;
     using MyForum.Data.Models;
+    using MyForum.Services.Mapping;
+    using MyForum.Web.ViewModels;
+    using MyForum.Web.ViewModels.Posts;
     using Xunit;
 
     public class PostServiceTests
     {
+        public PostServiceTests()
+        {
+            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
+        }
+
         [Fact]
         public async Task CreateAsyncShouldCreatedNewPostSuccessfully()
         {
@@ -174,6 +183,30 @@
 
             // Assert
             Assert.Null(post);
+        }
+
+        [Fact]
+        public async Task GetAllPostsShouldReturnAllPostsCorrectly()
+        {
+            // Arrange
+            var list = new List<Post>();
+
+            var mockRepo = new Mock<IDeletableEntityRepository<Post>>();
+
+            mockRepo.Setup(x => x.AllAsNoTracking())
+                .Returns(list.AsQueryable());
+
+            mockRepo.Setup(x => x.AddAsync(It.IsAny<Post>())).Callback((Post post) => list.Add(post));
+            var service = new PostsService(mockRepo.Object);
+
+            // Act
+            await service.CreateAsync("Game of Thrones1", "The best1", 1, "v2");
+            await service.CreateAsync("Game of Thrones2", "The best2", 2, "v1");
+            var s = mockRepo.Object.All().Count();
+            var posts = service.GetAllPosts<PostViewModel>();
+
+            // Assert
+            Assert.Equal(2, posts.Count());
         }
     }
 }

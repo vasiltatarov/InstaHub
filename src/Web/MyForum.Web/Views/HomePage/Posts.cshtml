@@ -30,10 +30,16 @@
                 <option value="Most-Visited">Most Visited</option>
                 <option value="Most-Liked">Most Liked</option>
             </select>
-            <a class="navbar-brand">Results: @this.Model.Count()</a>
+            <a class="navbar-brand">
+                <span class="badge badge-light">Results: @this.Model.Count()</span>
+            </a>
             <span>
-                <input value="@this.ViewData["searchTerm"]" type="search" name="searchTerm" class="form-control mr-sm-2" placeholder="Search forum"/>
-                <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
+                <button class="btn btn-warning" type="submit">
+                    <i class="fas fa-search"></i>
+                </button>
+            </span>
+            <span style="margin-left: -230px">
+                <input value="@this.ViewData["searchTerm"]" type="search" name="searchTerm" class="form-control" placeholder="Search forum" />
             </span>
         </form>
 

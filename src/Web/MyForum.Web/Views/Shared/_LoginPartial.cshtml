@@ -8,7 +8,9 @@
     @if (this.SignInManager.IsSignedIn(this.User))
     {
         <li class="nav-item">
-            <a class="nav-link text-white" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@this.User.Identity.Name</a>
+            <a asp-area="" asp-controller="ViewUserProfile" asp-action="ByUsername" asp-route-username="@User.Identity.Name" class="nav-link text-white" title="Manage">
+                <i class="fas fa-user-tie fa-fw"></i>Profile
+            </a>
         </li>
         if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
         {

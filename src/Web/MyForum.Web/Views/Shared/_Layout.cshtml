@@ -44,12 +44,7 @@
                         {
                             <li>
                                 <a asp-area="" asp-controller="Chat" asp-action="Chat" class="text-white nav-link nav-link-faded has-icon">
-                                    <i class="far fa-comment-dots"></i> Chat
-                                </a>
-                            </li>
-                            <li>
-                                <a asp-area="" asp-controller="ViewUserProfile" asp-action="ByUsername" asp-route-username="@User.Identity.Name" class="text-white nav-link nav-link-faded has-icon">
-                                    <i class="fas fa-user-tie fa-fw"></i>Profile
+                                    <i class="far fa-comment-dots"></i>Chat
                                 </a>
                             </li>
                             <li>
@@ -60,6 +55,11 @@
                             <li>
                                 <a asp-area="" asp-controller="UserSavedPosts" asp-action="GetSavedPosts" class="text-white nav-link nav-link-faded has-icon">
                                     <i class="fas fa-save fa-fw"></i>Saved
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
+                                    <i class="fas fa-user-cog"></i>Settings
                                 </a>
                             </li>
                         }

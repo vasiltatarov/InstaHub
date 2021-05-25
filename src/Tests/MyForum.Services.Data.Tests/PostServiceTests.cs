@@ -18,6 +18,12 @@
         public PostServiceTests()
         {
             AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
+
+            //var config = new MapperConfiguration(cfg =>
+            //{
+            //    cfg.CreateMap<Post, PostViewModel>();
+            //});
+            //var mapper = config.CreateMapper();
         }
 
         [Fact]
@@ -68,7 +74,6 @@
         [Fact]
         public async Task GetByIdShouldReturnCorrectPost() // Not work
         {
-            // Arrange
             var list = new List<Post>();
 
             var mockRepo = new Mock<IDeletableEntityRepository<Post>>();
@@ -81,7 +86,7 @@
 
             // Act
             var postId = await service.CreateAsync("Game of Thrones", "The best ever", 1, "v1");
-            var post = await service.GetById<It.IsAnyType>(postId);
+            var posts = await service.GetById<PostViewModel>(postId);
 
             // Assert
             Assert.Single(list);
@@ -196,17 +201,29 @@
             mockRepo.Setup(x => x.AllAsNoTracking())
                 .Returns(list.AsQueryable());
 
-            mockRepo.Setup(x => x.AddAsync(It.IsAny<Post>())).Callback((Post post) => list.Add(post));
+            mockRepo.Setup(x => x.AddAsync(It.IsAny<Post>()))
+                .Callback((Post post) => list.Add(post));
             var service = new PostsService(mockRepo.Object);
 
             // Act
             await service.CreateAsync("Game of Thrones1", "The best1", 1, "v2");
             await service.CreateAsync("Game of Thrones2", "The best2", 2, "v1");
             var s = mockRepo.Object.All().Count();
-            var posts = service.GetAllPosts<PostViewModel>();
+            var posts = service.GetAllPosts<Models>();
 
             // Assert
             Assert.Equal(2, posts.Count());
         }
+    }
+
+    public class Models
+    {
+        public string Title { get; set; }
+
+        public string Content { get; set; }
+
+        public int CategoryId { get; set; }
+
+        public string UserId { get; set; }
     }
 }

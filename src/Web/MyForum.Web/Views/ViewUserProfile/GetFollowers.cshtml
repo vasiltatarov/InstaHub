@@ -50,7 +50,7 @@
                             </div>
                             <ul class="profile-header-tab nav nav-tabs">
                                 <li class="nav-item">
-                                    <a asp-area="" asp-controller="ViewUserProfile" asp-action="ByUsername" asp-route-username="@this.Model.Username" class="nav-link">POSTS ( @this.Model.Posts.Count() )</a>
+                                    <a asp-area="" asp-controller="ViewUserProfile" asp-action="ByUsername" asp-route-username="@this.Model.Username" class="nav-link">POSTS ( @this.Model.PostsCount )</a>
                                 </li>
                                 <li class="nav-item">
                                     <a asp-area="" asp-controller="ViewUserProfile" asp-action="GetFollowers" asp-route-username="@this.Model.Username" class="nav-link active show">FOLLOWERS ( @this.Model.Followers.Count() )</a>

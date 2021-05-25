@@ -22,6 +22,8 @@
 
         public string Gender { get; set; }
 
+        public int PostsCount { get; set; }
+
         [NotMapped]
         public string CurrentUserImagePath { get; set; }
 

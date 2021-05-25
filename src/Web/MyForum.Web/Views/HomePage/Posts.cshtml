@@ -31,7 +31,7 @@
                 <option value="Most-Liked">Most Liked</option>
             </select>
             <a class="navbar-brand">
-                <span class="badge badge-light">Results: @this.Model.Count()</span>
+                <span class="badge badge-light">Results: @this.Model.Count() / @this.TempData["AllPosts"]</span>
             </a>
             <span>
                 <button class="btn btn-warning" type="submit">

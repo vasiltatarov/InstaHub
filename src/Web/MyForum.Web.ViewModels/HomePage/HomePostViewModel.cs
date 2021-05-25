@@ -46,7 +46,7 @@
             configuration.CreateMap<Post, HomePostViewModel>()
                 .ForMember(x => x.VotesCount, options =>
                 {
-                    options.MapFrom(p => p.Votes.Sum(v => (int) v.Type));
+                    options.MapFrom(p => p.Votes.Sum(v => (int)v.Type));
                 });
         }
     }

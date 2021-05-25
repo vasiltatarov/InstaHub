@@ -24,6 +24,8 @@ namespace MyForum.Data.Models
 
         public string Gender { get; set; }
 
+        public string Description { get; set; }
+
         // Audit info
         public DateTime CreatedOn { get; set; }
 

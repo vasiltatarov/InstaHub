@@ -54,6 +54,8 @@
             this.ViewData.Add("searchTerm", searchTerm);
             this.ViewData.Add("page", page);
 
+            this.TempData.Add("AllPosts", posts.Count());
+
             if (!string.IsNullOrWhiteSpace(searchTerm))
             {
                 posts = posts

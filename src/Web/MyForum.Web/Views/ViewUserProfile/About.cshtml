@@ -75,6 +75,20 @@
                                 <p><i class="fas fa-calendar-alt"></i>&nbsp Joined on -  <time datetime="@this.Model.CreatedOn.ToString("O")"></time></p>
                                 <p><i class="fa fa-map"></i>&nbsp Location - &nbsp; @Model.Location</p>
                                 <p><i class="fas fa-venus-mars"></i>&nbsp Gender - @this.Model.Gender</p>
+                                <p><i class="far fa-file-alt"></i>&nbsp Description:</p>
+                                @if (this.User.Identity.IsAuthenticated && this.User.Identity.Name == this.Model.Username)
+                                {
+                                    <p>
+                                        <textarea id="descriptionText" class="form-control" placeholder="Add your description here:" name="desc">@this.Model.Description</textarea>
+                                    </p>
+                                    <i onclick="addDescription()" class="btn btn-primary">Update</i>
+                                }
+                                else
+                                {
+                                    <p>
+                                        <textarea disabled class="form-control" placeholder="Add your description here:" name="desc">@this.Model.Description</textarea>
+                                    </p>
+                                }
                             </div>
                         </div>
                     </div>
@@ -82,5 +96,25 @@
             </div>
         </div>
     </div>
+
+    @section Scripts
+    {
+        <script>
+            function addDescription() {
+                const content = document.getElementById('descriptionText').value;
+                var json = { content: content };
+
+                $.ajax({
+                    type: 'GET',
+                    url: "/api/userSettings/changeDescription/" + content,
+                    data: JSON.stringify(json),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data) {
+                    }
+                });
+            }
+        </script>
+    }
 
 </body>

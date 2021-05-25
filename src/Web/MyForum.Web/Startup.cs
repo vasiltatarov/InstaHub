@@ -89,6 +89,7 @@ namespace MyForum.Web
             services.AddTransient<IUserSavedPostsService, UserSavedPostsService>();
             services.AddTransient<IChatService, ChatService>();
             services.AddTransient<IFollowService, FollowService>();
+            services.AddTransient<IUserSettingsService, UserSettingsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

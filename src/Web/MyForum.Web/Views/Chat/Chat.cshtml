@@ -16,7 +16,7 @@
                 <div class="inbox_people">
                     <div class="headind_srch">
                         <div class="recent_heading">
-                            <h4>Recent</h4>
+                            <h4>Last Active</h4>
                         </div>
                         <div class="srch_bar">
                             <div class="stylish-input-group">
@@ -28,90 +28,29 @@
                         </div>
                     </div>
                     <div class="inbox_chat">
-                        <div class="chat_list active_chat">
-                            <div class="chat_people">
-                                <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-                                <div class="chat_ib">
-                                    <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
-                                    <p>
-                                        Test, which is a new approach to have all solutions
-                                        astrology under one roof.
-                                    </p>
+                        @foreach (var message in this.Model.Messages
+                              .GroupBy(x => x.UserUserName)
+                              .Select(x => x.Last())
+                              .ToList()
+                          )
+                        {
+                            <div class="chat_list">
+                                <div class="chat_people">
+                                    <div class="chat_img">
+                                        <img class="rounded-circle" src="~/uploads/@message.UserImagePath" alt="sunil">
+                                    </div>
+                                    <div class="chat_ib">
+                                        <h5>
+                                            @message.UserUserName
+                                            <span class="chat_date">
+                                                <time datetime="@message.CreatedOn.ToString("O")"></time>
+                                            </span>
+                                        </h5>
+                                        <p>@message.Text</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="chat_list">
-                            <div class="chat_people">
-                                <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-                                <div class="chat_ib">
-                                    <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
-                                    <p>
-                                        Test, which is a new approach to have all solutions
-                                        astrology under one roof.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="chat_list">
-                            <div class="chat_people">
-                                <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-                                <div class="chat_ib">
-                                    <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
-                                    <p>
-                                        Test, which is a new approach to have all solutions
-                                        astrology under one roof.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="chat_list">
-                            <div class="chat_people">
-                                <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-                                <div class="chat_ib">
-                                    <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
-                                    <p>
-                                        Test, which is a new approach to have all solutions
-                                        astrology under one roof.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="chat_list">
-                            <div class="chat_people">
-                                <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-                                <div class="chat_ib">
-                                    <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
-                                    <p>
-                                        Test, which is a new approach to have all solutions
-                                        astrology under one roof.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="chat_list">
-                            <div class="chat_people">
-                                <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-                                <div class="chat_ib">
-                                    <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
-                                    <p>
-                                        Test, which is a new approach to have all solutions
-                                        astrology under one roof.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="chat_list">
-                            <div class="chat_people">
-                                <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-                                <div class="chat_ib">
-                                    <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
-                                    <p>
-                                        Test, which is a new approach to have all solutions
-                                        astrology under one roof.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
+                        }
                     </div>
                 </div>
                 <div class="mesgs">
@@ -126,7 +65,8 @@
                                 <div class="received_msg">
                                     <div class="received_withd_msg">
                                         <p>@message.Text</p>
-                                        <span style="color: red">@message.UserUserName</span>:<time datetime="@message.CreatedOn.ToString("O")"></time>
+                                        <span style="color: red">@message.UserUserName</span>:
+                                        <time datetime="@message.CreatedOn.ToString("O")"></time>
                                     </div>
                                 </div>
                             </div>
@@ -170,22 +110,21 @@
                     .withUrl("/chat")
                     .build();
 
-
             connection.on("NewMessage",
                 function (message) {
                     if (message.text.trim() !== '') {
                         var chatInfo = `
 <br />
 <div class="incoming_msg">
-    <div class="incoming_msg_img">
-        <img class="rounded-circle" src="/uploads/${message.userImagePath}" alt="" />
+<div class="incoming_msg_img">
+    <img class="rounded-circle" src="/uploads/${message.userImagePath}" alt="" />
+</div>
+<div class="received_msg">
+    <div class="received_withd_msg">
+        <p>${message.text}</p>
+       <span style="color: red">${message.userUserName}</span>:${moment().format('llll')}
     </div>
-    <div class="received_msg">
-        <div class="received_withd_msg">
-            <p>${message.text}</p>
-           <span style="color: red">${message.userUserName}</span>:${moment().format('llll')}
-        </div>
-    </div>
+</div>
 </div>`;
                         $("#messagesList").append(chatInfo);
                         $(".messages").animate({ scrollTop: "99999" }, "fast");

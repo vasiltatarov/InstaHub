@@ -1,8 +1,10 @@
 ﻿// ReSharper disable VirtualMemberCallInConstructor
+
 namespace MyForum.Data.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
 
     using Microsoft.AspNetCore.Identity;
     using MyForum.Data.Common.Models;
@@ -24,6 +26,7 @@ namespace MyForum.Data.Models
 
         public string Gender { get; set; }
 
+        [MaxLength(1000)]
         public string Description { get; set; }
 
         // Audit info

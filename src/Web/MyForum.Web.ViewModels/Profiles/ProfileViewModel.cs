@@ -1,12 +1,11 @@
-﻿using System.Linq;
-using MyForum.Web.ViewModels.ViewUserProfile;
-
-namespace MyForum.Web.ViewModels.Profiles
+﻿namespace MyForum.Web.ViewModels.Profiles
 {
+    using System.Linq;
 
     using AutoMapper;
     using MyForum.Data.Models;
     using MyForum.Services.Mapping;
+    using MyForum.Web.ViewModels.ViewUserProfile;
 
     public class ProfileViewModel : IMapFrom<ApplicationUser>, IHaveCustomMappings
     {
@@ -15,6 +14,8 @@ namespace MyForum.Web.ViewModels.Profiles
         public string Location { get; set; }
 
         public string ImagePath { get; set; }
+
+        public string Description { get; set; }
 
         public int PostsCount { get; set; }
 

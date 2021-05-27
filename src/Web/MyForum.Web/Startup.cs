@@ -1,6 +1,4 @@
-﻿using MyForum.Web.Hubs;
-
-namespace MyForum.Web
+﻿namespace MyForum.Web
 {
     using System.Reflection;
 
@@ -22,6 +20,7 @@ namespace MyForum.Web
     using MyForum.Services.Data;
     using MyForum.Services.Mapping;
     using MyForum.Services.Messaging;
+    using MyForum.Web.Hubs;
     using MyForum.Web.ViewModels;
 
     public class Startup
@@ -68,7 +67,7 @@ namespace MyForum.Web
             // Identity Core
             services.AddIdentityCore<ApplicationUser>()
                 .AddRoles<IdentityRole>()
-                .AddClaimsPrincipalFactory<UserClaimsPrincipalFactory<ApplicationUser, IdentityRole>>()
+                .AddClaimsPrincipalFactory<UserClaimsPrincipalFactory<ApplicationUser, ApplicationRole>>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders()
                 .AddDefaultUI();

@@ -40,7 +40,6 @@
                                     <br/>
                                     @if (this.Model.Username != this.User.Identity.Name)
                                     {
-                                        <a class="btn btn-warning" style="margin-right: 10px;">Message</a>
                                         @if (this.Model.IsUserFollowed)
                                         {
                                             <a asp-area="" asp-controller="Follow" asp-action="Unfollow" asp-route-username="@this.Model.Username" class="btn btn-dark">Unfollow</a>

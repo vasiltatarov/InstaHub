@@ -33,7 +33,7 @@ for details on configuring this project to bundle and minify static web assets. 
 }
 
 .navbar-nav li a:hover {
-    background-color: blue;
+    background-color: #17a2b8;
     border-radius: 10px;
 }
 

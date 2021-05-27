@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace MyForum.Data.Migrations
+﻿namespace MyForum.Data.Migrations
 {
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class AddUserFollowModel : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -12,7 +12,7 @@ namespace MyForum.Data.Migrations
                 {
                     FollowerId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     FollowedId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    IsFollowActive = table.Column<bool>(type: "bit", nullable: false)
+                    IsFollowActive = table.Column<bool>(type: "bit", nullable: false),
                 },
                 constraints: table =>
                 {

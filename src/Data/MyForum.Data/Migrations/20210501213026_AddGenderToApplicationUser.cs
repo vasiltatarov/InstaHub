@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace MyForum.Data.Migrations
+﻿namespace MyForum.Data.Migrations
 {
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class AddGenderToApplicationUser : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)

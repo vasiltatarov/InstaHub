@@ -18,10 +18,10 @@
         {
             var totalBytes = file.Length;
             var fileName = file.FileName.Trim('"');
-            fileName = EnsureFileName(fileName);
+            fileName = this.EnsureFileName(fileName);
             var buffer = new byte[16 * 1024];
 
-            using (FileStream output = File.Create(GetPathAndFileName(fileName)))
+            using (FileStream output = File.Create(this.GetPathAndFileName(fileName)))
             {
                 using (Stream input = file.OpenReadStream())
                 {
@@ -37,7 +37,7 @@
 
         private string GetPathAndFileName(string fileName)
         {
-            var path = hostingEnvironment.WebRootPath + "\\uploads\\";
+            var path = this.hostingEnvironment.WebRootPath + "\\uploads\\";
             if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);

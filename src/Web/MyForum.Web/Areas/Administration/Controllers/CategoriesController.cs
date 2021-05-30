@@ -9,20 +9,18 @@
     using MyForum.Data.Models;
 
     [Area("Administration")]
-    public class CategoriesController : Controller
+    public class CategoriesController : AdministrationController
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ApplicationDbContext context;
 
         public CategoriesController(ApplicationDbContext context)
         {
-            this._context = context;
+            this.context = context;
         }
 
         // GET: Administration/Categories
         public async Task<IActionResult> Index()
-        {
-            return this.View(await this._context.Categories.ToListAsync());
-        }
+            => this.View(await this.context.Categories.ToListAsync());
 
         // GET: Administration/Categories/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -32,7 +30,7 @@
                 return this.NotFound();
             }
 
-            var category = await this._context.Categories
+            var category = await this.context.Categories
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (category == null)
             {
@@ -44,9 +42,7 @@
 
         // GET: Administration/Categories/Create
         public IActionResult Create()
-        {
-            return this.View();
-        }
+            => this.View();
 
         // POST: Administration/Categories/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
@@ -57,8 +53,8 @@
         {
             if (this.ModelState.IsValid)
             {
-                this._context.Add(category);
-                await this._context.SaveChangesAsync();
+                this.context.Add(category);
+                await this.context.SaveChangesAsync();
                 return this.RedirectToAction(nameof(this.Index));
             }
 
@@ -73,7 +69,7 @@
                 return this.NotFound();
             }
 
-            var category = await this._context.Categories.FindAsync(id);
+            var category = await this.context.Categories.FindAsync(id);
             if (category == null)
             {
                 return this.NotFound();
@@ -98,8 +94,8 @@
             {
                 try
                 {
-                    this._context.Update(category);
-                    await this._context.SaveChangesAsync();
+                    this.context.Update(category);
+                    await this.context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -127,7 +123,7 @@
                 return this.NotFound();
             }
 
-            var category = await this._context.Categories
+            var category = await this.context.Categories
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (category == null)
             {
@@ -142,15 +138,13 @@
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var category = await this._context.Categories.FindAsync(id);
-            this._context.Categories.Remove(category);
-            await this._context.SaveChangesAsync();
+            var category = await this.context.Categories.FindAsync(id);
+            this.context.Categories.Remove(category);
+            await this.context.SaveChangesAsync();
             return this.RedirectToAction(nameof(this.Index));
         }
 
         private bool CategoryExists(int id)
-        {
-            return this._context.Categories.Any(e => e.Id == id);
-        }
+            => this.context.Categories.Any(e => e.Id == id);
     }
 }

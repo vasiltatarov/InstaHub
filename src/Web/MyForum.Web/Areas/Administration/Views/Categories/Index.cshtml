@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MyForum.Data.Models.Category>
+﻿@model IEnumerable<MyForum.Web.ViewModels.Categories.CategoryAdministrationViewModel>
 
 @{
     ViewData["Title"] = "Index";
@@ -8,9 +8,9 @@
 <hr/>
 
 <p>
-    <a class="btn btn-warning" asp-action="Create">Create New</a>
+    <a class="btn btn-success" asp-action="Create">Create New</a>
 </p>
-<table class="table">
+<table class="table table-bordered table-hover table-striped">
     <thead>
         <tr>
             <th>
@@ -53,8 +53,7 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                @*@Html.DisplayFor(modelItem => item.ImageUrl)*@
-                <img style="width: 100px" src="@item.ImageUrl"/>
+                <img style="width: 100px; height: 100px" src="@item.ImageUrl"/>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.IsDeleted)
@@ -69,9 +68,9 @@
                 @Html.DisplayFor(modelItem => item.ModifiedOn)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a class="btn btn-warning btn-sm m-1" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a class="btn btn-primary btn-sm m-1" asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a class="btn btn-danger btn-sm m-1" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
 }

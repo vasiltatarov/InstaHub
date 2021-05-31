@@ -1,26 +1,25 @@
 ﻿namespace MyForum.Web.Areas.Administration.Controllers
 {
-    using System.Linq;
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
-    using MyForum.Data;
-    using MyForum.Data.Models;
+    using MyForum.Services.Data;
+    using MyForum.Web.ViewModels.Categories;
 
     [Area("Administration")]
     public class CategoriesController : AdministrationController
     {
-        private readonly ApplicationDbContext context;
+        private readonly ICategoriesService categoriesService;
 
-        public CategoriesController(ApplicationDbContext context)
+        public CategoriesController(ICategoriesService categoriesService)
         {
-            this.context = context;
+            this.categoriesService = categoriesService;
         }
 
         // GET: Administration/Categories
-        public async Task<IActionResult> Index()
-            => this.View(await this.context.Categories.ToListAsync());
+        public IActionResult Index()
+            => this.View(this.categoriesService.GetAll<CategoryAdministrationViewModel>());
 
         // GET: Administration/Categories/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -30,8 +29,7 @@
                 return this.NotFound();
             }
 
-            var category = await this.context.Categories
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var category = await this.categoriesService.GetByIdAsync<CategoryAdministrationViewModel>(id.Value);
             if (category == null)
             {
                 return this.NotFound();
@@ -42,23 +40,22 @@
 
         // GET: Administration/Categories/Create
         public IActionResult Create()
-            => this.View();
+            => this.View(new CreateCategoryInputModel());
 
         // POST: Administration/Categories/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Name,Title,Description,ImageUrl,IsDeleted,DeletedOn,Id,CreatedOn,ModifiedOn")] Category category)
+        public async Task<IActionResult> Create(CreateCategoryInputModel input)
         {
-            if (this.ModelState.IsValid)
+            if (!this.ModelState.IsValid)
             {
-                this.context.Add(category);
-                await this.context.SaveChangesAsync();
-                return this.RedirectToAction(nameof(this.Index));
+                return this.View(input);
             }
 
-            return this.View(category);
+            await this.categoriesService.CreateAsync(input.Name, input.Title, input.Description, input.ImageUrl);
+            return this.RedirectToAction(nameof(this.Index));
         }
 
         // GET: Administration/Categories/Edit/5
@@ -69,7 +66,7 @@
                 return this.NotFound();
             }
 
-            var category = await this.context.Categories.FindAsync(id);
+            var category = await this.categoriesService.GetByIdAsync<CategoryAdministrationViewModel>(id.Value);
             if (category == null)
             {
                 return this.NotFound();
@@ -83,7 +80,7 @@
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Name,Title,Description,ImageUrl,IsDeleted,DeletedOn,Id,CreatedOn,ModifiedOn")] Category category)
+        public async Task<IActionResult> Edit(int id, CategoryAdministrationViewModel category)
         {
             if (id != category.Id)
             {
@@ -94,12 +91,12 @@
             {
                 try
                 {
-                    this.context.Update(category);
-                    await this.context.SaveChangesAsync();
+                    await this.categoriesService
+                        .Update(id, category.Name, category.Title, category.Description, category.ImageUrl, category.IsDeleted, category.DeletedOn, category.CreatedOn, category.ModifiedOn);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!this.CategoryExists(category.Id))
+                    if (!await this.CategoryExists(category.Id))
                     {
                         return this.NotFound();
                     }
@@ -123,8 +120,7 @@
                 return this.NotFound();
             }
 
-            var category = await this.context.Categories
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var category = await this.categoriesService.GetByIdAsync<CategoryAdministrationViewModel>(id.Value);
             if (category == null)
             {
                 return this.NotFound();
@@ -138,13 +134,17 @@
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var category = await this.context.Categories.FindAsync(id);
-            this.context.Categories.Remove(category);
-            await this.context.SaveChangesAsync();
+            var isDeleted = await this.categoriesService.Delete(id);
+
+            if (!isDeleted)
+            {
+                return this.NotFound();
+            }
+
             return this.RedirectToAction(nameof(this.Index));
         }
 
-        private bool CategoryExists(int id)
-            => this.context.Categories.Any(e => e.Id == id);
+        private async Task<bool> CategoryExists(int id)
+            => await this.categoriesService.IsCategoryExists(id);
     }
 }

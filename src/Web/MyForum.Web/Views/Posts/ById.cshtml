@@ -97,6 +97,12 @@
                 <a onclick="window.print()" class="btn btn-warning">
                     <i class="fas fa-print"></i>&nbsp; Print
                 </a>
+                <form method="post" asp-controller="Emails" asp-action="SendPostToEmail" asp-route-id="@this.Model.Id">
+                    <button class="btn btn-warning">Send Post to Email</button>
+                </form>
+                @*<a class="btn btn-warning" asp-controller="Emails" asp-action="SendPostToEmail" asp-route-id="@this.Model.Id">
+                    <i class="fas fa-envelope"></i>&nbsp; Send Post to Email
+                </a>*@
             }
         </div>
         <div class="row">

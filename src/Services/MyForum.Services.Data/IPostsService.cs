@@ -1,5 +1,6 @@
 ﻿namespace MyForum.Services.Data
 {
+    using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
@@ -16,6 +17,8 @@
         int GetCountByCategoryId(int categoryId);
 
         Task IncreaseVisitorsCount(int id);
+
+        Task Edit(int id, string title, string content, int categoryId, bool isDeleted, DateTime deletedOn, DateTime createdOn, DateTime modifiedOn);
 
         Task<bool> Delete(int id);
     }

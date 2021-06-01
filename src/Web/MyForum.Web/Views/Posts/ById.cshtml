@@ -99,6 +99,9 @@
                 </a>
                 if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
                 {
+                    <a class="btn btn-primary" asp-area="Administration" asp-action="Edit" asp-controller="Posts" asp-route-id="@this.Model.Id">
+                        <i class="fas fa-edit"></i>&nbsp; Edit
+                    </a>
                     <a data-toggle="modal" data-target="#exampleModal" class="btn btn-danger">
                         <i class="fas fa-trash-alt"></i>&nbsp; Delete
                     </a>

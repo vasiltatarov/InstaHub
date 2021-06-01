@@ -1,5 +1,6 @@
 ﻿namespace MyForum.Services.Data
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -93,6 +94,22 @@
             }
 
             post.VisitorsCount++;
+            await this.postRepository.SaveChangesAsync();
+        }
+
+        public async Task Edit(int id, string title, string content, int categoryId, bool isDeleted, DateTime deletedOn,
+            DateTime createdOn, DateTime modifiedOn)
+        {
+            var post = await this.postRepository.All().FirstOrDefaultAsync(x => x.Id == id);
+
+            post.Title = title;
+            post.Content = content;
+            post.CategoryId = categoryId;
+            post.CreatedOn = createdOn;
+            post.DeletedOn = deletedOn;
+            post.ModifiedOn = modifiedOn;
+            post.IsDeleted = isDeleted;
+
             await this.postRepository.SaveChangesAsync();
         }
 

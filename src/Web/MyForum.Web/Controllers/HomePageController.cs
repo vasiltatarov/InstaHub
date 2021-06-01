@@ -45,7 +45,7 @@
                 posts = this.postsService.GetAllPosts<HomePostViewModel>();
 
                 var cacheEntryOptions = new MemoryCacheEntryOptions()
-                    .SetAbsoluteExpiration(TimeSpan.FromSeconds(100));
+                    .SetAbsoluteExpiration(TimeSpan.FromSeconds(10));
 
                 this.cache.Set("Posts", posts, cacheEntryOptions);
             }

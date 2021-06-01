@@ -16,5 +16,7 @@
         int GetCountByCategoryId(int categoryId);
 
         Task IncreaseVisitorsCount(int id);
+
+        Task<bool> Delete(int id);
     }
 }

@@ -4,6 +4,7 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    using Microsoft.EntityFrameworkCore;
     using MyForum.Data.Common.Repositories;
     using MyForum.Data.Models;
     using MyForum.Services.Mapping;
@@ -93,6 +94,21 @@
 
             post.VisitorsCount++;
             await this.postRepository.SaveChangesAsync();
+        }
+
+        public async Task<bool> Delete(int id)
+        {
+            var post = await this.postRepository.All().FirstOrDefaultAsync(x => x.Id == id);
+
+            if (post == null)
+            {
+                return false;
+            }
+
+            this.postRepository.Delete(post);
+            await this.postRepository.SaveChangesAsync();
+
+            return true;
         }
     }
 }

@@ -23,8 +23,8 @@
     <div class="container">
 
         <form style="border-radius: 20px" class="navbar navbar-light bg-info justify-content-between" method="get" asp-action="Posts">
-            <select class="form-control col-2" id="searchFor" name="searchFor">
-                <option selected="">@ViewData["searchFor"]</option>
+            <select class="form-control col-2" id="searchFor" name="orderBy">
+                <option selected="">@ViewData["orderBy"]</option>
                 <option value="Latest">Latest</option>
                 <option value="Earliest">Earlier</option>
                 <option value="Most-Visited">Most Visited</option>
@@ -130,7 +130,7 @@
                 {
                     <li class="page-item">
                         <a class="page-link" asp-action="Posts"
-                           asp-route-searchFor="@this.ViewData["searchFor"]" asp-route-searchTerm="@this.ViewData["searchTerm"]"
+                           asp-route-searchFor="@this.ViewData["orderBy"]" asp-route-searchTerm="@this.ViewData["searchTerm"]"
                            asp-route-page="@(Model.PageNumber - 1)">
                             <i class="fas fa-angle-double-left"></i>
                         </a>
@@ -142,7 +142,7 @@
                     var active = i == Model.PageNumber ? " active" : string.Empty;
                     <li class="page-item @active">
                         <a class="page-link" asp-action="Posts"
-                           asp-route-searchFor="@this.ViewData["searchFor"]" asp-route-searchTerm="@this.ViewData["searchTerm"]"
+                           asp-route-searchFor="@this.ViewData["orderBy"]" asp-route-searchTerm="@this.ViewData["searchTerm"]"
                            asp-route-page="@i">@i</a>
                     </li>
                 }
@@ -159,7 +159,7 @@
                 {
                     <li class="page-item">
                         <a class="page-link" asp-action="Posts"
-                           asp-route-searchFor="@this.ViewData["searchFor"]" asp-route-searchTerm="@this.ViewData["searchTerm"]"
+                           asp-route-searchFor="@this.ViewData["orderBy"]" asp-route-searchTerm="@this.ViewData["searchTerm"]"
                            asp-route-page="@(Model.PageNumber + 1)">
                             <i class="fas fa-angle-double-right"></i>
                         </a>

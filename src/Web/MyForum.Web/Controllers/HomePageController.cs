@@ -31,14 +31,14 @@
         /// </summary>
         /// <param name="searchTerm"></param>
         /// searchTerm is a key word to search in the post's titles.
-        /// <param name="searchFor"></param>
-        /// searchFor is a key word to search in the post's titles.
+        /// <param name="orderBy"></param>
+        /// orderBy is a key word to search in the post's titles.
         /// <param name="page"></param>
         /// Install PagedList.Mvc and PagedList to do pagination.
         /// In cshtml file use IPagedList<T>.
         /// <returns></returns>
         [HttpGet]
-        public IActionResult Posts(string searchTerm, string searchFor = "Latest", int page = 1)
+        public IActionResult Posts(string searchTerm, string orderBy = "Latest", int page = 1)
         {
             if (!this.cache.TryGetValue<IEnumerable<HomePostViewModel>>("Posts", out var posts))
             {
@@ -50,7 +50,12 @@
                 this.cache.Set("Posts", posts, cacheEntryOptions);
             }
 
-            this.ViewData.Add("searchFor", searchFor);
+            if (posts.Count() != this.postsService.GetAllPosts<HomePostViewModel>().Count())
+            {
+                posts = this.postsService.GetAllPosts<HomePostViewModel>();
+            }
+
+            this.ViewData.Add("orderBy", orderBy);
             this.ViewData.Add("searchTerm", searchTerm);
             this.ViewData.Add("page", page);
 
@@ -63,9 +68,9 @@
                     .ToList();
             }
 
-            if (!string.IsNullOrWhiteSpace(searchFor))
+            if (!string.IsNullOrWhiteSpace(orderBy))
             {
-                posts = this.OrderHomePostsBy(posts, searchFor);
+                posts = this.OrderHomePostsBy(posts, orderBy);
             }
 
             return this.View(posts.ToPagedList(page, ItemsPerPage));

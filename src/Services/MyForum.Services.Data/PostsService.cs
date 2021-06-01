@@ -97,8 +97,7 @@
             await this.postRepository.SaveChangesAsync();
         }
 
-        public async Task Edit(int id, string title, string content, int categoryId, bool isDeleted, DateTime deletedOn,
-            DateTime createdOn, DateTime modifiedOn)
+        public async Task Edit(int id, string title, string content, int categoryId, bool isDeleted, DateTime deletedOn, DateTime createdOn, DateTime modifiedOn)
         {
             var post = await this.postRepository.All().FirstOrDefaultAsync(x => x.Id == id);
 

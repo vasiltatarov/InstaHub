@@ -10,6 +10,7 @@
     using MyForum.Data.Models;
     using MyForum.Services.Mapping;
     using MyForum.Web.ViewModels;
+    using MyForum.Web.ViewModels.Categories;
     using MyForum.Web.ViewModels.Posts;
     using Xunit;
 
@@ -86,11 +87,41 @@
 
             // Act
             var postId = await service.CreateAsync("Game of Thrones", "The best ever", 1, "v1");
-            var post = await service.GetById<PostViewModel>(postId);
+            var post = await service.GetById<PostInCategoryViewModel>(postId);
 
             // Assert
             Assert.Equal(post.Id, postId);
             Assert.Single(list);
+        }
+
+        [Fact]
+        public async Task GetByIdShouldReturnCorrectPostTest() // For Test
+        {
+            var mockRepo = new Mock<IDeletableEntityRepository<Post>>();
+
+            mockRepo.Setup(x => x.AllAsNoTracking())
+                .Returns(new List<Post>()
+                {
+                    new()
+                    {
+                        Id = 11,
+                        Content = "vasko",
+                    },
+                    new()
+                    {
+                        Id = 12,
+                        Content = "Nasko",
+                    },
+                }.AsQueryable());
+
+            var service = new PostsService(mockRepo.Object);
+            var postId = await service.CreateAsync("Game of Thrones", "The best ever", 1, "v1");
+
+            // Act
+            var post = await service.GetById<Post>(0);
+
+            // Assert
+            Assert.Equal(11, post.Id);
         }
 
         [Theory]

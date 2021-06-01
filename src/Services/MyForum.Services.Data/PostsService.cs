@@ -27,7 +27,7 @@
             await this.IncreaseVisitorsCount(id);
 
             var post = this.postRepository
-                .All()
+                .AllAsNoTracking()
                 .Where(x => x.Id == id)
                 .To<T>()
                 .FirstOrDefault();

@@ -18,7 +18,7 @@
     public partial class EmailModel : PageModel
     {
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly SignInManager<ApplicationUser> signInManager;
         private readonly IEmailSender _emailSender;
 
         public EmailModel(
@@ -27,7 +27,7 @@
             IEmailSender emailSender)
         {
             this._userManager = userManager;
-            this._signInManager = signInManager;
+            this.signInManager = signInManager;
             this._emailSender = emailSender;
         }
 

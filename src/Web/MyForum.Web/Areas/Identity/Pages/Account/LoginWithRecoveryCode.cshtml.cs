@@ -16,13 +16,13 @@
     [AllowAnonymous]
     public class LoginWithRecoveryCodeModel : PageModel
     {
-        private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly ILogger<LoginWithRecoveryCodeModel> _logger;
+        private readonly SignInManager<ApplicationUser> signInManager;
+        private readonly ILogger<LoginWithRecoveryCodeModel> logger;
 
         public LoginWithRecoveryCodeModel(SignInManager<ApplicationUser> signInManager, ILogger<LoginWithRecoveryCodeModel> logger)
         {
-            this._signInManager = signInManager;
-            this._logger = logger;
+            this.signInManager = signInManager;
+            this.logger = logger;
         }
 
         [BindProperty]
@@ -42,7 +42,7 @@
         public async Task<IActionResult> OnGetAsync(string returnUrl = null)
         {
             // Ensure the user has gone through the username & password screen first
-            var user = await this._signInManager.GetTwoFactorAuthenticationUserAsync();
+            var user = await this.signInManager.GetTwoFactorAuthenticationUserAsync();
             if (user == null)
             {
                 throw new InvalidOperationException($"Unable to load two-factor authentication user.");
@@ -60,7 +60,7 @@
                 return this.Page();
             }
 
-            var user = await this._signInManager.GetTwoFactorAuthenticationUserAsync();
+            var user = await this.signInManager.GetTwoFactorAuthenticationUserAsync();
             if (user == null)
             {
                 throw new InvalidOperationException($"Unable to load two-factor authentication user.");
@@ -68,22 +68,22 @@
 
             var recoveryCode = this.Input.RecoveryCode.Replace(" ", string.Empty);
 
-            var result = await this._signInManager.TwoFactorRecoveryCodeSignInAsync(recoveryCode);
+            var result = await this.signInManager.TwoFactorRecoveryCodeSignInAsync(recoveryCode);
 
             if (result.Succeeded)
             {
-                this._logger.LogInformation("User with ID '{UserId}' logged in with a recovery code.", user.Id);
+                this.logger.LogInformation("User with ID '{UserId}' logged in with a recovery code.", user.Id);
                 return this.LocalRedirect(returnUrl ?? this.Url.Content("~/"));
             }
 
             if (result.IsLockedOut)
             {
-                this._logger.LogWarning("User with ID '{UserId}' account locked out.", user.Id);
+                this.logger.LogWarning("User with ID '{UserId}' account locked out.", user.Id);
                 return this.RedirectToPage("./Lockout");
             }
             else
             {
-                this._logger.LogWarning("Invalid recovery code entered for user with ID '{UserId}' ", user.Id);
+                this.logger.LogWarning("Invalid recovery code entered for user with ID '{UserId}' ", user.Id);
                 this.ModelState.AddModelError(string.Empty, "Invalid recovery code entered.");
                 return this.Page();
             }

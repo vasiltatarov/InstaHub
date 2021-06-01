@@ -23,7 +23,7 @@
     [AllowAnonymous]
     public class RegisterModel : PageModel
     {
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWork unitOfWork;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
@@ -40,7 +40,7 @@
             this._signInManager = signInManager;
             this._logger = logger;
             this._emailSender = emailSender;
-            this._unitOfWork = unitOfWork;
+            this.unitOfWork = unitOfWork;
         }
 
         [BindProperty]
@@ -99,7 +99,7 @@
 
             if (this.ModelState.IsValid)
             {
-                this._unitOfWork.UploadImage(this.Input.Image);
+                this.unitOfWork.UploadImage(this.Input.Image);
 
                 var user = new ApplicationUser
                 {

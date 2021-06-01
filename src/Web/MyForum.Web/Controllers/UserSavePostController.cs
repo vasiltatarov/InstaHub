@@ -38,12 +38,12 @@
             return new SavePostResponseModel() { Message = message };
         }
 
-        //[Authorize]
-        //[HttpGet("delete/{postId}")]
-        //public async Task Delete(int postId)
-        //{
+        // [Authorize]
+        // [HttpGet("delete/{postId}")]
+        // public async Task Delete(int postId)
+        // {
         //    var userId = this.userManager.GetUserId(this.User);
         //    await this.userSavedPostsService.Delete(userId, postId);
-        //}
+        // }
     }
 }

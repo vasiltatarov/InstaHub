@@ -14,13 +14,13 @@
     [AllowAnonymous]
     public class RegisterConfirmationModel : PageModel
     {
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly IEmailSender _sender;
+        private readonly UserManager<ApplicationUser> userManager;
+        private readonly IEmailSender sender;
 
         public RegisterConfirmationModel(UserManager<ApplicationUser> userManager, IEmailSender sender)
         {
-            this._userManager = userManager;
-            this._sender = sender;
+            this.userManager = userManager;
+            this.sender = sender;
         }
 
         public string Email { get; set; }
@@ -36,19 +36,20 @@
                 return this.RedirectToPage("/Index");
             }
 
-            var user = await this._userManager.FindByEmailAsync(email);
+            var user = await this.userManager.FindByEmailAsync(email);
             if (user == null)
             {
                 return this.NotFound($"Unable to load user with email '{email}'.");
             }
 
             this.Email = email;
+
             // Once you add a real email sender, you should remove this code that lets you confirm the account
             this.DisplayConfirmAccountLink = true;
             if (this.DisplayConfirmAccountLink)
             {
-                var userId = await this._userManager.GetUserIdAsync(user);
-                var code = await this._userManager.GenerateEmailConfirmationTokenAsync(user);
+                var userId = await this.userManager.GetUserIdAsync(user);
+                var code = await this.userManager.GenerateEmailConfirmationTokenAsync(user);
                 code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                 this.EmailConfirmationUrl = this.Url.Page(
                     "/Account/ConfirmEmail",

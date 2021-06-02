@@ -32,11 +32,6 @@ for details on configuring this project to bundle and minify static web assets. 
     --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
-.navbar-nav li a:hover {
-    background-color: #17a2b8;
-    border-radius: 10px;
-}
-
 *,
 *::before,
 *::after {
@@ -134,4 +129,14 @@ body {
     width: 100%;
     white-space: nowrap;
     line-height: 60px; /* Vertically center the text there */
+}
+
+.navbar-nav li a:hover {
+    background-color: #17a2b8;
+    border-radius: 10px;
+}
+
+.category-img {
+    width: 200px;
+    height: 140px;
 }

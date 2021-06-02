@@ -14,7 +14,7 @@
     @foreach (var category in this.Model.Categories)
     {
         <div class="col-md-4 media p-3">
-            <img src="@category.ImageUrl" style="width: 200px; height: 140px" class="mr-3" alt="@category.Title"/>
+            <img src="@category.ImageUrl" class="mr-3 category-img" alt="@category.Title"/>
             <div class="media-body">
                 <h5 class="mt-0">
                     <a href="@category.Url">@category.Title (@category.PostsCount)</a>

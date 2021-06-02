@@ -54,7 +54,7 @@
         // For HomePageController.
         public IEnumerable<T> GetAllPosts<T>()
             => this.postRepository
-                .All()
+                .AllAsNoTracking()
                 .To<T>()
                 .ToList();
 

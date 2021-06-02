@@ -8,23 +8,15 @@
     using Moq;
     using MyForum.Data.Common.Repositories;
     using MyForum.Data.Models;
+    using MyForum.Services.Data.Tests.Models;
     using MyForum.Services.Mapping;
-    using MyForum.Web.ViewModels;
-    using MyForum.Web.ViewModels.Categories;
-    using MyForum.Web.ViewModels.Posts;
     using Xunit;
 
     public class PostServiceTests
     {
         public PostServiceTests()
         {
-            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
-
-            // var config = new MapperConfiguration(cfg =>
-            // {
-            //    cfg.CreateMap<PostViewModel, Post>();
-            // });
-            // var mapper = config.CreateMapper();
+            _ = new MapperInitializationProfile();
         }
 
         [Fact]
@@ -73,8 +65,9 @@
         }
 
         [Fact]
-        public async Task GetByIdShouldReturnCorrectPost() // Not work
+        public async Task GetByIdShouldReturnCorrectPost()
         {
+            // Arrange
             var list = new List<Post>();
 
             var mockRepo = new Mock<IDeletableEntityRepository<Post>>();
@@ -87,7 +80,7 @@
 
             // Act
             var postId = await service.CreateAsync("Game of Thrones", "The best ever", 1, "v1");
-            var post = await service.GetById<PostInCategoryViewModel>(postId);
+            var post = await service.GetById<PostModel>(postId);
 
             // Assert
             Assert.Equal(post.Id, postId);
@@ -95,7 +88,7 @@
         }
 
         [Fact]
-        public async Task GetByIdShouldReturnCorrectPostTest() // For Test
+        public async Task GetByIdShouldReturnCorrectPostTest()
         {
             var mockRepo = new Mock<IDeletableEntityRepository<Post>>();
 
@@ -115,10 +108,9 @@
                 }.AsQueryable());
 
             var service = new PostsService(mockRepo.Object);
-            var postId = await service.CreateAsync("Game of Thrones", "The best ever", 1, "v1");
 
             // Act
-            var post = await service.GetById<Post>(0);
+            var post = await service.GetById<PostModel>(11);
 
             // Assert
             Assert.Equal(11, post.Id);
@@ -231,29 +223,25 @@
             var mockRepo = new Mock<IDeletableEntityRepository<Post>>();
 
             mockRepo.Setup(x => x.AllAsNoTracking())
-                .Returns(list.AsQueryable());
+                .Returns(list.AsQueryable);
 
             mockRepo.Setup(x => x.AddAsync(It.IsAny<Post>()))
                 .Callback((Post post) => list.Add(post));
+
             var service = new PostsService(mockRepo.Object);
 
             // Act
             await service.CreateAsync("Game of Thrones1", "The best1", 1, "v2");
             await service.CreateAsync("Game of Thrones2", "The best2", 2, "v1");
-            var s = mockRepo.Object.All().Count();
-            var posts = service.GetAllPosts<Models>();
+            await service.CreateAsync("Game of Thrones3", "The best4", 2, "v1");
+
+            var posts = service.GetAllPosts<PostModel>();
 
             // Assert
-            Assert.Equal(2, posts.Count());
+            Assert.Equal(3, posts.Count());
         }
-    }
 
-    public class Models : IMapFrom<Post>
-    {
-        public string Title { get; set; }
-
-        public string Content { get; set; }
-
-        public string UserId { get; set; }
+        private void InitializeMapper() => AutoMapperConfig.
+            RegisterMappings(Assembly.Load("MyForum.Web.ViewModels"));
     }
 }

@@ -1,7 +1,12 @@
-# Forum System
-Система за създадване, четене, управление на постове със свободен достъп.
+## Project Introduction
+MyForum is my defense project for ASP.NET Core MVC course at SoftUni (April-June 2021). The website is..
 
-## Функционалност
+## Overview
+ASP.NET Core Template Author - 
+<a href="https://github.com/NikolayIT" target="_blank">NikolayIT</a>
+* Template for ASP.NET Core with repositories, services, models mapping, DI and StyleCop warnings fixed.
+
+## Functionality
 * Регистрация на потребители
 * Възможност за разглеждане, създадване, четене на постове
 * Възможност за коментиране, харесване, запазване и принтиране на постове
@@ -11,16 +16,27 @@
 * Кеширане на данните 'Memory Cache'(see below) в 'Home' страницата, с цел намаляне на заявките към базата данни
 * Интерактивен, гъвкав UX
 
-## Технологии
-* C#, ASP.NET Core MVC
-* MS SQL, Entity Framework Core
-* HTML, CSS, JavaScript
-* Auto-Mapper, jQuery
-* TinyMCE, Moment.js
+## Built With
+* ASP.NET Core 5 MVC
+* ASP.NET CORE view components
+* ASP.NET Core areas
+* MSSQL Server
+* Entity Framework Core
+* Auto-Mapper
+* SignalR
+* SendGrid
+* AJAX
+* jQuery
+* Moq
+* <a href="https://www.nuget.org/packages/X.PagedList.Mvc/">X.PagedList.Mvc</a>
 * Bootstrap
 * Font Awesome Icons
 
-## This is the current state of database diagrams relations in my app.
+## Client Side Libraries
+* TinyMCE
+* Moment.js
+
+## This is the current state of database diagrams relations in my app
 
 ![](DatabaseDiagrams.png)
 

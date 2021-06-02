@@ -1,14 +1,12 @@
 ﻿namespace MyForum.Services.Data
 {
+    using MyForum.Data.Common.Repositories;
+    using MyForum.Data.Models;
+    using MyForum.Services.Mapping;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-
-    using Microsoft.EntityFrameworkCore;
-    using MyForum.Data.Common.Repositories;
-    using MyForum.Data.Models;
-    using MyForum.Services.Mapping;
 
     public class PostsService : IPostsService
     {
@@ -99,7 +97,12 @@
 
         public async Task Edit(int id, string title, string content, int categoryId, bool isDeleted, DateTime deletedOn, DateTime createdOn, DateTime modifiedOn)
         {
-            var post = await this.postRepository.All().FirstOrDefaultAsync(x => x.Id == id);
+            var post = this.postRepository.All().FirstOrDefault(x => x.Id == id);
+
+            if (post == null)
+            {
+                return;
+            }
 
             post.Title = title;
             post.Content = content;
@@ -114,7 +117,7 @@
 
         public async Task<bool> Delete(int id)
         {
-            var post = await this.postRepository.All().FirstOrDefaultAsync(x => x.Id == id);
+            var post = this.postRepository.All().FirstOrDefault(x => x.Id == id);
 
             if (post == null)
             {

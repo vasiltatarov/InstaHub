@@ -1,15 +1,14 @@
 ﻿namespace MyForum.Services.Data.Tests
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Reflection;
     using System.Threading.Tasks;
 
     using Moq;
     using MyForum.Data.Common.Repositories;
     using MyForum.Data.Models;
     using MyForum.Services.Data.Tests.Models;
-    using MyForum.Services.Mapping;
     using Xunit;
 
     public class PostServiceTests
@@ -241,7 +240,191 @@
             Assert.Equal(3, posts.Count());
         }
 
-        private void InitializeMapper() => AutoMapperConfig.
-            RegisterMappings(Assembly.Load("MyForum.Web.ViewModels"));
+        [Theory]
+        [InlineData(2)]
+        public async Task GetByCategoryIdShouldReturnCorrectCountPosts(int categoryId)
+        {
+            // Arrange
+            var list = new List<Post>();
+
+            var mockRepo = new Mock<IDeletableEntityRepository<Post>>();
+
+            mockRepo.Setup(x => x.All()).Returns(list.AsQueryable);
+            mockRepo.Setup(x => x.AddAsync(It.IsAny<Post>()))
+                .Callback((Post post) => list.Add(post));
+
+            var service = new PostsService(mockRepo.Object);
+
+            // Act
+            await service.CreateAsync("Game of Thrones1", "The best1", 1, "v2");
+            await service.CreateAsync("Game of Thrones2", "The best2", categoryId, "v1");
+            await service.CreateAsync("Game of Thrones3", "The best4", categoryId, "v3");
+
+            var postsInCategory = service.GetByCategoryId<PostModel>(categoryId);
+
+            // Assert
+            Assert.Equal(2, postsInCategory.Count());
+        }
+
+        [Theory]
+        [InlineData(22)]
+        public async Task GetByCategoryIdShouldReturnEmptyCollectionIfPostsWithGivenCategoryIdNotExists(int categoryId)
+        {
+            // Arrange
+            var list = new List<Post>();
+
+            var mockRepo = new Mock<IDeletableEntityRepository<Post>>();
+
+            mockRepo.Setup(x => x.All()).Returns(list.AsQueryable);
+            mockRepo.Setup(x => x.AddAsync(It.IsAny<Post>()))
+                .Callback((Post post) => list.Add(post));
+
+            var service = new PostsService(mockRepo.Object);
+
+            // Act
+            await service.CreateAsync("Game of Thrones1", "The best1", 1, "v2");
+            await service.CreateAsync("Game of Thrones2", "The best2", 2, "v1");
+
+            var postsInCategory = service.GetByCategoryId<PostModel>(categoryId);
+
+            // Assert
+            Assert.Empty(postsInCategory);
+        }
+
+        [Theory]
+        [InlineData(2, 2)]
+        public async Task GetByCategoryIdShouldReturnCorrectCountPostsWithTakeParameter(int categoryId, int take)
+        {
+            // Arrange
+            var list = new List<Post>();
+
+            var mockRepo = new Mock<IDeletableEntityRepository<Post>>();
+
+            mockRepo.Setup(x => x.All()).Returns(list.AsQueryable);
+            mockRepo.Setup(x => x.AddAsync(It.IsAny<Post>()))
+                .Callback((Post post) => list.Add(post));
+
+            var service = new PostsService(mockRepo.Object);
+
+            // Act
+            await service.CreateAsync("Game of Thrones1", "The best1", categoryId, "v2");
+            await service.CreateAsync("Game of Thrones2", "The best2", categoryId, "v1");
+            await service.CreateAsync("Game of Thrones3", "The best3", categoryId, "v3");
+
+            var postsInCategory = service.GetByCategoryId<PostModel>(categoryId, take);
+
+            // Assert
+            Assert.Equal(2, postsInCategory.Count());
+        }
+
+        [Theory]
+        [InlineData(0)]
+        public async Task EditShouldSuccessfullyEditPost(int postId)
+        {
+            // Arrange
+            var list = new List<Post>();
+
+            var mockRepo = new Mock<IDeletableEntityRepository<Post>>();
+
+            mockRepo.Setup(x => x.All()).Returns(list.AsQueryable);
+            mockRepo.Setup(x => x.AddAsync(It.IsAny<Post>()))
+                .Callback((Post post) => list.Add(post));
+
+            var service = new PostsService(mockRepo.Object);
+
+            // Act
+            await service.CreateAsync("Game of Thrones1", "The best1", 1, "v2");
+
+            await service
+                .Edit(postId, "Harry Potter", "And the Half Blood Prince", 1, false, DateTime.Now, DateTime.Now, DateTime.Now);
+            var post = list.FirstOrDefault();
+
+            // Assert
+            Assert.Equal("Harry Potter", post.Title);
+            Assert.Equal("And the Half Blood Prince", post.Content);
+        }
+
+        [Theory]
+        [InlineData(22)]
+        public async Task EditShouldNotEditPostWhenIdNotExist(int postId)
+        {
+            // Arrange
+            var list = new List<Post>();
+
+            var mockRepo = new Mock<IDeletableEntityRepository<Post>>();
+
+            mockRepo.Setup(x => x.All()).Returns(list.AsQueryable);
+            mockRepo.Setup(x => x.AddAsync(It.IsAny<Post>()))
+                .Callback((Post post) => list.Add(post));
+
+            var service = new PostsService(mockRepo.Object);
+
+            // Act
+            await service.CreateAsync("Game of Thrones1", "The best1", 1, "v2");
+
+            await service
+                .Edit(postId, "Harry Potter", "And the Half Blood Prince", 1, false, DateTime.Now, DateTime.Now, DateTime.Now);
+            var post = list.FirstOrDefault();
+
+            // Assert
+            Assert.NotEqual("Harry Potter", post.Title);
+            Assert.NotEqual("And the Half Blood Prince", post.Content);
+        }
+
+        [Theory]
+        [InlineData(0)]
+        public async Task DeleteShouldWorkCorrect(int postId)
+        {
+            // Arrange
+            var list = new List<Post>();
+
+            var mockRepo = new Mock<IDeletableEntityRepository<Post>>();
+
+            mockRepo.Setup(x => x.All()).Returns(list.AsQueryable);
+            mockRepo.Setup(x => x.AddAsync(It.IsAny<Post>()))
+                .Callback((Post post) => list.Add(post));
+            mockRepo.Setup(x => x.Delete(It.IsAny<Post>()))
+                .Callback((Post post) => post.IsDeleted = true);
+
+            var service = new PostsService(mockRepo.Object);
+
+            // Act
+            await service.CreateAsync("Game of Thrones1", "The best1", 1, "v2");
+
+            var isDeleted = await service.Delete(postId);
+            var post = list.FirstOrDefault();
+
+            // Assert
+            Assert.True(isDeleted);
+            Assert.True(post.IsDeleted);
+        }
+
+        [Theory]
+        [InlineData(22)]
+        public async Task DeleteShouldNotDeletePostWhenIdNotExist(int postId)
+        {
+            // Arrange
+            var list = new List<Post>();
+
+            var mockRepo = new Mock<IDeletableEntityRepository<Post>>();
+
+            mockRepo.Setup(x => x.All()).Returns(list.AsQueryable);
+            mockRepo.Setup(x => x.AddAsync(It.IsAny<Post>()))
+                .Callback((Post post) => list.Add(post));
+            mockRepo.Setup(x => x.Delete(It.IsAny<Post>()))
+                .Callback((Post post) => post.IsDeleted = true);
+
+            var service = new PostsService(mockRepo.Object);
+
+            // Act
+            await service.CreateAsync("Game of Thrones1", "The best1", 1, "v2");
+
+            var isDeleted = await service.Delete(postId);
+            var post = list.FirstOrDefault();
+
+            // Assert
+            Assert.False(isDeleted);
+            Assert.False(post.IsDeleted);
+        }
     }
 }

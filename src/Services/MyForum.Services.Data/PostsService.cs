@@ -1,12 +1,13 @@
 ﻿namespace MyForum.Services.Data
 {
-    using MyForum.Data.Common.Repositories;
-    using MyForum.Data.Models;
-    using MyForum.Services.Mapping;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
+    using MyForum.Data.Common.Repositories;
+    using MyForum.Data.Models;
+    using MyForum.Services.Mapping;
 
     public class PostsService : IPostsService
     {

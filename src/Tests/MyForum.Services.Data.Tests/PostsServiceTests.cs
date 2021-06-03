@@ -11,9 +11,9 @@
     using MyForum.Services.Data.Tests.Models;
     using Xunit;
 
-    public class PostServiceTests
+    public class PostsServiceTests
     {
-        public PostServiceTests()
+        public PostsServiceTests()
         {
             _ = new MapperInitializationProfile();
         }

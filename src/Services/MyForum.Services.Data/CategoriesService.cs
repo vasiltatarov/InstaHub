@@ -64,10 +64,15 @@
                 .AllWithDeleted()
                 .AnyAsync(x => x.Id == id);
 
-        public async Task Update(int id, string name, string title, string description, string imageUrl, bool isDeleted, DateTime deletedOn,
-            DateTime createdOn, DateTime modifiedOn)
+        public async Task Update(int id, string name, string title, string description, string imageUrl, bool isDeleted, DateTime deletedOn, DateTime createdOn, DateTime modifiedOn)
         {
             var category = await this.categoryRepository.All().FirstOrDefaultAsync(x => x.Id == id);
+
+            if (category == null)
+            {
+                return;
+            }
+
             category.Name = name;
             category.Title = title;
             category.Description = description;

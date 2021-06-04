@@ -39,9 +39,7 @@
                 userFollow = new UserFollow
                 {
                     FollowerId = followerId,
-                    Follower = await this.userRepository.All().FirstOrDefaultAsync(x => x.Id == followerId),
                     FollowedId = followedId,
-                    Followed = await this.userRepository.All().FirstOrDefaultAsync(x => x.Id == followedId),
                     IsFollowActive = true,
                 };
                 await this.userFollows.AddAsync(userFollow);

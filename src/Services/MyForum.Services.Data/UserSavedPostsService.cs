@@ -62,6 +62,12 @@
         {
             var userPost = await this.userSavedPostsRepository.All()
                 .FirstOrDefaultAsync(x => x.UserId == userId && x.PostId == postId && x.IsDeleted == false);
+
+            if (userPost == null)
+            {
+                return;
+            }
+
             this.userSavedPostsRepository.Delete(userPost);
             await this.userSavedPostsRepository.SaveChangesAsync();
         }

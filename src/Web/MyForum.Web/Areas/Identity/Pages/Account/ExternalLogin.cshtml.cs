@@ -74,7 +74,7 @@
             if (remoteError != null)
             {
                 this.ErrorMessage = $"Error from external provider: {remoteError}";
-                return this.RedirectToPage("./Login", new {ReturnUrl = returnUrl });
+                return this.RedirectToPage("./Login", new { ReturnUrl = returnUrl });
             }
 
             var info = await this.signInManager.GetExternalLoginInfoAsync();
@@ -85,7 +85,7 @@
             }
 
             // Sign in the user with this external login provider if the user already has a login.
-            var result = await this.signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, isPersistent: false, bypassTwoFactor : true);
+            var result = await this.signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, isPersistent: false, bypassTwoFactor: true);
             if (result.Succeeded)
             {
                 this.logger.LogInformation("{Name} logged in with {LoginProvider} provider.", info.Principal.Identity.Name, info.LoginProvider);
@@ -146,8 +146,7 @@
                             values: new { area = "Identity", userId = userId, code = code },
                             protocol: this.Request.Scheme);
 
-                        await this.emailSender.SendEmailAsync(this.Input.Email, "Confirm your email",
-                            $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                        await this.emailSender.SendEmailAsync(this.Input.Email, "Confirm your email", $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
                         // If account confirmation is required, we need to show the link if we don't have a real email sender
                         if (this.userManager.Options.SignIn.RequireConfirmedAccount)

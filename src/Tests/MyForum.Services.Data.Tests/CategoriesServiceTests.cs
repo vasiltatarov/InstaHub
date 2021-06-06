@@ -65,6 +65,27 @@
             Assert.Equal(2, all.Count());
         }
 
+        [Fact]
+        public void GetAllShouldReturnEmptyCollection()
+        {
+            var all = this.service.GetAll<CategoryModel>();
+
+            Assert.Empty(all);
+        }
+
+        [Theory]
+        [InlineData(2)]
+        public async Task GetAllShouldReturnAllCategoriesCorrectWhenCountIsPassed(int count)
+        {
+            await this.service.CreateAsync(this.data[0].Name, this.data[0].Title, this.data[0].Description, this.data[0].ImageUrl);
+            await this.service.CreateAsync(this.data[1].Name, this.data[1].Title, this.data[1].Description, this.data[1].ImageUrl);
+            await this.service.CreateAsync(this.data[1].Name, this.data[1].Title, this.data[1].Description, this.data[1].ImageUrl);
+
+            var all = this.service.GetAll<CategoryModel>(count);
+
+            Assert.Equal(2, all.Count());
+        }
+
         [Theory]
         [InlineData("Calisthenics")]
         public async Task GetByNameShouldReturnCorrectCategoryByGivenName(string name)

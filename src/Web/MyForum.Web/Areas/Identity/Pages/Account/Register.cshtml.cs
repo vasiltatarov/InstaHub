@@ -23,7 +23,7 @@
     [AllowAnonymous]
     public class RegisterModel : PageModel
     {
-        private readonly IUnitOfWork unitOfWork;
+        private readonly IUploadPhotoService uploadPhoto;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
@@ -34,13 +34,13 @@
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
-            IUnitOfWork unitOfWork)
+            IUploadPhotoService uploadPhoto)
         {
             this._userManager = userManager;
             this._signInManager = signInManager;
             this._logger = logger;
             this._emailSender = emailSender;
-            this.unitOfWork = unitOfWork;
+            this.uploadPhoto = uploadPhoto;
         }
 
         [BindProperty]
@@ -99,7 +99,7 @@
 
             if (this.ModelState.IsValid)
             {
-                this.unitOfWork.UploadImage(this.Input.Image);
+                this.uploadPhoto.UploadImage(this.Input.Image);
 
                 var user = new ApplicationUser
                 {
@@ -123,8 +123,8 @@
                         values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
                         protocol: this.Request.Scheme);
 
-                    await this._emailSender.SendEmailAsync(this.Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    await this._emailSender
+                        .SendEmailAsync(this.Input.Email, "Confirm your email", $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
                     if (this._userManager.Options.SignIn.RequireConfirmedAccount)
                     {

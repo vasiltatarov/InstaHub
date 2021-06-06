@@ -2,7 +2,7 @@
 {
     using Microsoft.AspNetCore.Http;
 
-    public interface IUnitOfWork
+    public interface IUploadPhotoService
     {
         void UploadImage(IFormFile file);
     }

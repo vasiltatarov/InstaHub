@@ -83,7 +83,7 @@
             services.AddTransient<IPostsService, PostsService>();
             services.AddTransient<IVotesService, VotesService>();
             services.AddTransient<ICommentService, CommentService>();
-            services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddTransient<IUploadPhotoService, UploadPhotoService>();
             services.AddTransient<IUserSavedPostsService, UserSavedPostsService>();
             services.AddTransient<IChatService, ChatService>();
             services.AddTransient<IFollowService, FollowService>();

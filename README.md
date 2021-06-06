@@ -28,6 +28,7 @@ ASP.NET Core Template Author -
 * AJAX
 * jQuery
 * Moq
+* XUnit
 * <a href="https://www.nuget.org/packages/X.PagedList.Mvc/">X.PagedList.Mvc</a>
 * Bootstrap
 * Font Awesome Icons
@@ -40,7 +41,12 @@ ASP.NET Core Template Author -
 
 ![](DatabaseDiagrams.png)
 
-## Имплементация
+## Testing
+* 100% Tests of Services
+
+![](ServicesCodeCoverage.png)
+
+## Implementation
 
 * Followings / Followers (Model)
 ```javascript

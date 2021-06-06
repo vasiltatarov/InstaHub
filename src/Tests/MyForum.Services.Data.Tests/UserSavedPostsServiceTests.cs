@@ -1,15 +1,14 @@
-﻿using System.Linq;
-using MyForum.Services.Data.Tests.Models;
-
-namespace MyForum.Services.Data.Tests
+﻿namespace MyForum.Services.Data.Tests
 {
     using System;
+    using System.Linq;
     using System.Threading.Tasks;
 
     using Microsoft.EntityFrameworkCore;
     using MyForum.Data;
     using MyForum.Data.Models;
     using MyForum.Data.Repositories;
+    using MyForum.Services.Data.Tests.Models;
     using Xunit;
 
     public class UserSavedPostsServiceTests
@@ -114,6 +113,19 @@ namespace MyForum.Services.Data.Tests
 
             Assert.Null(savePostWithoutDeleted);
             Assert.True(savePost.IsDeleted);
+        }
+
+        [Theory]
+        [InlineData("v12", 1)]
+        public async Task DeleteShouldNotDeleteSavePost(string userId, int postId)
+        {
+            await this.service.Delete(userId, postId);
+
+            var savePostWithoutDeleted = await this.repo.All().FirstOrDefaultAsync();
+            var savePost = await this.repo.AllWithDeleted().FirstOrDefaultAsync();
+
+            Assert.Null(savePostWithoutDeleted);
+            Assert.Null(savePost);
         }
 
         [Theory]

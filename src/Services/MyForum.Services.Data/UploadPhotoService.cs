@@ -5,11 +5,11 @@
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
 
-    public class UnitOfWork : IUnitOfWork
+    public class UploadPhotoService : IUploadPhotoService
     {
         private IHostingEnvironment hostingEnvironment;
 
-        public UnitOfWork(IHostingEnvironment hostingEnvironment)
+        public UploadPhotoService(IHostingEnvironment hostingEnvironment)
         {
             this.hostingEnvironment = hostingEnvironment;
         }

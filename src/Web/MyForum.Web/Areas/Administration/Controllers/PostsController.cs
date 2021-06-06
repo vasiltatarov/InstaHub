@@ -45,8 +45,8 @@
                 return this.View(post);
             }
 
-            await this.postsService.Edit(id, post.Title, post.Content, post.CategoryId, post.IsDeleted, post.DeletedOn,
-                post.CreatedOn, post.ModifiedOn);
+            await this.postsService
+                .Edit(id, post.Title, post.Content, post.CategoryId, post.IsDeleted, post.DeletedOn, post.CreatedOn, post.ModifiedOn);
 
             return this.RedirectToAction("ById", "Posts", new { area = string.Empty, id });
         }

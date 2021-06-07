@@ -1,4 +1,4 @@
-﻿## Project Introduction
+## Project Introduction
 InstaHub is my defense project for ASP.NET Core MVC course at SoftUni (April-June 2021). The website is..
 
 ## Overview
@@ -81,7 +81,7 @@ out var posts))
 </a>
 ```
 
-### Контрол на достъпа
+### Access control
 * Гостите могат да се регистрират, да преглеждат каталога, детайлите на тестовете и профилните страници на потребителите
 * Регистрираните потребители могат да решават тестове, да преглеждат резултатите си и да създават и редактират тестове
 * Само създателя на един тест може да го редактира и изтрива

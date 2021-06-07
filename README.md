@@ -7,14 +7,15 @@ ASP.NET Core Template Author -
 * Template for ASP.NET Core with repositories, services, models mapping, DI and StyleCop warnings fixed.
 
 ## Functionality
-* Регистрация на потребители
-* Възможност за разглеждане, създадване, четене на постове
-* Възможност за коментиране, харесване, запазване и принтиране на постове
-* Възможност за последване на потребители, както и да бъдете последвани от други потребители
-* Възможност за филтриране по категория на постовете и търсене по заглавие
-* Чат стая позволяваща на потребителите да обменят съобщения
-* Кеширане на данните 'Memory Cache'(see below) в 'Home' страницата, с цел намаляне на заявките към базата данни
-* Интерактивен, гъвкав UX
+* Users Registration.
+* Ability to View, Create, Read Publications.
+* Ability to Comment, like, save and print publications.
+* Ability to Edit and Delete publications (Only for the creator).
+* Ability to Follow users, as well as be followed by other users.
+* Ability to Filter publications by category and search by Title.
+* Chat room allowing users to exchange messages.
+* Cache Data 'Memory Cache' (see below in HomePage) to reduce database queries.
+* Interactive, flexible UX (User Experience)
 
 ## Built With
 * ASP.NET Core 5 MVC
@@ -39,10 +40,11 @@ ASP.NET Core Template Author -
 
 ## This is the current state of database diagrams relations in my app
 
-![](ServicesCodeCoverage.jpg)
+![](DBDiagram.jpg)
 
 ## Testing
-* 100% Tests of Services
+
+* 100% Tests Coverage of Services
 
 ![](ServicesCodeCoverage.jpg)
 
@@ -82,7 +84,7 @@ out var posts))
 ```
 
 ### Access control
-* Гостите могат да се регистрират, да преглеждат каталога, детайлите на тестовете и профилните страници на потребителите
-* Регистрираните потребители могат да решават тестове, да преглеждат резултатите си и да създават и редактират тестове
-* Само създателя на един тест може да го редактира и изтрива
-* Всеки регистриран потребител може да решава чужд тест
+* Logged users can create, read publications.
+* Logged users can view publications by category, details, user profile page, and also can search and filter publications.
+* Only creator of the publication can Edit and Delete it.
+* Logged users can like and comments other publications.

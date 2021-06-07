@@ -1,0 +1,108 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="~/css/login.css">
+    <meta charset="utf-8">
+    <title>@ViewData["Title"]</title>
+</head>
+<body>
+
+    <div class="login-box">
+
+        <form asp-route-returnUrl="@Model.ReturnUrl" method="post" enctype="multipart/form-data">
+            <h1>Register</h1>
+            <div asp-validation-summary="All" class="text-danger" placeholder="Password"></div>
+
+            <div class="textbox">
+                <i class="fas fa-user"></i>
+                <input asp-for="Input.UserName" class="form-control" placeholder="Username" />
+                <span asp-validation-for="Input.UserName" class="text-danger"></span>
+            </div>
+
+            <div class="textbox">
+                <i class='fas fa-envelope'></i>
+                <input asp-for="Input.Email" class="form-control" placeholder="Email" />
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+            </div>
+
+            <div class="textbox">
+                <i class="fas fa-lock"></i>
+                <input asp-for="Input.Password" class="form-control" placeholder="Password" />
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
+            </div>
+
+            <div class="textbox">
+                <i class="fas fa-lock"></i>
+                <input asp-for="Input.ConfirmPassword" class="form-control" placeholder="Repeat Password" />
+                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+            </div>
+
+            <div class="textbox">
+                <i class="fas fa-map-marker-alt"></i>
+                <input asp-for="Input.Location" class="form-control" placeholder="Location" />
+                <span asp-validation-for="Input.Location" class="text-danger"></span>
+            </div>
+
+            <br />
+            <input asp-for="Input.Gender" type="radio" value="Male" checked> Male
+            <input asp-for="Input.Gender" type="radio" value="Female"> Female<br>
+            <br />
+
+            <p>Select profile picture:</p>
+            <input asp-for="Input.Image" />
+            <span asp-validation-for="Input.Image" class="text-danger"></span>
+
+            <div class="form-group">
+                <button type="submit">Register</button>
+            </div>
+
+            <p>
+                Already have an account?
+                <a asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl">Login Here</a>.
+            </p>
+            <p>By creating an account you agree to our <a href="uslovia.html">Terms & Privacy</a>.</p>
+        </form>
+        @*<section></section>*@
+    </div>
+
+</body>
+</html>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+@*<section>
+        <h4>Use another service to register.</h4>
+        <hr />
+        @{
+            if ((Model.ExternalLogins?.Count ?? 0) == 0)
+            {
+                <div>
+                    <p>
+                        There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkID=532715">this article</a>
+                        for details on setting up this ASP.NET application to support logging in via external services.
+                    </p>
+                </div>
+            }
+            else
+            {
+                <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                    <div>
+                        <p>
+                            @foreach (var provider in Model.ExternalLogins)
+                            {
+                                <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                            }
+                        </p>
+                    </div>
+                </form>
+            }
+        }
+    </section>*@

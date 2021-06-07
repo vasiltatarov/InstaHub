@@ -8,7 +8,7 @@
   "identity": "AspNetCore.Template",
   "name": "ASP.NET Core Template",
   "shortName": "aspnet-core",
-  "sourceName": "MyForum",
+  "sourceName": "InstaHub",
   "symbols": {
     "skipRestore": {
       "type": "parameter",

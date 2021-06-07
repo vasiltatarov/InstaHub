@@ -1,0 +1,56 @@
+﻿@using InstaHub.Common
+@model IEnumerable<InstaHub.Web.ViewModels.Profiles.ProfileViewModel>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@this.ViewData["Title"] - @GlobalConstants.SystemName</title>
+
+    <link href="~/css/user-profiles.css" rel="stylesheet" />
+
+    <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css" />
+
+    <link href="~/lib/fontawesome/css/all.css" rel="stylesheet" asp-append-version="true" />
+</head>
+<body style="background: aliceblue">
+    <div class="container profile">
+        <div class="col-md-12">
+            <div class="panel-profile">
+                <div class="panel-heading overflow-h">
+                    <h2 class="panel-title"><i class="fa fa-tasks"></i>Profiles</h2>
+                </div>
+                <hr />
+                <div class="row m-1">
+                    @foreach (var profile in this.Model)
+                    {
+                        <div class="col-sm-4">
+                            <div class="profile-blog blog-border">
+                                <img class="rounded-x" src="~/uploads/@profile.ImagePath" alt="">
+                                <div class="name-location">
+                                    <strong>
+                                        <a asp-controller="ViewUserProfile" asp-action="ByUsername" asp-route-username="@profile.Username">
+                                            @profile.Username
+                                        </a>
+                                    </strong>
+                                    <span>
+                                        <i class="fa fa-map-marker"></i> @profile.Location
+                                    </span>
+                                </div>
+                                <div class="clearfix margin-bottom-20"></div>
+                                <p>@(profile.Description ?? "Still No Description")</p>
+                                <hr>
+                                <ul class="list-inline share-list">
+                                    <li><i class="fa fa-bell"></i>@profile.PostsCount Posts</li>
+                                    <li><i class="far fa-eye ml-2"></i> @profile.PostViews Views</li>
+                                    <li><i class="fas fa-thumbs-up"></i>@profile.Posts.Sum(x => x.Votes.Count) Likes</li>
+                                </ul>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

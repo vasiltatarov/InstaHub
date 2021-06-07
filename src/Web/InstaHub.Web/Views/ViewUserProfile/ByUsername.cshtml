@@ -1,0 +1,182 @@
+﻿@using InstaHub.Common
+@model InstaHub.Web.ViewModels.ViewUserProfile.UserProfileViewModel
+
+@{
+    var posts = (PagedList.IPagedList)this.Model.Posts;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@this.ViewData["Title"] - @GlobalConstants.SystemName</title>
+
+    <link href="~/css/profile.css" rel="stylesheet" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+
+    <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css" />
+
+    <link href="~/lib/fontawesome/css/all.css" rel="stylesheet" asp-append-version="true" />
+</head>
+<body style="background: aliceblue">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div id="content">
+                    <div class="profile">
+                        <div class="profile-header">
+                            <div class="profile-header-cover"></div>
+                            <div class="profile-header-content">
+                                <div class="profile-header-img">
+                                    <img src="~/uploads/@Model.ImagePath" alt="">
+                                </div>
+                                <div class="profile-header-info">
+                                    <h4>@Model.Username</h4>
+                                    <br/>
+                                    @if (this.Model.Username != this.User.Identity.Name)
+                                    {
+                                        @if (this.Model.IsUserFollowed)
+                                        {
+                                            <a asp-area="" asp-controller="Follow" asp-action="Unfollow" asp-route-username="@this.Model.Username" class="btn btn-dark">Unfollow</a>
+                                        }
+                                        else
+                                        {
+                                            <a asp-area="" asp-controller="Follow" asp-action="Follow" asp-route-username="@this.Model.Username" class="btn btn-warning">Follow</a>
+                                        }
+                                    }
+                                </div>
+                            </div>
+                            <ul class="profile-header-tab nav nav-tabs">
+                                <li class="nav-item">
+                                    <a asp-area="" asp-controller="ViewUserProfile" asp-action="ByUsername" asp-route-username="@this.Model.Username" class="nav-link active show">POSTS ( @this.Model.PostsCount )</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-area="" asp-controller="ViewUserProfile" asp-action="GetFollowers" asp-route-username="@this.Model.Username" class="nav-link">FOLLOWERS ( @this.Model.Followers.Count() )</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-area="" asp-controller="ViewUserProfile" asp-action="GetFollowing" asp-route-username="@this.Model.Username">FOLLOWING ( @this.Model.Followed.Count() )</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-area="" asp-controller="ViewUserProfile" asp-action="About" asp-route-username="@this.Model.Username" class="nav-link">ABOUT</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="profile-content">
+                        <div class="tab-content p-0">
+                            <div class="tab-pane fade active show" id="profile-post">
+                                <ul class="timeline">
+                                    @foreach (var post in Model.Posts)
+                                    {
+                                        <li>
+                                            <div class="timeline-time">
+                                                <span>
+                                                    <time datetime="@post.CreatedOn.ToString("O")"></time>
+                                                </span>
+                                            </div>
+                                            <div class="timeline-icon">
+                                                <a href="javascript:;">&nbsp;</a>
+                                            </div>
+                                            <div class="timeline-body">
+                                                <div class="timeline-header">
+                                                    <span class="userimage"><img src="~/uploads/@Model.ImagePath" alt=""></span>
+                                                    <span class="username">
+                                                        <b>
+                                                            <a asp-area="" asp-controller="Posts" asp-action="ById" asp-route-id="@post.Id">@post.Title</a>
+                                                        </b>
+                                                    </span>
+                                                </div>
+                                                <div class="timeline-content">
+                                                    <p>
+                                                        @Html.Raw(post.Content)
+                                                    </p>
+                                                </div>
+                                                <hr />
+                                                <div class="timeline-likes">
+                                                    <div class="stats-right">
+                                                        <span class="stats-text">@post.Comments.Count Comments</span>
+                                                    </div>
+                                                    <div>
+                                                        <span class="fa-stack fa-fw stats-icon">
+                                                            <i class="fa fa-circle fa-stack-2x text-danger"></i>
+                                                            <i class="fa fa-heart fa-stack-1x fa-inverse t-plus-1"></i>
+                                                        </span>
+                                                        <span class="stats-total">@post.Votes.Count</span>
+                                                    </div>
+                                                </div>
+                                                <div class="timeline-comment-box">
+                                                    <div class="user"><img src="~/uploads/@Model.CurrentUserImagePath" style="width: 50px;"></div>
+                                                    <div class="input">
+                                                        <div class="input-group">
+                                                            <span>
+                                                                <a class="btn btn-primary" type="button" asp-controller="Posts" asp-action="ById" asp-route-id="@post.Id">
+                                                                    Like & Comment
+                                                                </a>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <nav>
+        <ul class="pagination pagination pagination justify-content-center">
+            @if (posts.PageNumber == 1)
+            {
+                <li class="page-item disabled">
+                    <a class="page-link" href="#">
+                        <i class="fas fa-angle-double-left"></i>
+                    </a>
+                </li>
+            }
+            else
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-action="ByUsername" asp-route-username="@this.Model.Username" asp-route-page="@(posts.PageNumber - 1)">
+                        <i class="fas fa-angle-double-left"></i>
+                    </a>
+                </li>
+            }
+
+            @for (int i = 1; i <= posts.PageCount; i++)
+            {
+                var active = i == posts.PageNumber ? " active" : string.Empty;
+                <li class="page-item @active">
+                    <a class="page-link" asp-action="ByUsername" asp-route-username="@this.Model.Username" asp-route-page="@i">@i</a>
+                </li>
+            }
+
+            @if (posts.PageNumber == posts.PageCount)
+            {
+                <li class="page-item disabled">
+                    <a class="page-link" href="#">
+                        <i class="fas fa-angle-double-right"></i>
+                    </a>
+                </li>
+            }
+            else
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-action="ByUsername" asp-route-username="@this.Model.Username" asp-route-page="@(posts.PageNumber + 1)">
+                        <i class="fas fa-angle-double-right"></i>
+                    </a>
+                </li>
+            }
+        </ul>
+    </nav>
+
+</body>

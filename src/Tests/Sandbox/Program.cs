@@ -10,14 +10,13 @@
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
-    using MyForum.Data;
-    using MyForum.Data.Common;
-    using MyForum.Data.Common.Repositories;
-    using MyForum.Data.Models;
-    using MyForum.Data.Repositories;
-    using MyForum.Data.Seeding;
-    using MyForum.Services.Data;
-    using MyForum.Services.Messaging;
+    using InstaHub.Data;
+    using InstaHub.Data.Common;
+    using InstaHub.Data.Common.Repositories;
+    using InstaHub.Data.Models;
+    using InstaHub.Data.Repositories;
+    using InstaHub.Data.Seeding;
+    using InstaHub.Services.Messaging;
 
     public static class Program
     {

@@ -1,5 +1,5 @@
-## Project Introduction
-MyForum is my defense project for ASP.NET Core MVC course at SoftUni (April-June 2021). The website is..
+﻿## Project Introduction
+InstaHub is my defense project for ASP.NET Core MVC course at SoftUni (April-June 2021). The website is..
 
 ## Overview
 ASP.NET Core Template Author - 

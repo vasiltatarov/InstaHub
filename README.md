@@ -39,12 +39,12 @@ ASP.NET Core Template Author -
 
 ## This is the current state of database diagrams relations in my app
 
-![](DatabaseDiagrams.png)
+![](ServicesCodeCoverage.jpg)
 
 ## Testing
 * 100% Tests of Services
 
-![](ServicesCodeCoverage.png)
+![](ServicesCodeCoverage.jpg)
 
 ## Implementation
 

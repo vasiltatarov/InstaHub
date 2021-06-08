@@ -9,10 +9,8 @@
     <title>@this.ViewData["Title"] - @GlobalConstants.SystemName</title>
 
     <link href="~/css/profile.css" rel="stylesheet" />
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true" />
-    <link href="~/css/home.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
 
     <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
@@ -53,30 +51,21 @@
             <div class="row">
                 <div class="col-md-12">
                     <div id="content">
-                        <!-- begin profile-content -->
                         <div class="profile-content">
-                            <!-- begin tab-content -->
                             <div class="tab-content p-0">
-                                <!-- begin #profile-post tab -->
                                 <div class="tab-pane fade active show" id="profile-post">
-                                    <!-- begin timeline -->
                                     <ul class="timeline">
                                         @foreach (var post in Model)
                                         {
                                             <li>
-                                                <!-- begin timeline-time -->
                                                 <div class="timeline-time">
                                                     <span>
                                                         <time datetime="@post.CreatedOn.ToString("O")"></time>
                                                     </span>
                                                 </div>
-                                                <!-- end timeline-time -->
-                                                <!-- begin timeline-icon -->
                                                 <div class="timeline-icon">
                                                     <a href="javascript:;">&nbsp;</a>
                                                 </div>
-                                                <!-- end timeline-icon -->
-                                                <!-- begin timeline-body -->
                                                 <div class="timeline-body">
                                                     <div class="timeline-header">
                                                         <span class="userimage"><img src="~/uploads/@post.PostUserImagePath" alt=""></span>
@@ -106,17 +95,12 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <!-- end timeline-body -->
                                             </li>
                                         }
                                     </ul>
-                                    <!-- end timeline -->
                                 </div>
-                                <!-- end #profile-post tab -->
                             </div>
-                            <!-- end tab-content -->
                         </div>
-                        <!-- end profile-content -->
                     </div>
                 </div>
             </div>

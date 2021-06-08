@@ -2,12 +2,12 @@
 {
     using System.Threading.Tasks;
 
-    using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Identity;
-    using Microsoft.AspNetCore.Mvc;
     using InstaHub.Data.Models;
     using InstaHub.Services.Data;
     using InstaHub.Web.ViewModels.Comments;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
 
     public class CommentsController : Controller
     {
@@ -24,6 +24,11 @@
         [Authorize]
         public async Task<IActionResult> Create(CreateCommentInputModel input)
         {
+            if (!this.ModelState.IsValid)
+            {
+                return this.NotFound();
+            }
+
             int? parentId = input.ParentId == 0
                 ? null
                 : input.ParentId;

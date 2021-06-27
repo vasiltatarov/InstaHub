@@ -3,16 +3,17 @@
     this.ViewData["Title"] = "Categories";
 }
 
-<div class="text-center">
-    <h1 class="display-4">@this.ViewData["Title"]</h1>
-    <br/>
-</div>
-<hr/>
+<ol class="breadcrumb">
+    <li class="breadcrumb-item active">@this.ViewData["Title"]</li>
+</ol>
+
+<hr />
+
 <div class="row">
     @foreach (var category in this.Model.Categories)
     {
         <div class="col-12 col-md-4">
-            <img src="@category.ImageUrl" class="w-50 h-50" alt="@category.Title"/>
+            <img src="@category.ImageUrl" class="w-50 h-50" alt="@category.Title" />
             <div class="media-body">
                 <h5 class="mt-0">
                     <a href="@category.Url">@category.Title (@category.PostsCount)</a>

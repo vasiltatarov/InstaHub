@@ -57,6 +57,11 @@
     }
 }
 
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a asp-action="Posts" asp-controller="HomePage">Home</a></li>
+    <li class="breadcrumb-item active">@this.ViewData["Title"]</li>
+</ol>
+
 <div class="container-fluid">
     <div style="text-align: center; margin: 10px">
         <h1>@this.Model.Title</h1>

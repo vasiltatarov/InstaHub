@@ -3,6 +3,11 @@
     this.ViewData["Title"] = this.Model.Title;
 }
 
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a asp-action="GetCategories" asp-controller="Categories">Categories</a></li>
+    <li class="breadcrumb-item active">@this.ViewData["Title"]</li>
+</ol>
+
 <div class="text-center">
     <h1 class="display-4">@this.ViewData["Title"]</h1>
 </div>

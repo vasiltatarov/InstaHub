@@ -2,7 +2,12 @@
 
 <link href="~/css/profile.css" rel="stylesheet" asp-append-version="true" />
 
+<ol class="breadcrumb">
+    <li class="breadcrumb-item active">Home</li>
+</ol>
+
 <div class="container">
+
     <form style="border-radius: 20px" class="navbar navbar-light bg-info justify-content-between" method="get" asp-action="Posts">
         <select class="form-control col-2" id="searchFor" name="orderBy">
             <option selected="">@ViewData["orderBy"]</option>

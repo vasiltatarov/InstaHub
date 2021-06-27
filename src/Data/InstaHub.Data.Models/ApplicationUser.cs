@@ -6,8 +6,8 @@ namespace InstaHub.Data.Models
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    using Microsoft.AspNetCore.Identity;
     using InstaHub.Data.Common.Models;
+    using Microsoft.AspNetCore.Identity;
 
     public class ApplicationUser : IdentityUser, IAuditInfo, IDeletableEntity
     {

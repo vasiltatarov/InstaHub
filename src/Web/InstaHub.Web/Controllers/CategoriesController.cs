@@ -2,10 +2,10 @@
 {
     using System;
 
-    using Microsoft.AspNetCore.Mvc;
     using InstaHub.Services.Data;
     using InstaHub.Web.ViewModels.Categories;
     using InstaHub.Web.ViewModels.Home;
+    using Microsoft.AspNetCore.Mvc;
 
     public class CategoriesController : Controller
     {

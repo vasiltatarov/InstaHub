@@ -3,12 +3,12 @@
     using System.Text;
     using System.Threading.Tasks;
 
+    using InstaHub.Data.Models;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.RazorPages;
     using Microsoft.AspNetCore.WebUtilities;
-    using InstaHub.Data.Models;
 
     [AllowAnonymous]
     public class ConfirmEmailChangeModel : PageModel

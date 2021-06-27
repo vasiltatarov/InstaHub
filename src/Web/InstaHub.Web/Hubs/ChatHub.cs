@@ -3,12 +3,12 @@
     using System;
     using System.Threading.Tasks;
 
-    using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Identity;
-    using Microsoft.AspNetCore.SignalR;
     using InstaHub.Data.Models;
     using InstaHub.Services.Data;
     using InstaHub.Web.ViewModels.Chat;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.SignalR;
 
     [Authorize]
     public class ChatHub : Hub

@@ -2,8 +2,8 @@
 {
     using System.Linq;
 
-    using Microsoft.EntityFrameworkCore;
     using InstaHub.Data.Common.Models;
+    using Microsoft.EntityFrameworkCore;
 
     internal static class EntityIndexesConfiguration
     {

@@ -1,4 +1,4 @@
-﻿namespace InstaHub.Web.ViewModels.ViewUserProfile
+﻿namespace InstaHub.Web.ViewModels.Profile
 {
     using System;
     using System.Collections.Generic;

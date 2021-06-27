@@ -4,11 +4,11 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    using Microsoft.EntityFrameworkCore;
     using InstaHub.Data;
     using InstaHub.Data.Models;
     using InstaHub.Data.Repositories;
     using InstaHub.Services.Data.Tests.Models;
+    using Microsoft.EntityFrameworkCore;
     using Xunit;
 
     public class ChatServiceTests

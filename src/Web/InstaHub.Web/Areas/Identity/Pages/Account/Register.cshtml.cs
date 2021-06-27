@@ -7,6 +7,8 @@
     using System.Text.Encodings.Web;
     using System.Threading.Tasks;
 
+    using InstaHub.Data.Models;
+    using InstaHub.Services.Data;
     using Microsoft.AspNetCore.Authentication;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
@@ -16,8 +18,6 @@
     using Microsoft.AspNetCore.Mvc.RazorPages;
     using Microsoft.AspNetCore.WebUtilities;
     using Microsoft.Extensions.Logging;
-    using InstaHub.Data.Models;
-    using InstaHub.Services.Data;
 
     [AllowAnonymous]
     public class RegisterModel : PageModel

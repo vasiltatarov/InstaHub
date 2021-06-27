@@ -1,4 +1,4 @@
-﻿@model InstaHub.Web.ViewModels.ViewUserProfile.UserProfileViewModel
+﻿@model InstaHub.Web.ViewModels.Profile.UserProfileViewModel
 
 <link href="~/css/profile.css" rel="stylesheet" asp-append-version="true" />
 
@@ -31,16 +31,16 @@
                         </div>
                         <ul class="profile-header-tab nav nav-tabs">
                             <li class="nav-item">
-                                <a asp-area="" asp-controller="ViewUserProfile" asp-action="ByUsername" asp-route-username="@this.Model.Username" class="nav-link">POSTS ( @this.Model.PostsCount )</a>
+                                <a asp-area="" asp-controller="Profile" asp-action="ByUsername" asp-route-username="@this.Model.Username" class="nav-link">POSTS ( @this.Model.PostsCount )</a>
                             </li>
                             <li class="nav-item">
-                                <a asp-area="" asp-controller="ViewUserProfile" asp-action="GetFollowers" asp-route-username="@this.Model.Username" class="nav-link">FOLLOWERS ( @this.Model.Followers.Count() )</a>
+                                <a asp-area="" asp-controller="Profile" asp-action="GetFollowers" asp-route-username="@this.Model.Username" class="nav-link">FOLLOWERS ( @this.Model.Followers.Count() )</a>
                             </li>
                             <li class="nav-item">
-                                <a asp-area="" asp-controller="ViewUserProfile" asp-action="GetFollowing" asp-route-username="@this.Model.Username" class="nav-link">FOLLOWING ( @this.Model.Followed.Count() )</a>
+                                <a asp-area="" asp-controller="Profile" asp-action="GetFollowing" asp-route-username="@this.Model.Username" class="nav-link">FOLLOWING ( @this.Model.Followed.Count() )</a>
                             </li>
                             <li class="nav-item">
-                                <a asp-area="" asp-controller="ViewUserProfile" asp-action="About" asp-route-username="@this.Model.Username" class="nav-link active show">ABOUT</a>
+                                <a asp-area="" asp-controller="Profile" asp-action="About" asp-route-username="@this.Model.Username" class="nav-link active show">ABOUT</a>
                             </li>
                         </ul>
                     </div>

@@ -4,8 +4,8 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    using Microsoft.EntityFrameworkCore;
     using InstaHub.Data.Common.Repositories;
+    using Microsoft.EntityFrameworkCore;
 
     public class EfRepository<TEntity> : IRepository<TEntity>
         where TEntity : class

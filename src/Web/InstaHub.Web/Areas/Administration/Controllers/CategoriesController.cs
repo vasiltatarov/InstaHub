@@ -2,10 +2,10 @@
 {
     using System.Threading.Tasks;
 
-    using Microsoft.AspNetCore.Mvc;
-    using Microsoft.EntityFrameworkCore;
     using InstaHub.Services.Data;
     using InstaHub.Web.ViewModels.Categories;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.EntityFrameworkCore;
 
     [Area("Administration")]
     public class CategoriesController : AdministrationController

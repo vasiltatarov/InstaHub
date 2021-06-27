@@ -4,10 +4,10 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    using Microsoft.EntityFrameworkCore;
     using InstaHub.Data.Common.Repositories;
     using InstaHub.Data.Models;
     using InstaHub.Services.Mapping;
+    using Microsoft.EntityFrameworkCore;
 
     public class FollowService : IFollowService
     {

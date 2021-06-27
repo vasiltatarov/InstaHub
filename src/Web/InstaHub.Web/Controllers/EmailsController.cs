@@ -2,13 +2,13 @@
 {
     using System.Threading.Tasks;
 
-    using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Identity;
-    using Microsoft.AspNetCore.Mvc;
     using InstaHub.Data.Models;
     using InstaHub.Services.Data;
     using InstaHub.Services.Messaging;
     using InstaHub.Web.ViewModels.Posts;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
 
     public class EmailsController : Controller
     {

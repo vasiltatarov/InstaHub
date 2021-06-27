@@ -5,7 +5,7 @@
     using AutoMapper;
     using InstaHub.Data.Models;
     using InstaHub.Services.Mapping;
-    using InstaHub.Web.ViewModels.ViewUserProfile;
+    using InstaHub.Web.ViewModels.Profile;
 
     public class ProfileViewModel : IMapFrom<ApplicationUser>, IHaveCustomMappings
     {

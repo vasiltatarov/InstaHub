@@ -2,9 +2,9 @@
 {
     using System.Threading.Tasks;
 
-    using Microsoft.AspNetCore.Mvc;
     using InstaHub.Services.Data;
     using InstaHub.Web.ViewModels.Posts;
+    using Microsoft.AspNetCore.Mvc;
 
     public class PostsController : AdministrationController
     {

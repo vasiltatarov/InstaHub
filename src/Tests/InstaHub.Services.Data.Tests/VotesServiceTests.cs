@@ -4,9 +4,9 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    using Moq;
     using InstaHub.Data.Common.Repositories;
     using InstaHub.Data.Models;
+    using Moq;
     using Xunit;
 
     public class VotesServiceTests

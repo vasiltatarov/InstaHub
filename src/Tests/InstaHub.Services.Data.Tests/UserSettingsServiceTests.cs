@@ -3,10 +3,10 @@
     using System;
     using System.Threading.Tasks;
 
-    using Microsoft.EntityFrameworkCore;
     using InstaHub.Data;
     using InstaHub.Data.Models;
     using InstaHub.Data.Repositories;
+    using Microsoft.EntityFrameworkCore;
     using Xunit;
 
     public class UserSettingsServiceTests

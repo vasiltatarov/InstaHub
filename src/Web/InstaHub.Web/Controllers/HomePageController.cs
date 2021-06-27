@@ -5,11 +5,11 @@
     using System.Globalization;
     using System.Linq;
 
+    using InstaHub.Services.Data;
+    using InstaHub.Web.ViewModels.HomePage;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Caching.Memory;
-    using InstaHub.Services.Data;
-    using InstaHub.Web.ViewModels.HomePage;
     using PagedList;
 
     [Authorize]

@@ -2,12 +2,12 @@
 {
     using System.Threading.Tasks;
 
+    using InstaHub.Data.Models;
+    using InstaHub.Services.Data;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
-    using InstaHub.Data.Models;
-    using InstaHub.Services.Data;
 
     [Authorize]
     public class FollowController : Controller
@@ -29,7 +29,7 @@
 
             await this.followService.FollowAsync(currentUser.Id, followedUser.Id);
 
-            return this.RedirectToAction("ByUsername", "ViewUserProfile", new { username });
+            return this.RedirectToAction("ByUsername", "Profile", new { username });
         }
 
         [Authorize]
@@ -40,7 +40,7 @@
 
             await this.followService.UnfollowAsync(currentUser.Id, followedUser.Id);
 
-            return this.RedirectToAction("ByUsername", "ViewUserProfile", new { username });
+            return this.RedirectToAction("ByUsername", "Profile", new { username });
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model InstaHub.Web.ViewModels.ViewUserProfile.UserProfileViewModel
+﻿@model InstaHub.Web.ViewModels.Profile.UserProfileViewModel
 
 <link href="~/css/profile.css" rel="stylesheet" asp-append-version="true" />
 
@@ -31,16 +31,16 @@
                         </div>
                         <ul class="profile-header-tab nav nav-tabs">
                             <li class="nav-item">
-                                <a asp-area="" asp-controller="ViewUserProfile" asp-action="ByUsername" asp-route-username="@this.Model.Username" class="nav-link">POSTS ( @this.Model.PostsCount )</a>
+                                <a class="nav-link" asp-area="" asp-controller="Profile" asp-action="ByUsername" asp-route-username="@this.Model.Username">POSTS ( @this.Model.PostsCount )</a>
                             </li>
                             <li class="nav-item">
-                                <a asp-area="" asp-controller="ViewUserProfile" asp-action="GetFollowers" asp-route-username="@this.Model.Username" class="nav-link">FOLLOWERS ( @this.Model.Followers.Count() )</a>
+                                <a class="nav-link active show" asp-area="" asp-controller="Profile" asp-action="GetFollowers" asp-route-username="@this.Model.Username">FOLLOWERS ( @this.Model.Followers.Count() )</a>
                             </li>
                             <li class="nav-item">
-                                <a asp-area="" asp-controller="ViewUserProfile" asp-action="GetFollowing" asp-route-username="@this.Model.Username" class="nav-link active show">FOLLOWING ( @this.Model.Followed.Count() )</a>
+                                <a class="nav-link" asp-area="" asp-controller="Profile" asp-action="GetFollowing" asp-route-username="@this.Model.Username">FOLLOWING ( @this.Model.Followed.Count() )</a>
                             </li>
                             <li class="nav-item">
-                                <a asp-area="" asp-controller="ViewUserProfile" asp-action="About" asp-route-username="@this.Model.Username" class="nav-link">ABOUT</a>
+                                <a class="nav-link" asp-area="" asp-controller="Profile" asp-action="About" asp-route-username="@this.Model.Username">ABOUT</a>
                             </li>
                         </ul>
                     </div>
@@ -50,17 +50,17 @@
                         <div class="d-flex justify-content-center row">
                             <div class="col-md-6">
                                 <div class="p-3 bg-white text-center">
-                                    @foreach (var following in this.Model.Followed)
+                                    @foreach (var follower in this.Model.Followers)
                                     {
                                         <div class="d-flex flex-row justify-content-between align-items-center">
                                             <div class="d-flex flex-row align-items-center">
-                                                <img class="rounded-circle" src="~/uploads/@following.FollowedImagePath" width="60" style="height: 60px;">
+                                                <img class="rounded-circle" src="~/uploads/@follower.FollowerImagePath" width="60" style="height: 60px;">
                                                 <div class="d-flex flex-column align-items-start ml-2">
-                                                    <span class="font-weight-bold">@following.FollowedUserName</span>
+                                                    <span class="font-weight-bold">@follower.FollowerUserName</span>
                                                 </div>
                                             </div>
                                             <div class="d-flex flex-row align-items-center mt-2">
-                                                <a asp-area="" asp-controller="ViewUserProfile" asp-action="ByUsername" asp-route-username="@following.FollowedUserName" class="btn btn-outline-primary btn-sm" type="button">View Profile</a>
+                                                <a asp-area="" asp-controller="Profile" asp-action="ByUsername" asp-route-username="@follower.FollowerUserName" class="btn btn-outline-primary btn-sm" type="button">View Profile</a>
                                             </div>
                                         </div>
                                         <hr />

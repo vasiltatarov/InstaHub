@@ -2,11 +2,11 @@
 {
     using System.Linq;
 
-    using Microsoft.AspNetCore.Identity;
-    using Microsoft.AspNetCore.Mvc;
     using InstaHub.Data.Models;
     using InstaHub.Services.Mapping;
     using InstaHub.Web.ViewModels.Profiles;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
 
     public class ProfilesController : Controller
     {

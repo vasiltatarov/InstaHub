@@ -6,10 +6,10 @@
     using System.Threading;
     using System.Threading.Tasks;
 
-    using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-    using Microsoft.EntityFrameworkCore;
     using InstaHub.Data.Common.Models;
     using InstaHub.Data.Models;
+    using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore;
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
     {

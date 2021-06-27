@@ -2,12 +2,12 @@
 {
     using System.Threading.Tasks;
 
-    using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Identity;
-    using Microsoft.AspNetCore.Mvc;
     using InstaHub.Data.Models;
     using InstaHub.Services.Data;
     using InstaHub.Web.ViewModels.UserSavedPosts;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
     using PagedList;
 
     [Authorize]

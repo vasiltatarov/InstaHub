@@ -2,11 +2,11 @@
 {
     using System.Threading.Tasks;
 
+    using InstaHub.Data.Models;
+    using InstaHub.Services.Data;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
-    using InstaHub.Data.Models;
-    using InstaHub.Services.Data;
 
     [ApiController]
     [Route("api/[controller]")]

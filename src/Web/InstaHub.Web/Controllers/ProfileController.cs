@@ -7,7 +7,7 @@
     using InstaHub.Services.Data;
     using InstaHub.Services.Mapping;
     using InstaHub.Web.ViewModels.Follow;
-    using InstaHub.Web.ViewModels.ViewUserProfile;
+    using InstaHub.Web.ViewModels.Profile;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -15,14 +15,14 @@
     using PagedList;
 
     [Authorize]
-    public class ViewUserProfileController : Controller
+    public class ProfileController : Controller
     {
         private const int PagedOnList = 5;
 
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IFollowService followService;
 
-        public ViewUserProfileController(
+        public ProfileController(
             UserManager<ApplicationUser> userManager,
             IFollowService followService)
         {

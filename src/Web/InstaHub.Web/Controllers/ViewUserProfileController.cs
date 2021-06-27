@@ -3,15 +3,15 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Identity;
-    using Microsoft.AspNetCore.Mvc;
-    using Microsoft.EntityFrameworkCore;
     using InstaHub.Data.Models;
     using InstaHub.Services.Data;
     using InstaHub.Services.Mapping;
     using InstaHub.Web.ViewModels.Follow;
     using InstaHub.Web.ViewModels.ViewUserProfile;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.EntityFrameworkCore;
     using PagedList;
 
     [Authorize]

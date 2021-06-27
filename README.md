@@ -46,6 +46,9 @@ Home page
 Login / Register
 ![](login_register.jpg)
 
+Posts/ById/{postId}
+![](PostById.jpg)
+
 # Database Diagram
 
 ![](DBDiagram.jpg)

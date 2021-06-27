@@ -7,21 +7,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@this.ViewData["Title"] - @GlobalConstants.SystemName</title>
-
-    <link href="~/css/profile.css" rel="stylesheet" />
-
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
-
-    <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css" />
-
-    <link href="~/lib/fontawesome/css/all.css" rel="stylesheet" asp-append-version="true" />
+    <link href="~/css/profile.css" rel="stylesheet" asp-append-version="true" />
 </head>
-<body style="background: aliceblue">
-
+<body>
     <div class="container">
-
         <form style="border-radius: 20px" class="navbar navbar-light bg-info justify-content-between" method="get" asp-action="Posts">
             <select class="form-control col-2" id="searchFor" name="orderBy">
                 <option selected="">@ViewData["orderBy"]</option>

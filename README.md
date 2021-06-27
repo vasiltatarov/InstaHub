@@ -1,12 +1,12 @@
-## Project Introduction
+# Project Introduction
 InstaHub is my defense project for ASP.NET Core MVC course at SoftUni (April-June 2021). The website is..
 
-## Overview
+# Overview
 ASP.NET Core Template Author - 
 <a href="https://github.com/NikolayIT" target="_blank">NikolayIT</a>
 * Template for ASP.NET Core with repositories, services, models mapping, DI and StyleCop warnings fixed.
 
-## Functionality
+# Functionality
 * Users Registration.
 * Ability to View, Create, Read Publications.
 * Ability to Comment, like, save and print publications.
@@ -17,7 +17,7 @@ ASP.NET Core Template Author -
 * Cache Data 'Memory Cache' (see below in HomePage) to reduce database queries.
 * Interactive, flexible UX (User Experience)
 
-## Built With
+# Built With
 * ASP.NET Core 5 MVC
 * ASP.NET CORE view components
 * ASP.NET Core areas
@@ -34,21 +34,29 @@ ASP.NET Core Template Author -
 * Bootstrap
 * Font Awesome Icons
 
-## Client Side Libraries
+# Client Side Libraries
 * TinyMCE
 * Moment.js
 
-## This is the current state of database diagrams relations in my app
+# Interface
+
+Home page
+![](HomePage.jpg)
+
+Login / Register
+![](login_register.jpg)
+
+# Database Diagram
 
 ![](DBDiagram.jpg)
 
-## Testing
+# Testing
 
 * 100% Tests Coverage of Services
 
 ![](ServicesCodeCoverage.jpg)
 
-## Implementation
+# Implementation
 
 * Followings / Followers (Model)
 ```javascript
@@ -83,7 +91,7 @@ out var posts))
 </a>
 ```
 
-### Access control
+# Access control
 * Logged users can create, read publications.
 * Logged users can view publications by category, details, user profile page, and also can search and filter publications.
 * Only creator of the publication can Edit and Delete it.

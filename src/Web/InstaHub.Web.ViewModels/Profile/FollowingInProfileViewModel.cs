@@ -5,8 +5,9 @@
 
     using InstaHub.Data.Models;
     using InstaHub.Services.Mapping;
+    using InstaHub.Web.ViewModels.Follow;
 
-    public class PostInProfileViewModel : IMapFrom<ApplicationUser>
+    public class FollowingInProfileViewModel : IMapFrom<ApplicationUser>
     {
         public string UserName { get; set; }
 
@@ -17,10 +18,7 @@
         public int PostsCount { get; set; }
 
         [NotMapped]
-        public int Followers { get; set; }
-
-        [NotMapped]
-        public int Followed { get; set; }
+        public int FollowersCount { get; set; }
 
         [NotMapped]
         public string CurrentUserImagePath { get; set; }
@@ -28,6 +26,7 @@
         [NotMapped]
         public bool IsUserFollowed { get; set; }
 
-        public IEnumerable<UserProfilePostViewModel> Posts { get; set; }
+        [NotMapped]
+        public IEnumerable<FollowedViewModel> Followed { get; set; }
     }
 }

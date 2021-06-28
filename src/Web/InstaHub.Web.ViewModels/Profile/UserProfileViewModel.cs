@@ -44,7 +44,8 @@
         {
             configuration
                 .CreateMap<ApplicationUser, ProfileViewModel>()
-                .ForMember(x => x.Username,
+                .ForMember(
+                    x => x.Username,
                     y => y.MapFrom(x => x.UserName));
         }
     }

@@ -60,8 +60,8 @@
         public async Task<IActionResult> GetFollowers(string username)
         {
             var userViewModel = this.userManager.Users
-                .To<UserProfileViewModel>()
-                .FirstOrDefault(x => x.Username == username);
+                .To<FollowerInProfileViewModel>()
+                .FirstOrDefault(x => x.UserName == username);
 
             if (userViewModel == null)
             {
@@ -74,7 +74,7 @@
 
             userViewModel.IsUserFollowed = await this.followService.CheckIfFollowExistAsync(currentUser.Id, followedUser.Id);
             userViewModel.Followers = this.followService.GetFollowersByUserId<FollowerViewModel>(followedUser.Id);
-            userViewModel.Followed = this.followService.GetFollowedByUserId<FollowedViewModel>(followedUser.Id);
+            userViewModel.FollowedCount = this.followService.GetFollowedByUserId<FollowedViewModel>(followedUser.Id).Count();
 
             userViewModel.CurrentUserImagePath = currentUser.ImagePath;
 
@@ -84,8 +84,8 @@
         public async Task<IActionResult> GetFollowing(string username)
         {
             var userViewModel = this.userManager.Users
-                .To<UserProfileViewModel>()
-                .FirstOrDefault(x => x.Username == username);
+                .To<FollowingInProfileViewModel>()
+                .FirstOrDefault(x => x.UserName == username);
 
             if (userViewModel == null)
             {
@@ -97,7 +97,7 @@
                 .FirstOrDefaultAsync(x => x.UserName == username);
 
             userViewModel.IsUserFollowed = await this.followService.CheckIfFollowExistAsync(currentUser.Id, followedUser.Id);
-            userViewModel.Followers = this.followService.GetFollowersByUserId<FollowerViewModel>(followedUser.Id);
+            userViewModel.FollowersCount = this.followService.GetFollowersByUserId<FollowerViewModel>(followedUser.Id).Count();
             userViewModel.Followed = this.followService.GetFollowedByUserId<FollowedViewModel>(followedUser.Id);
 
             userViewModel.CurrentUserImagePath = currentUser.ImagePath;

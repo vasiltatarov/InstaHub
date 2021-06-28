@@ -1,11 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using AutoMapper;
-
-namespace InstaHub.Web.ViewModels.Profile
+﻿namespace InstaHub.Web.ViewModels.Profile
 {
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Linq;
 
+    using AutoMapper;
     using InstaHub.Data.Models;
     using InstaHub.Services.Mapping;
 

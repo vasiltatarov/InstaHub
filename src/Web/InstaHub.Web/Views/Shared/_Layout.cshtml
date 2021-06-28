@@ -37,6 +37,12 @@
                             </a>
                         </li>
 
+                        <li class="nav-item">
+                            <a asp-area="" asp-controller="Profile" asp-action="GetPosts" asp-route-username="@User.Identity.Name" class="nav-link text-white" title="Manage">
+                                <i class="fas fa-user-tie fa-fw"></i>Profile
+                            </a>
+                        </li>
+
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                                 Services
@@ -57,11 +63,11 @@
                                 </a>
                             </div>
                         </li>
-                        <li>
+                        @*<li>
                             <a asp-area="" asp-controller="Posts" asp-action="Create" class="btn btn-primary" type="button">
                                 <i class="fas fa-plus"></i>&nbsp;Publication
                             </a>
-                        </li>
+                        </li>*@
                     }
                     else
                     {

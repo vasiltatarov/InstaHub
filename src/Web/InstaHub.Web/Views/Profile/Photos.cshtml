@@ -1,4 +1,4 @@
-﻿@model InstaHub.Web.ViewModels.Profile.FollowingInProfileViewModel
+﻿@model InstaHub.Web.ViewModels.Profile.PhotoInProfileViewModel
 
 <div class="container">
     <div class="info">
@@ -26,7 +26,7 @@
                 <div class="stats d-flex flex-row align-items-center align-items-lg-start text-center text-lg-left">
                     <div class="posts ml-2 ml-lg-0"><p class="lead"><b>@Model.PostsCount</b> posts</p></div>
                     <div class="posts"><p class="lead"><b>&emsp; @Model.FollowersCount</b> followers</p></div>
-                    <div class="posts"><p class="lead"><b>&emsp; @Model.Followed.Count()</b> following</p></div>
+                    <div class="posts"><p class="lead"><b>&emsp; @Model.FollowingsCount</b> following</p></div>
                 </div>
                 <p class="lead mb-0 mt-2"><b>Description</b></p>
                 <p class="lead text-center text-lg-left">@Model.Description</p>
@@ -41,7 +41,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" asp-area="" asp-controller="Profile" asp-action="Photos" asp-route-username="@this.Model.UserName">
+                <a class="nav-link active" asp-area="" asp-controller="Profile" asp-action="Photos" asp-route-username="@this.Model.UserName">
                     <i class="fas fa-th"></i> Photos
                 </a>
             </li>
@@ -51,7 +51,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" asp-area="" asp-controller="Profile" asp-action="GetFollowing" asp-route-username="@this.Model.UserName">
+                <a class="nav-link" asp-area="" asp-controller="Profile" asp-action="GetFollowing" asp-route-username="@this.Model.UserName">
                     <i class="far fa-bookmark"></i> Following
                 </a>
             </li>
@@ -64,26 +64,50 @@
     </div>
 </div>
 
-<div class="container mt-5">
-    <div class="d-flex justify-content-center row">
-        <div class="col-md-6">
-            <div class="p-3 bg-white text-center">
-                @foreach (var following in this.Model.Followed)
-                {
-                    <div class="d-flex flex-row justify-content-between align-items-center">
-                        <div class="d-flex flex-row align-items-center">
-                            <img class="rounded-circle" src="~/uploads/@following.FollowedImagePath" width="60" style="height: 60px;">
-                            <div class="d-flex flex-column align-items-start ml-2">
-                                <span class="font-weight-bold">@following.FollowedUserName</span>
-                            </div>
-                        </div>
-                        <div class="d-flex flex-row align-items-center mt-2">
-                            <a asp-area="" asp-controller="Profile" asp-action="GetPosts" asp-route-username="@following.FollowedUserName" class="btn btn-outline-primary btn-sm" type="button">View Profile</a>
-                        </div>
-                    </div>
-                    <hr />
-                }
+<div class="profile-tabs tab-content">
+    <div class="tab-pane fade show active" id="photos">
+        <div class="row">
+            <div class="col-12 col-md-4">
+                <div class="square">
+                    <img src="~/img/dog-4.jpg" class="w-100 h-75"/>
+                </div>
+            </div>
+            <div class="col-12 col-md-4">
+                <div class="square">
+                    <img src="~/img/dog-5.jpg" class="w-100 h-75"/>
+                </div>
+            </div>
+            <div class="col-12 col-md-4">
+                <div class="square">
+                    <img src="~/img/dog-6.jpg" class="w-100 h-75"/>
+                </div>
+            </div>
+            <div class="col-12 col-md-4">
+                <div class="square">
+                    <img src="~/img/dog-7.jpg" class="w-100"/>
+                </div>
+            </div>
+            <div class="col-12 col-md-4">
+                <div class="square">
+                    <img src="~/img/dog-8.jpg"  class="w-100"/>
+                </div>
+            </div>
+            <div class="col-12 col-md-4">
+                <div class="square">
+                    <img src="~/img/dog-3.jpg"  class="w-100"/>
+                </div>
             </div>
         </div>
+        <div class="d-flex justify-content-center my-5">
+            <a href="#a" class="btn btn-outline-primary btn-pill">Load More</a>
+        </div>
+    </div>
+    <div class="tab-pane fade text-center" id="saved">
+
+        <p class="lead"><span class="text-danger"><i class="far fa-frown-open"></i></span> Nothing saved yet.</p>
+    </div>
+    <div class="tab-pane fade text-center" id="tagged">
+        <p class="lead">Help people tag you.</p>
+        <a href="#a" class="btn btn-info btn-pill">Find Friends</a>
     </div>
 </div>

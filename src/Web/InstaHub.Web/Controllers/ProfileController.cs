@@ -128,5 +128,29 @@
 
             return this.View(userViewModel);
         }
+
+        public async Task<IActionResult> Photos(string username)
+        {
+            var userViewModel = this.userManager.Users
+                .To<PhotoInProfileViewModel>()
+                .FirstOrDefault(x => x.UserName == username);
+
+            if (userViewModel == null)
+            {
+                return this.BadRequest();
+            }
+
+            var currentUser = await this.userManager.GetUserAsync(this.User);
+            var followedUser = await this.userManager.Users
+                .FirstOrDefaultAsync(x => x.UserName == username);
+
+            userViewModel.IsUserFollowed = await this.followService.CheckIfFollowExistAsync(currentUser.Id, followedUser.Id);
+            userViewModel.FollowersCount = this.followService.GetFollowersByUserId<FollowerViewModel>(followedUser.Id).Count();
+            userViewModel.FollowingsCount = this.followService.GetFollowedByUserId<FollowedViewModel>(followedUser.Id).Count();
+
+            userViewModel.CurrentUserImagePath = currentUser.ImagePath;
+
+            return this.View(userViewModel);
+        }
     }
 }

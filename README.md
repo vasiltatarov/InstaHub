@@ -43,6 +43,9 @@ ASP.NET Core Template Author -
 Home page
 ![](HomePage.jpg)
 
+Home page
+![](Profile.jpg)
+
 Login / Register
 ![](login_register.jpg)
 

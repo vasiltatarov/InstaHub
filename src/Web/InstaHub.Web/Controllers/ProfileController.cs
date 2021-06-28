@@ -108,8 +108,8 @@
         public async Task<IActionResult> About(string username)
         {
             var userViewModel = this.userManager.Users
-                .To<UserProfileViewModel>()
-                .FirstOrDefault(x => x.Username == username);
+                .To<AboutInProfileViewModel>()
+                .FirstOrDefault(x => x.UserName == username);
 
             if (userViewModel == null)
             {
@@ -121,8 +121,8 @@
                 .FirstOrDefaultAsync(x => x.UserName == username);
 
             userViewModel.IsUserFollowed = await this.followService.CheckIfFollowExistAsync(currentUser.Id, followedUser.Id);
-            userViewModel.Followers = this.followService.GetFollowersByUserId<FollowerViewModel>(followedUser.Id);
-            userViewModel.Followed = this.followService.GetFollowedByUserId<FollowedViewModel>(followedUser.Id);
+            userViewModel.FollowersCount = this.followService.GetFollowersByUserId<FollowerViewModel>(followedUser.Id).Count();
+            userViewModel.FollowingsCount = this.followService.GetFollowedByUserId<FollowedViewModel>(followedUser.Id).Count();
 
             userViewModel.CurrentUserImagePath = currentUser.ImagePath;
 

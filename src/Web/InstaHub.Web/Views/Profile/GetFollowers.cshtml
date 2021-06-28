@@ -1,75 +1,88 @@
 ﻿@model InstaHub.Web.ViewModels.Profile.UserProfileViewModel
 
-<link href="~/css/profile.css" rel="stylesheet" asp-append-version="true" />
-
 <div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <div id="content">
-                <div class="profile">
-                    <div class="profile-header">
-                        <div class="profile-header-cover"></div>
-                        <div class="profile-header-content">
-                            <div class="profile-header-img">
-                                <img src="~/uploads/@Model.ImagePath" alt="">
-                            </div>
-                            <div class="profile-header-info">
-                                <h4>@Model.Username</h4>
-                                <br />
-                                @if (this.Model.Username != this.User.Identity.Name)
-                                {
-                                    @if (this.Model.IsUserFollowed)
-                                    {
-                                        <a asp-area="" asp-controller="Follow" asp-action="Unfollow" asp-route-username="@this.Model.Username" class="btn btn-dark">Unfollow</a>
-                                    }
-                                    else
-                                    {
-                                        <a asp-area="" asp-controller="Follow" asp-action="Follow" asp-route-username="@this.Model.Username" class="btn btn-warning">Follow</a>
-                                    }
-                                }
+    <div class="info">
+        <div class="row">
+            <div class="col-12 col-md-4 text-center">
+                <img src="~/uploads/@Model.ImagePath" alt="Raised circle image" class="img-fluid rounded-circle shadow-lg" style="width: 180px;">
+            </div>
+            <div class="col-12 col-md-8 d-flex flex-column align-items-center align-items-lg-start">
+                <div class="d-flex flex-row align-items-start mt-3 mt-lg-0">
+                    <div class="name">
+                        <h2 class="mb-0">@Model.Username</h2>
+                    </div>
+                    @if (this.Model.Username != this.User.Identity.Name)
+                    {
+                        @if (this.Model.IsUserFollowed)
+                        {
+                            <a asp-area="" asp-controller="Follow" asp-action="Unfollow" asp-route-username="@this.Model.Username" class="btn btn-primary btn-pill btn-sm ml-3 mt-1">Unfollow</a>
+                        }
+                        else
+                        {
+                            <a asp-area="" asp-controller="Follow" asp-action="Follow" asp-route-username="@this.Model.Username" class="btn btn-primary btn-pill btn-sm ml-3 mt-1">Follow</a>
+                        }
+                    }
+                </div>
+                <div class="stats d-flex flex-row align-items-center align-items-lg-start text-center text-lg-left">
+                    <div class="posts ml-2 ml-lg-0"><p class="lead"><b>@Model.Posts.Count()</b> posts</p></div>
+                    <div class="posts"><p class="lead"><b>&emsp; @Model.Followers.Count()</b> followers</p></div>
+                    <div class="posts"><p class="lead"><b>&emsp; @Model.Followed.Count()</b> following</p></div>
+                </div>
+                <p class="lead mb-0 mt-2"><b>Description</b></p>
+                <p class="lead text-center text-lg-left">@Model.Description</p>
+            </div>
+        </div>
+    </div>
+    <div class="navigation d-flex justify-content-center">
+        <ul class="nav nav-primary nav-tabs mt-3 d-flex flex-column flex-md-row">
+            <li class="nav-item">
+                <a class="nav-link" asp-area="" asp-controller="Profile" asp-action="ByUsername" asp-route-username="@this.Model.Username">
+                    <i class="fas fa-th"></i> Posts
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#photos">
+                    <i class="fas fa-th"></i> Photos
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" asp-area="" asp-controller="Profile" asp-action="GetFollowers" asp-route-username="@this.Model.Username">
+                    <i class="far fa-bookmark"></i> Followers
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-area="" asp-controller="Profile" asp-action="GetFollowing" asp-route-username="@this.Model.Username">
+                    <i class="far fa-bookmark"></i> Following
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-area="" asp-controller="Profile" asp-action="About" asp-route-username="@this.Model.Username">
+                    <i class="far fa-id-badge"></i> About
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="container mt-5">
+    <div class="d-flex justify-content-center row">
+        <div class="col-md-6">
+            <div class="p-3 bg-white text-center">
+                @foreach (var follower in this.Model.Followers)
+                {
+                    <div class="d-flex flex-row justify-content-between align-items-center">
+                        <div class="d-flex flex-row align-items-center">
+                            <img class="rounded-circle" src="~/uploads/@follower.FollowerImagePath" width="60" style="height: 60px;">
+                            <div class="d-flex flex-column align-items-start ml-2">
+                                <span class="font-weight-bold">@follower.FollowerUserName</span>
                             </div>
                         </div>
-                        <ul class="profile-header-tab nav nav-tabs">
-                            <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="Profile" asp-action="ByUsername" asp-route-username="@this.Model.Username">POSTS ( @this.Model.PostsCount )</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active show" asp-area="" asp-controller="Profile" asp-action="GetFollowers" asp-route-username="@this.Model.Username">FOLLOWERS ( @this.Model.Followers.Count() )</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="Profile" asp-action="GetFollowing" asp-route-username="@this.Model.Username">FOLLOWING ( @this.Model.Followed.Count() )</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="Profile" asp-action="About" asp-route-username="@this.Model.Username">ABOUT</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="profile-content">
-                    <div class="container mt-5">
-                        <div class="d-flex justify-content-center row">
-                            <div class="col-md-6">
-                                <div class="p-3 bg-white text-center">
-                                    @foreach (var follower in this.Model.Followers)
-                                    {
-                                        <div class="d-flex flex-row justify-content-between align-items-center">
-                                            <div class="d-flex flex-row align-items-center">
-                                                <img class="rounded-circle" src="~/uploads/@follower.FollowerImagePath" width="60" style="height: 60px;">
-                                                <div class="d-flex flex-column align-items-start ml-2">
-                                                    <span class="font-weight-bold">@follower.FollowerUserName</span>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex flex-row align-items-center mt-2">
-                                                <a asp-area="" asp-controller="Profile" asp-action="ByUsername" asp-route-username="@follower.FollowerUserName" class="btn btn-outline-primary btn-sm" type="button">View Profile</a>
-                                            </div>
-                                        </div>
-                                        <hr />
-                                    }
-                                </div>
-                            </div>
+                        <div class="d-flex flex-row align-items-center mt-2">
+                            <a asp-area="" asp-controller="Profile" asp-action="ByUsername" asp-route-username="@follower.FollowerUserName" class="btn btn-outline-primary btn-sm" type="button">View Profile</a>
                         </div>
                     </div>
-                </div>
+                    <hr />
+                }
             </div>
         </div>
     </div>

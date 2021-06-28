@@ -1,4 +1,7 @@
-﻿namespace InstaHub.Web.Controllers
+﻿using System.Collections.Generic;
+using System.Text.RegularExpressions;
+
+namespace InstaHub.Web.Controllers
 {
     using System.Linq;
     using System.Threading.Tasks;
@@ -139,6 +142,21 @@
             {
                 return this.BadRequest();
             }
+
+            var imageList = new List<string>();
+            var pattern = @"<img.*?src=""(?<url>.*?)"".*?>";
+            var rx = new Regex(pattern);
+
+            foreach (var image in userViewModel.Images)
+            {
+                foreach (Match m in rx.Matches(image))
+                {
+                    var url = m.Groups["url"].Value;
+                    imageList.Add(url);
+                }
+            }
+
+            userViewModel.Images = imageList;
 
             var currentUser = await this.userManager.GetUserAsync(this.User);
             var followedUser = await this.userManager.Users

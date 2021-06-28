@@ -29,7 +29,7 @@
 
             await this.followService.FollowAsync(currentUser.Id, followedUser.Id);
 
-            return this.RedirectToAction("ByUsername", "Profile", new { username });
+            return this.RedirectToAction("GetPosts", "Profile", new { username });
         }
 
         [Authorize]
@@ -40,7 +40,7 @@
 
             await this.followService.UnfollowAsync(currentUser.Id, followedUser.Id);
 
-            return this.RedirectToAction("ByUsername", "Profile", new { username });
+            return this.RedirectToAction("GetPosts", "Profile", new { username });
         }
     }
 }

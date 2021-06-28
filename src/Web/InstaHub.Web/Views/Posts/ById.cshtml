@@ -32,7 +32,7 @@
                     <div class="media flex-wrap w-100 align-items-center">
                         <img alt="" class="d-block ui-w-40 rounded-circle" src="~/uploads/@comment.UserImagePath" style="width: 80px; height: 70px;">
                         <div class="media-body ml-3">
-                            <a asp-controller="Profile" asp-action="ByUsername" asp-route-username="@comment.UserUserName" class="fas fa-user-edit" data-abc="true">@comment.UserUserName</a>
+                            <a asp-controller="Profile" asp-action="GetPosts" asp-route-username="@comment.UserUserName" class="fas fa-user-edit" data-abc="true">@comment.UserUserName</a>
                             <div class="text-muted small">
                                 <i class="fas fa-calendar-alt"></i>
                                 <time datetime="@this.Model.CreatedOn.ToString("O")"></time>
@@ -107,7 +107,7 @@
                     <div class="media flex-wrap w-100 align-items-center">
                         <img alt="" class="d-block ui-w-40 rounded-circle img-fluid" src="~/uploads/@this.Model.UserImagePath" style="width: 80px; height: 70px;">
                         <div class="media-body ml-3">
-                            <a asp-controller="Profile" asp-action="ByUsername" asp-route-username="@Model.UserUserName" class="fas fa-user-edit" data-abc="true">@this.Model.UserUserName</a>
+                            <a asp-controller="Profile" asp-action="GetPosts" asp-route-username="@Model.UserUserName" class="fas fa-user-edit" data-abc="true">@this.Model.UserUserName</a>
                             <div class="text-muted small">
                                 <i class="fas fa-calendar-alt"></i>
                                 <time datetime="@this.Model.CreatedOn.ToString("O")"></time>

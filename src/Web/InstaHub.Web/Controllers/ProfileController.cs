@@ -31,11 +31,11 @@
         }
 
         [Authorize]
-        public async Task<IActionResult> ByUsername(string username, int page = 1)
+        public async Task<IActionResult> GetPosts(string username, int page = 1)
         {
             var userViewModel = this.userManager.Users
-                .To<UserProfileViewModel>()
-                .FirstOrDefault(x => x.Username == username);
+                .To<PostInProfileViewModel>()
+                .FirstOrDefault(x => x.UserName == username);
 
             if (userViewModel == null)
             {
@@ -47,8 +47,8 @@
                 .FirstOrDefaultAsync(x => x.UserName == username);
 
             userViewModel.IsUserFollowed = await this.followService.CheckIfFollowExistAsync(currentUser.Id, followedUser.Id);
-            userViewModel.Followers = this.followService.GetFollowersByUserId<FollowerViewModel>(followedUser.Id);
-            userViewModel.Followed = this.followService.GetFollowedByUserId<FollowedViewModel>(followedUser.Id);
+            userViewModel.Followers = this.followService.GetFollowersByUserId<FollowerViewModel>(followedUser.Id).Count();
+            userViewModel.Followed = this.followService.GetFollowedByUserId<FollowedViewModel>(followedUser.Id).Count();
 
             userViewModel.CurrentUserImagePath = currentUser.ImagePath;
 

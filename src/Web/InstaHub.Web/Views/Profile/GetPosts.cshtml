@@ -1,4 +1,4 @@
-﻿@model InstaHub.Web.ViewModels.Profile.UserProfileViewModel
+﻿@model InstaHub.Web.ViewModels.Profile.PostInProfileViewModel
 
 @{
     var posts = (PagedList.IPagedList)this.Model.Posts;
@@ -15,24 +15,24 @@
             <div class="col-12 col-md-8 d-flex flex-column align-items-center align-items-lg-start">
                 <div class="d-flex flex-row align-items-start mt-3 mt-lg-0">
                     <div class="name">
-                        <h2 class="mb-0">@Model.Username</h2>
+                        <h2 class="mb-0">@Model.UserName</h2>
                     </div>
-                    @if (this.Model.Username != this.User.Identity.Name)
+                    @if (this.Model.UserName != this.User.Identity.Name)
                     {
                         @if (this.Model.IsUserFollowed)
                         {
-                            <a asp-area="" asp-controller="Follow" asp-action="Unfollow" asp-route-username="@this.Model.Username" class="btn btn-primary btn-pill btn-sm ml-3 mt-1">Unfollow</a>
+                            <a asp-area="" asp-controller="Follow" asp-action="Unfollow" asp-route-username="@this.Model.UserName" class="btn btn-primary btn-pill btn-sm ml-3 mt-1">Unfollow</a>
                         }
                         else
                         {
-                            <a asp-area="" asp-controller="Follow" asp-action="Follow" asp-route-username="@this.Model.Username" class="btn btn-primary btn-pill btn-sm ml-3 mt-1">Follow</a>
+                            <a asp-area="" asp-controller="Follow" asp-action="Follow" asp-route-username="@this.Model.UserName" class="btn btn-primary btn-pill btn-sm ml-3 mt-1">Follow</a>
                         }
                     }
                 </div>
                 <div class="stats d-flex flex-row align-items-center align-items-lg-start text-center text-lg-left">
-                    <div class="posts ml-2 ml-lg-0"><p class="lead"><b>@Model.Posts.Count()</b> posts</p></div>
-                    <div class="posts"><p class="lead"><b>&emsp; @Model.Followers.Count()</b> followers</p></div>
-                    <div class="posts"><p class="lead"><b>&emsp; @Model.Followed.Count()</b> following</p></div>
+                    <div class="posts ml-2 ml-lg-0"><p class="lead"><b>@Model.PostsCount</b> posts</p></div>
+                    <div class="posts"><p class="lead"><b>&emsp; @Model.Followers</b> followers</p></div>
+                    <div class="posts"><p class="lead"><b>&emsp; @Model.Followed</b> following</p></div>
                 </div>
                 <p class="lead mb-0 mt-2"><b>Description</b></p>
                 <p class="lead text-center text-lg-left">@Model.Description</p>
@@ -42,7 +42,7 @@
     <div class="navigation d-flex justify-content-center">
         <ul class="nav nav-primary nav-tabs mt-3 d-flex flex-column flex-md-row">
             <li class="nav-item">
-                <a class="nav-link active" asp-area="" asp-controller="Profile" asp-action="ByUsername" asp-route-username="@this.Model.Username">
+                <a class="nav-link active" asp-area="" asp-controller="Profile" asp-action="GetPosts" asp-route-username="@this.Model.UserName">
                     <i class="fas fa-th"></i> Posts
                 </a>
             </li>
@@ -52,17 +52,17 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" asp-area="" asp-controller="Profile" asp-action="GetFollowers" asp-route-username="@this.Model.Username">
+                <a class="nav-link" asp-area="" asp-controller="Profile" asp-action="GetFollowers" asp-route-username="@this.Model.UserName">
                     <i class="far fa-bookmark"></i> Followers
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" asp-area="" asp-controller="Profile" asp-action="GetFollowing" asp-route-username="@this.Model.Username">
+                <a class="nav-link" asp-area="" asp-controller="Profile" asp-action="GetFollowing" asp-route-username="@this.Model.UserName">
                     <i class="far fa-bookmark"></i> Following
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" asp-area="" asp-controller="Profile" asp-action="About" asp-route-username="@this.Model.Username">
+                <a class="nav-link" asp-area="" asp-controller="Profile" asp-action="About" asp-route-username="@this.Model.UserName">
                     <i class="far fa-id-badge"></i> About
                 </a>
             </li>
@@ -146,7 +146,7 @@
         else
         {
             <li class="page-item">
-                <a class="page-link" asp-action="ByUsername" asp-route-username="@this.Model.Username" asp-route-page="@(posts.PageNumber - 1)">
+                <a class="page-link" asp-action="GetPosts" asp-route-username="@this.Model.UserName" asp-route-page="@(posts.PageNumber - 1)">
                     <i class="fas fa-angle-double-left"></i>
                 </a>
             </li>
@@ -156,7 +156,7 @@
         {
             var active = i == posts.PageNumber ? " active" : string.Empty;
             <li class="page-item @active">
-                <a class="page-link" asp-action="ByUsername" asp-route-username="@this.Model.Username" asp-route-page="@i">@i</a>
+                <a class="page-link" asp-action="GetPosts" asp-route-username="@this.Model.UserName" asp-route-page="@i">@i</a>
             </li>
         }
 
@@ -171,7 +171,7 @@
         else
         {
             <li class="page-item">
-                <a class="page-link" asp-action="ByUsername" asp-route-username="@this.Model.Username" asp-route-page="@(posts.PageNumber + 1)">
+                <a class="page-link" asp-action="GetPosts" asp-route-username="@this.Model.UserName" asp-route-page="@(posts.PageNumber + 1)">
                     <i class="fas fa-angle-double-right"></i>
                 </a>
             </li>

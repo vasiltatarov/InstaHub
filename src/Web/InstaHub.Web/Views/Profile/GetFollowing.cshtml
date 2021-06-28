@@ -36,7 +36,7 @@
     <div class="navigation d-flex justify-content-center">
         <ul class="nav nav-primary nav-tabs mt-3 d-flex flex-column flex-md-row">
             <li class="nav-item">
-                <a class="nav-link" asp-area="" asp-controller="Profile" asp-action="ByUsername" asp-route-username="@this.Model.Username">
+                <a class="nav-link" asp-area="" asp-controller="Profile" asp-action="GetPosts" asp-route-username="@this.Model.Username">
                     <i class="fas fa-th"></i> Posts
                 </a>
             </li>
@@ -78,7 +78,7 @@
                             </div>
                         </div>
                         <div class="d-flex flex-row align-items-center mt-2">
-                            <a asp-area="" asp-controller="Profile" asp-action="ByUsername" asp-route-username="@following.FollowedUserName" class="btn btn-outline-primary btn-sm" type="button">View Profile</a>
+                            <a asp-area="" asp-controller="Profile" asp-action="GetPosts" asp-route-username="@following.FollowedUserName" class="btn btn-outline-primary btn-sm" type="button">View Profile</a>
                         </div>
                     </div>
                     <hr />

@@ -12,10 +12,7 @@
     {
         private readonly UserManager<ApplicationUser> userManager;
 
-        public ProfilesController(UserManager<ApplicationUser> userManager)
-        {
-            this.userManager = userManager;
-        }
+        public ProfilesController(UserManager<ApplicationUser> userManager) => this.userManager = userManager;
 
         public IActionResult GetProfiles()
             => this.View(this.userManager

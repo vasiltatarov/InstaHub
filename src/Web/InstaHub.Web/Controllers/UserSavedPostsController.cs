@@ -10,11 +10,11 @@
     using Microsoft.AspNetCore.Mvc;
     using PagedList;
 
+    using static InstaHub.Common.GlobalConstants;
+
     [Authorize]
     public class UserSavedPostsController : Controller
     {
-        private const int ItemsOnPaged = 5;
-
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IUserSavedPostsService userSavedPostsService;
 
@@ -25,7 +25,7 @@
         }
 
         [Authorize]
-        public IActionResult GetSavedPosts(int page = 1)
+        public IActionResult GetSavedPosts(int page = DefaultPage)
         {
             var userId = this.userManager.GetUserId(this.User);
             var posts = this.userSavedPostsService

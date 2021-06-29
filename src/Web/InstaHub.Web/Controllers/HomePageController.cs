@@ -12,11 +12,11 @@
     using Microsoft.Extensions.Caching.Memory;
     using PagedList;
 
+    using static InstaHub.Common.GlobalConstants;
+
     [Authorize]
     public class HomePageController : Controller
     {
-        private const int ItemsPerPage = 5;
-
         private readonly IPostsService postsService;
         private readonly IMemoryCache cache;
 
@@ -38,7 +38,7 @@
         /// In cshtml file use IPagedList<T>.
         /// <returns></returns>
         [HttpGet]
-        public IActionResult Posts(string searchTerm, string orderBy = "Latest", int page = 1)
+        public IActionResult Posts(string searchTerm, string orderBy = "Latest", int page = DefaultPage)
         {
             if (!this.cache.TryGetValue<IEnumerable<HomePostViewModel>>("Posts", out var posts))
             {
@@ -73,7 +73,7 @@
                 posts = this.OrderHomePostsBy(posts, orderBy);
             }
 
-            return this.View(posts.ToPagedList(page, ItemsPerPage));
+            return this.View(posts.ToPagedList(page, ItemsOnPaged));
         }
 
         private IEnumerable<HomePostViewModel> OrderHomePostsBy(IEnumerable<HomePostViewModel> posts, string searchFor)

@@ -16,11 +16,11 @@
     using Microsoft.EntityFrameworkCore;
     using PagedList;
 
+    using static InstaHub.Common.GlobalConstants;
+
     [Authorize]
     public class ProfileController : Controller
     {
-        private const int PagedOnList = 5;
-
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IFollowService followService;
 
@@ -33,7 +33,7 @@
         }
 
         [Authorize]
-        public async Task<IActionResult> GetPosts(string username, int page = 1)
+        public async Task<IActionResult> GetPosts(string username, int page = DefaultPage)
         {
             var userViewModel = this.userManager.Users
                 .To<PostInProfileViewModel>()
@@ -54,7 +54,7 @@
 
             userViewModel.CurrentUserImagePath = currentUser.ImagePath;
 
-            userViewModel.Posts = userViewModel.Posts.ToPagedList(page, PagedOnList);
+            userViewModel.Posts = userViewModel.Posts.ToPagedList(page, ItemsOnPaged);
 
             return this.View(userViewModel);
         }

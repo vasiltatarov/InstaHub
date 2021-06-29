@@ -11,9 +11,7 @@
         private readonly ICategoriesService categoriesService;
 
         public HomeController(ICategoriesService categoriesService)
-        {
-            this.categoriesService = categoriesService;
-        }
+            => this.categoriesService = categoriesService;
 
         /// <summary>
         /// This is my home page. Start page of the application.

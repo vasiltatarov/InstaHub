@@ -23,6 +23,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Data\InstaHub.Data.Common\InstaHub.Data.Common.csproj" />
     <ProjectReference Include="..\..\Data\InstaHub.Data.Models\InstaHub.Data.Models.csproj" />
+    <ProjectReference Include="..\..\Web\InstaHub.Web.ViewModels\InstaHub.Web.ViewModels.csproj" />
     <ProjectReference Include="..\InstaHub.Services.Mapping\InstaHub.Services.Mapping.csproj" />
   </ItemGroup>
 

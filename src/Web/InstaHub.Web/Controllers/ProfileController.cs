@@ -23,40 +23,32 @@
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IFollowService followService;
+        private readonly IProfileService profileService;
 
         public ProfileController(
             UserManager<ApplicationUser> userManager,
-            IFollowService followService)
+            IFollowService followService,
+            IProfileService profileService)
         {
             this.userManager = userManager;
             this.followService = followService;
+            this.profileService = profileService;
         }
 
         [Authorize]
-        public async Task<IActionResult> GetPosts(string username, int page = DefaultPage)
+        public async Task<IActionResult> GetPosts(string username, int page = DefaultPage) // Return two id's of the users
         {
-            var userViewModel = this.userManager.Users
-                .To<PostInProfileViewModel>()
-                .FirstOrDefault(x => x.UserName == username);
+            var (currentUserId, followedUserId, currentUserImagePath) = await this.GetUserIds(username);
+            var posts = await this.profileService.GetUserPosts(username, currentUserId, followedUserId, currentUserImagePath);
 
-            if (userViewModel == null)
+            if (posts == null)
             {
                 return this.BadRequest();
             }
 
-            var currentUser = await this.userManager.GetUserAsync(this.User);
-            var followedUser = await this.userManager.Users
-                .FirstOrDefaultAsync(x => x.UserName == username);
+            posts.Posts = posts.Posts.ToPagedList(page, ItemsOnPaged);
 
-            userViewModel.IsUserFollowed = await this.followService.CheckIfFollowExistAsync(currentUser.Id, followedUser.Id);
-            userViewModel.Followers = this.followService.GetFollowersByUserId<FollowerViewModel>(followedUser.Id).Count();
-            userViewModel.Followed = this.followService.GetFollowedByUserId<FollowedViewModel>(followedUser.Id).Count();
-
-            userViewModel.CurrentUserImagePath = currentUser.ImagePath;
-
-            userViewModel.Posts = userViewModel.Posts.ToPagedList(page, ItemsOnPaged);
-
-            return this.View(userViewModel);
+            return this.View(posts);
         }
 
         public async Task<IActionResult> GetFollowers(string username)
@@ -168,6 +160,14 @@
             userViewModel.CurrentUserImagePath = currentUser.ImagePath;
 
             return this.View(userViewModel);
+        }
+
+        private async Task<(string T1, string T2, string T3)> GetUserIds(string username)
+        {
+            var currentUser = await this.userManager.GetUserAsync(this.User);
+            var followedUser = await this.userManager.Users.FirstOrDefaultAsync(x => x.UserName == username);
+
+            return (currentUser.Id, followedUser.Id, currentUser.ImagePath);
         }
     }
 }

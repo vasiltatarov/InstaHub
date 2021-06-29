@@ -84,7 +84,7 @@
             <a href="javascript:void(0)" onclick="window.print()" class="btn btn-warning text-white">
                 <i class="fas fa-print"></i>&nbsp; Print
             </a>
-            if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+            if (this.User.IsInRole(GlobalConstants.AdministratorRoleName) || this.User.Identity.Name == this.Model.UserUserName)
             {
                 <a class="btn btn-primary" asp-area="Administration" asp-action="Edit" asp-controller="Posts" asp-route-id="@this.Model.Id">
                     <i class="fas fa-edit"></i>&nbsp; Edit

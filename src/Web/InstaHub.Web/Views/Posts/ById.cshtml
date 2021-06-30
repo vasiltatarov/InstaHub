@@ -93,11 +93,14 @@
                     <i class="fas fa-trash-alt"></i>&nbsp; Delete
                 </a>
             }
-            <form style="margin-top: -35px" class="text-right" method="post">
-                <button class="btn btn-warning" asp-controller="Emails" asp-action="SendPostToEmail" asp-route-id="@this.Model.Id">
-                    <i class="fas fa-envelope"></i>&nbsp; Send Post to Email
-                </button>
-            </form>
+            <a class="btn btn-primary" asp-controller="Emails" asp-action="SendPostToEmail" asp-route-id="@this.Model.Id">
+                <i class="fas fa-envelope"></i>&nbsp; Send Post to Email
+            </a>
+            @*<form style="margin-top: -35px" class="text-right" method="post">
+                    <button class="btn btn-warning" asp-controller="Emails" asp-action="SendPostToEmail" asp-route-id="@this.Model.Id">
+                        <i class="fas fa-envelope"></i>&nbsp; Send Post to Email
+                    </button>
+                </form>*@
         }
     </div>
     <div class="row">

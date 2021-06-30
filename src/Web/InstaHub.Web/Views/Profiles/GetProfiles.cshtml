@@ -1,56 +1,52 @@
-﻿@using InstaHub.Common
-@model IEnumerable<InstaHub.Web.ViewModels.Profiles.ProfileViewModel>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@this.ViewData["Title"] - @GlobalConstants.SystemName</title>
+﻿@model IEnumerable<InstaHub.Web.ViewModels.Profiles.ProfileViewModel>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css" asp-append-version="true">
 
-    <link href="~/css/user-profiles.css" rel="stylesheet" />
-
-    <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css" />
-
-    <link href="~/lib/fontawesome/css/all.css" rel="stylesheet" asp-append-version="true" />
-</head>
-<body style="background: aliceblue">
-    <div class="container profile">
-        <div class="col-md-12">
-            <div class="panel-profile">
-                <div class="panel-heading overflow-h">
-                    <h2 class="panel-title"><i class="fa fa-tasks"></i>Profiles</h2>
-                </div>
-                <hr />
-                <div class="row m-1">
-                    @foreach (var profile in this.Model)
+<div class="container border border-primary p-4 bg-light">
+    <table class="table table-striped table-hover table-bordered" id="myTable">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Location</th>
+                <th>Description</th>
+                <th>Posts</th>
+                <th>Views</th>
+                <th>Likes</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var profile in this.Model)
+        {
+            <tr>
+                <td>
+                    <a asp-controller="Profile" asp-action="GetPosts" asp-route-username="@profile.Username">
+                        @profile.Username
+                    </a>
+                </td>
+                <td>@(profile.Location ?? "Location Miss")</td>
+                <td>
+                    @if (profile.Description == null)
                     {
-                        <div class="col-sm-4">
-                            <div class="profile-blog blog-border">
-                                <img class="rounded-x" src="~/uploads/@profile.ImagePath" alt="">
-                                <div class="name-location">
-                                    <strong>
-                                        <a asp-controller="Profile" asp-action="GetPosts" asp-route-username="@profile.Username">
-                                            @profile.Username
-                                        </a>
-                                    </strong>
-                                    <span>
-                                        <i class="fa fa-map-marker"></i> @profile.Location
-                                    </span>
-                                </div>
-                                <div class="clearfix margin-bottom-20"></div>
-                                <p>@(profile.Description ?? "Still No Description")</p>
-                                <hr>
-                                <ul class="list-inline share-list">
-                                    <li><i class="fa fa-bell"></i>@profile.PostsCount Posts</li>
-                                    <li><i class="far fa-eye ml-2"></i> @profile.PostViews Views</li>
-                                    <li><i class="fas fa-thumbs-up"></i>@profile.Posts.Sum(x => x.Votes.Count) Likes</li>
-                                </ul>
-                            </div>
-                        </div>
+                    <p>Still No Description</p>
                     }
-                </div>
-            </div>
-        </div>
-    </div>
-</body>
+                    else
+                    {
+                        @(profile.Description.Length <= 40 ? profile.Description : profile.Description.Substring(0, 40) + " ...")
+                    }
+                </td>
+                <td>@profile.PostsCount</td>
+                <td>@profile.PostViews</td>
+                <td>@profile.Posts.Sum(x => x.Votes.Count)</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts {
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js" asp-append-version="true"></script>
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable();
+        });
+    </script>
+}

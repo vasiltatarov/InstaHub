@@ -94,6 +94,14 @@
       "files": [
         "dist/browser/signalr.min.js"
       ]
+    },
+    {
+      "library": "datatables@1.10.18",
+      "destination": "wwwroot/lib/datatables/",
+      "files": [
+        "media/css/jquery.dataTables.min.css",
+        "media/js/jquery.dataTables.min.js"
+      ]
     }
   ]
 }

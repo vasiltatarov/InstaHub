@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    public interface IPostsService
+    public interface IPostService
     {
         Task<T> GetById<T>(int id);
 

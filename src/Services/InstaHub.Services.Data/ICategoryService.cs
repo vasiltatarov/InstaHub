@@ -7,7 +7,7 @@
     using InstaHub.Data.Models;
     using InstaHub.Services.Mapping;
 
-    public interface ICategoriesService : IMapFrom<Category>
+    public interface ICategoryService : IMapFrom<Category>
     {
         Task CreateAsync(string name, string title, string description, string imageUrl);
 

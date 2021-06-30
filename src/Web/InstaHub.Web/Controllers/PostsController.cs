@@ -12,19 +12,19 @@
     [Authorize]
     public class PostsController : Controller
     {
-        private readonly IPostsService postsService;
-        private readonly ICategoriesService categoriesService;
+        private readonly IPostService postService;
+        private readonly ICategoryService categoryService;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IUserSavedPostsService userSavedPostsService;
 
         public PostsController(
-            IPostsService postsService,
-            ICategoriesService categoriesService,
+            IPostService postService,
+            ICategoryService categoryService,
             UserManager<ApplicationUser> userManager,
             IUserSavedPostsService userSavedPostsService)
         {
-            this.postsService = postsService;
-            this.categoriesService = categoriesService;
+            this.postService = postService;
+            this.categoryService = categoryService;
             this.userManager = userManager;
             this.userSavedPostsService = userSavedPostsService;
         }
@@ -32,7 +32,7 @@
         [Authorize]
         public IActionResult Create()
         {
-            var categories = this.categoriesService.GetAll<CategoryDropDownViewModel>();
+            var categories = this.categoryService.GetAll<CategoryDropDownViewModel>();
             var viewModel = new PostCreateInputModel()
             {
                 Categories = categories,
@@ -51,7 +51,7 @@
             }
 
             var user = await this.userManager.GetUserAsync(this.User);
-            var postId = await this.postsService.CreateAsync(input.Title, input.Content, input.CategoryId, user.Id);
+            var postId = await this.postService.CreateAsync(input.Title, input.Content, input.CategoryId, user.Id);
 
             this.TempData["InfoMessage"] = "Forum post Created!";
 
@@ -60,7 +60,7 @@
 
         public async Task<IActionResult> ById(int id)
         {
-            var postViewModel = await this.postsService.GetById<PostViewModel>(id);
+            var postViewModel = await this.postService.GetById<PostViewModel>(id);
 
             var user = await this.userManager.GetUserAsync(this.User);
             this.TempData["IsPostSaved"] = await this.userSavedPostsService.IsPostSaved(user.Id, id);

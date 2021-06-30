@@ -30,7 +30,7 @@
             mockRepo.Setup(x => x.AddAsync(It.IsAny<Post>()))
                 .Callback((Post post) => list.Add(post));
 
-            var service = new PostsService(mockRepo.Object);
+            var service = new PostService(mockRepo.Object);
 
             // Act
             await service.CreateAsync("Game of Thrones", "The best ever", 1, "v1");
@@ -53,7 +53,7 @@
             mockRepo.Setup(x => x.AddAsync(It.IsAny<Post>()))
                 .Callback((Post post) => list.Add(post));
 
-            var service = new PostsService(mockRepo.Object);
+            var service = new PostService(mockRepo.Object);
 
             // Act
             var postId = await service.CreateAsync("Game of Thrones", "The best ever", 1, "v1");
@@ -75,7 +75,7 @@
             mockRepo.Setup(x => x.AddAsync(It.IsAny<Post>()))
                 .Callback((Post post) => list.Add(post));
 
-            var service = new PostsService(mockRepo.Object);
+            var service = new PostService(mockRepo.Object);
 
             // Act
             var postId = await service.CreateAsync("Game of Thrones", "The best ever", 1, "v1");
@@ -106,7 +106,7 @@
                     },
                 }.AsQueryable());
 
-            var service = new PostsService(mockRepo.Object);
+            var service = new PostService(mockRepo.Object);
 
             // Act
             var post = await service.GetById<PostModel>(11);
@@ -128,7 +128,7 @@
             mockRepo.Setup(x => x.AddAsync(It.IsAny<Post>()))
                 .Callback((Post post) => list.Add(post));
 
-            var service = new PostsService(mockRepo.Object);
+            var service = new PostService(mockRepo.Object);
 
             // Act
             await service.CreateAsync("Game of Thrones", "The best", categoryId, "v1");
@@ -153,7 +153,7 @@
             mockRepo.Setup(x => x.AddAsync(It.IsAny<Post>()))
                 .Callback((Post post) => list.Add(post));
 
-            var service = new PostsService(mockRepo.Object);
+            var service = new PostService(mockRepo.Object);
 
             // Act
             await service.CreateAsync("Game of Thrones", "The best", 1, "v1");
@@ -176,7 +176,7 @@
             mockRepo.Setup(x => x.AddAsync(It.IsAny<Post>()))
                 .Callback((Post post) => list.Add(post));
 
-            var service = new PostsService(mockRepo.Object);
+            var service = new PostService(mockRepo.Object);
 
             // Act
             var postId = await service.CreateAsync("Game of Thrones", "The best", 1, "v1");
@@ -203,7 +203,7 @@
             mockRepo.Setup(x => x.AddAsync(It.IsAny<Post>()))
                 .Callback((Post post) => list.Add(post));
 
-            var service = new PostsService(mockRepo.Object);
+            var service = new PostService(mockRepo.Object);
 
             // Act
             await service.IncreaseVisitorsCount(postId);
@@ -227,7 +227,7 @@
             mockRepo.Setup(x => x.AddAsync(It.IsAny<Post>()))
                 .Callback((Post post) => list.Add(post));
 
-            var service = new PostsService(mockRepo.Object);
+            var service = new PostService(mockRepo.Object);
 
             // Act
             await service.CreateAsync("Game of Thrones1", "The best1", 1, "v2");
@@ -253,7 +253,7 @@
             mockRepo.Setup(x => x.AddAsync(It.IsAny<Post>()))
                 .Callback((Post post) => list.Add(post));
 
-            var service = new PostsService(mockRepo.Object);
+            var service = new PostService(mockRepo.Object);
 
             // Act
             await service.CreateAsync("Game of Thrones1", "The best1", 1, "v2");
@@ -279,7 +279,7 @@
             mockRepo.Setup(x => x.AddAsync(It.IsAny<Post>()))
                 .Callback((Post post) => list.Add(post));
 
-            var service = new PostsService(mockRepo.Object);
+            var service = new PostService(mockRepo.Object);
 
             // Act
             await service.CreateAsync("Game of Thrones1", "The best1", 1, "v2");
@@ -304,7 +304,7 @@
             mockRepo.Setup(x => x.AddAsync(It.IsAny<Post>()))
                 .Callback((Post post) => list.Add(post));
 
-            var service = new PostsService(mockRepo.Object);
+            var service = new PostService(mockRepo.Object);
 
             // Act
             await service.CreateAsync("Game of Thrones1", "The best1", categoryId, "v2");
@@ -330,7 +330,7 @@
             mockRepo.Setup(x => x.AddAsync(It.IsAny<Post>()))
                 .Callback((Post post) => list.Add(post));
 
-            var service = new PostsService(mockRepo.Object);
+            var service = new PostService(mockRepo.Object);
 
             // Act
             await service.CreateAsync("Game of Thrones1", "The best1", 1, "v2");
@@ -357,7 +357,7 @@
             mockRepo.Setup(x => x.AddAsync(It.IsAny<Post>()))
                 .Callback((Post post) => list.Add(post));
 
-            var service = new PostsService(mockRepo.Object);
+            var service = new PostService(mockRepo.Object);
 
             // Act
             await service.CreateAsync("Game of Thrones1", "The best1", 1, "v2");
@@ -386,7 +386,7 @@
             mockRepo.Setup(x => x.Delete(It.IsAny<Post>()))
                 .Callback((Post post) => post.IsDeleted = true);
 
-            var service = new PostsService(mockRepo.Object);
+            var service = new PostService(mockRepo.Object);
 
             // Act
             await service.CreateAsync("Game of Thrones1", "The best1", 1, "v2");
@@ -414,7 +414,7 @@
             mockRepo.Setup(x => x.Delete(It.IsAny<Post>()))
                 .Callback((Post post) => post.IsDeleted = true);
 
-            var service = new PostsService(mockRepo.Object);
+            var service = new PostService(mockRepo.Object);
 
             // Act
             await service.CreateAsync("Game of Thrones1", "The best1", 1, "v2");

@@ -10,16 +10,16 @@
     [Area("Administration")]
     public class CategoriesController : AdministrationController
     {
-        private readonly ICategoriesService categoriesService;
+        private readonly ICategoryService categoryService;
 
-        public CategoriesController(ICategoriesService categoriesService)
+        public CategoriesController(ICategoryService categoryService)
         {
-            this.categoriesService = categoriesService;
+            this.categoryService = categoryService;
         }
 
         // GET: Administration/Categories
         public IActionResult Index()
-            => this.View(this.categoriesService.GetAll<CategoryAdministrationViewModel>());
+            => this.View(this.categoryService.GetAll<CategoryAdministrationViewModel>());
 
         // GET: Administration/Categories/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -29,7 +29,7 @@
                 return this.NotFound();
             }
 
-            var category = await this.categoriesService.GetByIdAsync<CategoryAdministrationViewModel>(id.Value);
+            var category = await this.categoryService.GetByIdAsync<CategoryAdministrationViewModel>(id.Value);
             if (category == null)
             {
                 return this.NotFound();
@@ -54,7 +54,7 @@
                 return this.View(input);
             }
 
-            await this.categoriesService.CreateAsync(input.Name, input.Title, input.Description, input.ImageUrl);
+            await this.categoryService.CreateAsync(input.Name, input.Title, input.Description, input.ImageUrl);
             return this.RedirectToAction(nameof(this.Index));
         }
 
@@ -66,7 +66,7 @@
                 return this.NotFound();
             }
 
-            var category = await this.categoriesService.GetByIdAsync<CategoryAdministrationViewModel>(id.Value);
+            var category = await this.categoryService.GetByIdAsync<CategoryAdministrationViewModel>(id.Value);
             if (category == null)
             {
                 return this.NotFound();
@@ -91,7 +91,7 @@
             {
                 try
                 {
-                    await this.categoriesService
+                    await this.categoryService
                         .Update(id, category.Name, category.Title, category.Description, category.ImageUrl, category.IsDeleted, category.DeletedOn, category.CreatedOn, category.ModifiedOn);
                 }
                 catch (DbUpdateConcurrencyException)
@@ -120,7 +120,7 @@
                 return this.NotFound();
             }
 
-            var category = await this.categoriesService.GetByIdAsync<CategoryAdministrationViewModel>(id.Value);
+            var category = await this.categoryService.GetByIdAsync<CategoryAdministrationViewModel>(id.Value);
             if (category == null)
             {
                 return this.NotFound();
@@ -134,7 +134,7 @@
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var isDeleted = await this.categoriesService.Delete(id);
+            var isDeleted = await this.categoryService.Delete(id);
 
             if (!isDeleted)
             {
@@ -145,6 +145,6 @@
         }
 
         private async Task<bool> CategoryExists(int id)
-            => await this.categoriesService.IsCategoryExists(id);
+            => await this.categoryService.IsCategoryExists(id);
     }
 }

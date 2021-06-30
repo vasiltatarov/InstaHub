@@ -15,7 +15,7 @@
     {
         private readonly Category[] data;
         private readonly EfDeletableEntityRepository<Category> repo;
-        private readonly CategoriesService service;
+        private readonly CategoryService service;
 
         public CategoriesServiceTests()
         {
@@ -23,7 +23,7 @@
                 .UseInMemoryDatabase(Guid.NewGuid().ToString()).Options;
             var db = new ApplicationDbContext(options);
             this.repo = new EfDeletableEntityRepository<Category>(db);
-            this.service = new CategoriesService(this.repo);
+            this.service = new CategoryService(this.repo);
 
             _ = new MapperInitializationProfile();
 

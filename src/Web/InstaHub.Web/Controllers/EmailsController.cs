@@ -14,13 +14,13 @@
     [Authorize]
     public class EmailsController : Controller
     {
-        private readonly IPostsService postsService;
+        private readonly IPostService postService;
         private readonly IEmailSender emailSender;
         private readonly UserManager<ApplicationUser> userManager;
 
-        public EmailsController(IPostsService postsService, IEmailSender emailSender, UserManager<ApplicationUser> userManager)
+        public EmailsController(IPostService postService, IEmailSender emailSender, UserManager<ApplicationUser> userManager)
         {
-            this.postsService = postsService;
+            this.postService = postService;
             this.emailSender = emailSender;
             this.userManager = userManager;
         }
@@ -35,7 +35,7 @@
                 return this.View(form);
             }
 
-            var post = await this.postsService.GetById<PostViewModel>(form.Id);
+            var post = await this.postService.GetById<PostViewModel>(form.Id);
             var user = await this.userManager.GetUserAsync(this.User);
 
             await this.emailSender

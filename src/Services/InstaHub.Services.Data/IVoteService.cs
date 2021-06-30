@@ -2,7 +2,7 @@
 {
     using System.Threading.Tasks;
 
-    public interface IVotesService
+    public interface IVoteService
     {
         Task VoteAsync(int postId, string userId, bool isUpVote);
 

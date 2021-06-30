@@ -8,10 +8,10 @@
 
     public class HomeController : BaseController
     {
-        private readonly ICategoriesService categoriesService;
+        private readonly ICategoryService categoryService;
 
-        public HomeController(ICategoriesService categoriesService)
-            => this.categoriesService = categoriesService;
+        public HomeController(ICategoryService categoryService)
+            => this.categoryService = categoryService;
 
         /// <summary>
         /// This is my home page. Start page of the application.

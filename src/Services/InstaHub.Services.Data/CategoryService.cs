@@ -10,11 +10,11 @@
     using InstaHub.Services.Mapping;
     using Microsoft.EntityFrameworkCore;
 
-    public class CategoriesService : ICategoriesService
+    public class CategoryService : ICategoryService
     {
         private readonly IDeletableEntityRepository<Category> categoryRepository;
 
-        public CategoriesService(IDeletableEntityRepository<Category> categoryRepository)
+        public CategoryService(IDeletableEntityRepository<Category> categoryRepository)
         {
             this.categoryRepository = categoryRepository;
         }

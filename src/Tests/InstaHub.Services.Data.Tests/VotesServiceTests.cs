@@ -22,7 +22,7 @@
             mockRepo.Setup(x => x.AddAsync(It.IsAny<Vote>()))
                 .Callback((Vote vote) => list.Add(vote));
 
-            var service = new VotesService(mockRepo.Object);
+            var service = new VoteService(mockRepo.Object);
 
             await service.VoteAsync(1, "v1", true);
             await service.VoteAsync(1, "v2", true);
@@ -44,7 +44,7 @@
             mockRepo.Setup(x => x.AddAsync(It.IsAny<Vote>()))
                 .Callback((Vote vote) => list.Add(vote));
 
-            var service = new VotesService(mockRepo.Object);
+            var service = new VoteService(mockRepo.Object);
 
             await service.VoteAsync(1, "v1", true);
             await service.VoteAsync(1, "v2", true);

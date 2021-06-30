@@ -8,24 +8,24 @@
 
     public class PostsController : AdministrationController
     {
-        private readonly IPostsService postsService;
-        private readonly ICategoriesService categoriesService;
+        private readonly IPostService postService;
+        private readonly ICategoryService categoryService;
 
-        public PostsController(IPostsService postsService, ICategoriesService categoriesService)
+        public PostsController(IPostService postService, ICategoryService categoryService)
         {
-            this.postsService = postsService;
-            this.categoriesService = categoriesService;
+            this.postService = postService;
+            this.categoryService = categoryService;
         }
 
         public async Task<IActionResult> Edit(int id)
         {
-            var post = await this.postsService.GetById<EditPostViewModel>(id);
+            var post = await this.postService.GetById<EditPostViewModel>(id);
             if (post == null)
             {
                 return this.NotFound();
             }
 
-            var categories = this.categoriesService.GetAll<CategoryDropDownViewModel>();
+            var categories = this.categoryService.GetAll<CategoryDropDownViewModel>();
             post.Categories = categories;
 
             return this.View(post);
@@ -45,7 +45,7 @@
                 return this.View(post);
             }
 
-            await this.postsService
+            await this.postService
                 .Edit(id, post.Title, post.Content, post.CategoryId, post.IsDeleted, post.DeletedOn, post.CreatedOn, post.ModifiedOn);
 
             return this.RedirectToAction("ById", "Posts", new { area = string.Empty, id });
@@ -53,7 +53,7 @@
 
         public async Task<IActionResult> Delete(int id)
         {
-            var isDeleted = await this.postsService.Delete(id);
+            var isDeleted = await this.postService.Delete(id);
 
             if (!isDeleted)
             {

@@ -6,11 +6,11 @@
     using InstaHub.Data.Common.Repositories;
     using InstaHub.Data.Models;
 
-    public class VotesService : IVotesService
+    public class VoteService : IVoteService
     {
         private readonly IRepository<Vote> votesRepository;
 
-        public VotesService(IRepository<Vote> votesRepository)
+        public VoteService(IRepository<Vote> votesRepository)
         {
             this.votesRepository = votesRepository;
         }

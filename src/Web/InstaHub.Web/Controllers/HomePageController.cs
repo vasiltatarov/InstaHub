@@ -17,12 +17,12 @@
     [Authorize]
     public class HomePageController : Controller
     {
-        private readonly IPostsService postsService;
+        private readonly IPostService postService;
         private readonly IMemoryCache cache;
 
-        public HomePageController(IPostsService postsService, IMemoryCache memoryCache)
+        public HomePageController(IPostService postService, IMemoryCache memoryCache)
         {
-            this.postsService = postsService;
+            this.postService = postService;
             this.cache = memoryCache;
         }
 
@@ -42,7 +42,7 @@
         {
             if (!this.cache.TryGetValue<IEnumerable<HomePostViewModel>>("Posts", out var posts))
             {
-                posts = this.postsService.GetAllPosts<HomePostViewModel>();
+                posts = this.postService.GetAllPosts<HomePostViewModel>();
 
                 var cacheEntryOptions = new MemoryCacheEntryOptions()
                     .SetAbsoluteExpiration(TimeSpan.FromSeconds(10));
@@ -50,9 +50,9 @@
                 this.cache.Set("Posts", posts, cacheEntryOptions);
             }
 
-            if (posts.Count() != this.postsService.GetAllPosts<HomePostViewModel>().Count())
+            if (posts.Count() != this.postService.GetAllPosts<HomePostViewModel>().Count())
             {
-                posts = this.postsService.GetAllPosts<HomePostViewModel>();
+                posts = this.postService.GetAllPosts<HomePostViewModel>();
             }
 
             this.ViewData.Add("orderBy", orderBy);

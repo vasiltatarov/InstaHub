@@ -9,11 +9,11 @@
     using InstaHub.Data.Models;
     using InstaHub.Services.Mapping;
 
-    public class PostsService : IPostsService
+    public class PostService : IPostService
     {
         private readonly IDeletableEntityRepository<Post> postRepository;
 
-        public PostsService(IDeletableEntityRepository<Post> postRepository)
+        public PostService(IDeletableEntityRepository<Post> postRepository)
         {
             this.postRepository = postRepository;
         }

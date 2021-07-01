@@ -1,0 +1,48 @@
+﻿@model InstaHub.Web.ViewModels.Contacts.ContactFormViewModel
+
+<div class="contact bg-light">
+    <div class="cta bg-primary text-center text-white">
+        <h1 class="text-white">Contact Us</h1>
+        <p class="lead">Let us know what you think. We will get back to you within a day.</p>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-8 offset-md-2">
+                <div class="card no-hover">
+                    <grammarly-extension data-grammarly-shadow-root="true" style="position: absolute; top: 0px; left: 0px; pointer-events: none;" class="cGcvT"></grammarly-extension><grammarly-extension data-grammarly-shadow-root="true" style="mix-blend-mode: darken; position: absolute; top: 0px; left: 0px; pointer-events: none;" class="cGcvT"></grammarly-extension>
+                    <div class="card-body p-5">
+                        <form method="post">
+                            <div asp-validation-summary="All" class="text-danger"></div>
+
+                            <div class="form-group">
+                                <label asp-for="Name">Your name</label>
+                                <input asp-for="Name" class="form-control form-control-lg" placeholder="Enter name">
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Email">Your email address</label>
+                                <input asp-for="Email" class="form-control form-control-lg" placeholder="Enter email">
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Message">Your message</label>
+                                <textarea asp-for="Message" class="form-control" rows="5" spellcheck="false"></textarea>
+                                <span asp-validation-for="Message" class="text-danger"></span>
+                            </div>
+
+                            <div class="text-center mt-5">
+                                <button type="submit" class="btn btn-primary btn-lg">Send Message</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

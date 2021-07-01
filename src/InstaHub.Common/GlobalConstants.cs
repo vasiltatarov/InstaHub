@@ -6,8 +6,9 @@
 
         public const string AdministratorRoleName = "Administrator";
 
-        public const int ItemsOnPaged = 5;
+        public const string MyEmail = "vasiltatarov3@gmail.com";
 
+        public const int ItemsOnPaged = 5;
         public const int DefaultPage = 1;
     }
 }

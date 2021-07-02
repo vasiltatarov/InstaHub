@@ -49,20 +49,23 @@
                             </a>
                             <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 49px, 0px); top: 0px; left: 0px; will-change: transform;">
                                 <a class="dropdown-item" asp-area="" asp-controller="Profiles" asp-action="GetProfiles">
-                                    <i class="fas fa-users fa-fw"></i>Profiles
+                                    <i class="fas fa-users fa-fw"></i> Profiles
                                 </a>
                                 <a class="dropdown-item" asp-area="" asp-controller="UserSavedPosts" asp-action="GetSavedPosts">
-                                    <i class="fas fa-save fa-fw"></i>Saved
+                                    <i class="fas fa-save fa-fw"></i> Saved
                                 </a>
                                 <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
-                                    <i class="fas fa-user-cog"></i>Settings
+                                    <i class="fas fa-user-cog"></i> Settings
                                 </a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" asp-area="" asp-controller="Contacts" asp-action="Index">
-                                    <i class="fas fa-mail-bulk"></i>Contact Us
+                                    <i class="fas fa-mail-bulk"></i> Contact Us
+                                </a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="AboutUs">
+                                    <i class="fas fa-info"></i> About Us
                                 </a>
                                 <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Privacy">
-                                    <i class="fas fa-user-secret fa-fw"></i>Privacy
+                                    <i class="fas fa-user-secret fa-fw"></i> Privacy
                                 </a>
                             </div>
                         </li>
@@ -95,8 +98,8 @@
                     <ul class="footer-menu list-unstyled d-flex flex-row text-center text-md-left">
                         <li><a href="https://vasiltatarov.github.io/Vasko00/" target="_blank">My Portfolio</a></li>
                         <li><a href="https://github.com/vasiltatarov/ForumSystem" target="_blank">Source Code</a></li>
-                        <li><a asp-controller="Contacts" asp-action="Index">Contact Us</a></li>
-                        <li><a href="https://bootstrapbay.com/terms" target="_blank">About Us</a></li>
+                        <li><a asp-area="" asp-controller="Contacts" asp-action="Index">Contact Us</a></li>
+                        <li><a asp-area="" asp-controller="Home" asp-action="AboutUs">About Us</a></li>
                     </ul>
                 </div>
                 <div class="social mt-4 mt-md-0">

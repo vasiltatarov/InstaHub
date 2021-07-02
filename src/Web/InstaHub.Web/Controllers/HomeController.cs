@@ -2,36 +2,19 @@
 {
     using System.Diagnostics;
 
-    using InstaHub.Services.Data;
     using InstaHub.Web.ViewModels;
     using Microsoft.AspNetCore.Mvc;
 
     public class HomeController : BaseController
     {
-        private readonly ICategoryService categoryService;
+        public IActionResult Index() => this.View();
 
-        public HomeController(ICategoryService categoryService)
-            => this.categoryService = categoryService;
+        public IActionResult Privacy() => this.View();
 
-        /// <summary>
-        /// This is my home page. Start page of the application.
-        /// </summary>
-        /// <returns></returns>
-        public IActionResult Index()
-        {
-            return this.View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return this.View();
-        }
+        public IActionResult AboutUs() => this.View();
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
-        {
-            return this.View(
-                new ErrorViewModel { RequestId = Activity.Current?.Id ?? this.HttpContext.TraceIdentifier });
-        }
+            => this.View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? this.HttpContext.TraceIdentifier });
     }
 }

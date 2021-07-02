@@ -358,4 +358,3 @@ appsettings.Production.json
 *.min.css
 *.min.js
 /src/Web/InstaHub.Web/appsettings.Production.Development.json
-/src/Web/InstaHub.Web/wwwroot/img

@@ -1,0 +1,151 @@
+﻿<style>
+    .card-img {
+        height: 300px;
+    }
+</style>
+
+<div class="header bg-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <h1 class="display-4">Learn more about <br> InstaHub</h1>
+                <p class="lead my-4">
+                    InstaHub is a website which is  something between <br> social network and forum.
+                </p>
+                <a asp-area="" asp-controller="HomePage" asp-action="Posts" class="btn btn-primary btn-lg mt-0 mt-md-3 mt-lg-0">Enjoy with us</a>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="devices pl-md-4 pt-5 pt-md-0">
+                    <img src="~/img/landing_devices.png" alt="Example Navbar 1" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br />
+<br />
+<br />
+<br />
+<br />
+
+<div class="features bg-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-4">
+                <div class="feature">
+                    <div class="big-icon text-primary"><i class="fas fa-tools"></i></div>
+                    <h5 class="text-primary">Work with Bootstrap</h5>
+                    <p class="lead">Bootstrap 4 is a toolkit of front-end components for websites. It provides multiple utilities and components for writing responsive websites. </p>
+                </div>
+            </div>
+            <div class="col-12 col-md-4">
+                <div class="feature">
+                    <div class="big-icon text-secondary"><i class="fas fa-puzzle-piece"></i></div>
+                    <h5 class="text-secondary">Mix &amp; Match</h5>
+                    <p class="lead">Lazy Kit comes with a variety of different components and sections. By fitting them together you can easily create your desired pages.</p>
+                </div>
+            </div>
+            <div class="col-12 col-md-4">
+                <div class="feature">
+                    <div class="big-icon text-success"><i class="fas fa-palette"></i></div>
+                    <h5 class="text-success">Customise the Kit</h5>
+                    <p class="lead">Want to try different colours, spacing or typography? You can customise the Lazy Kit by modifying its SCSS files. </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br />
+<br />
+<br />
+<br />
+<br />
+
+<div class="blog-posts">
+    <div class="text-center">
+        <h2>Our Team</h2>
+        <p class="lead">We are constantly releasing new features. Stay up to date with us.</p>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="component">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <img class="card-img" src="~/img/006.jpg" alt="Martin Pavlov">
+                        </div>
+                        <div class="card-body">
+                            <span class="badge badge-success mb-2">Martin Pavlov</span>
+                            <h4 class="card-title">CTO</h4>
+                            <p class="card-text">Owning a dog is great fun and immensely rewarding. But, dogs have complex needs and each dog is unique. </p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="#a" class="btn btn-primary">View More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="component">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <img class="card-img" src="~/uploads/05.jpg" alt="Vasil Tatarov">
+                        </div>
+                        <div class="card-body">
+                            <span class="badge badge-warning mb-2">Vasil Tatarov</span>
+                            <h4 class="card-title">SEO</h4>
+                            <p class="card-text">Considering Spain's abundant coastline, beaches that do allow you to take your pooch to feel sand... </p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="#a" class="btn btn-outline-primary">View More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="component">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <img class="card-img" src="~/img/007.jpg" alt="Aleksandra Toncheva">
+                        </div>
+                        <div class="card-body">
+                            <span class="badge badge-secondary mb-2">Aleksandra Toncheva</span>
+                            <h4 class="card-title">Senior</h4>
+                            <p class="card-text">This new addition to your family will require lots of love, attention and plenty of supplies. </p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="#a" class="btn btn-outline-primary">View More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br />
+<br />
+
+<div class="text-center">
+    <h2>Our Location</h2>
+</div>
+
+<div id="googleMap" style="width:100%;height:500px;"></div>
+
+@section Scripts
+{
+    <script>
+        function myMap() {
+            var mapProp = {
+                center: new google.maps.LatLng(41.32851281025581, 25.364302272498417),
+                zoom: 12,
+            };
+            var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+        }
+    </script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBncE2vtgZ1A2m8QFexvV6DlU9RVohgl4&callback=myMap"></script>
+}

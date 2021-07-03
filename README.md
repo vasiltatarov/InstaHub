@@ -1,5 +1,5 @@
 # Project Introduction
-InstaHub is my defense project for ASP.NET Core MVC course at SoftUni (April-June 2021). The website is..
+InstaHub is my defense project for ASP.NET Core MVC course at SoftUni (April-June 2021). <br /> The website is something between social network and forum system.
 
 # Overview
 ASP.NET Core Template Author - 

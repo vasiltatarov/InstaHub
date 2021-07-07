@@ -5,6 +5,7 @@
     using InstaHub.Data.Models;
     using InstaHub.Services.Data;
     using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
@@ -17,16 +18,18 @@
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IProfileService profileService;
+        private readonly IUploadPhotoService uploadPhotoService;
 
         public ProfileController(
             UserManager<ApplicationUser> userManager,
-            IProfileService profileService)
+            IProfileService profileService,
+            IUploadPhotoService uploadPhotoService)
         {
             this.userManager = userManager;
             this.profileService = profileService;
+            this.uploadPhotoService = uploadPhotoService;
         }
 
-        [Authorize]
         public async Task<IActionResult> GetPosts(string username, int page = DefaultPage)
         {
             var (currentUserId, followedUserId, currentUserImagePath) = await this.GetUserIds(username);
@@ -67,6 +70,22 @@
             var photos = await this.profileService.GetUserPhotos(username, currentUserId, followedUserId, currentUserImagePath);
 
             return this.View(photos);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ChangeUserImage(IFormFile file, string username)
+        {
+            if (file == null)
+            {
+                return this.RedirectToAction("About", new { username });
+            }
+
+            var user = await this.userManager.GetUserAsync(this.User);
+
+            this.uploadPhotoService.UploadImage(file);
+            await this.profileService.ChangeUserImage(user.Id, file.FileName);
+
+            return this.RedirectToAction("About", new { username });
         }
 
         private async Task<(string T1, string T2, string T3)> GetUserIds(string username)

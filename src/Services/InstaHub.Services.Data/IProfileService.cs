@@ -15,5 +15,7 @@
         Task<AboutInProfileViewModel> GetUserAbout(string username, string currentUserId, string followedUserId, string currentUserImagePath);
 
         Task<PhotoInProfileViewModel> GetUserPhotos(string username, string currentUserId, string followedUserId, string currentUserImagePath);
+
+        Task ChangeUserImage(string userId, string fileName);
     }
 }

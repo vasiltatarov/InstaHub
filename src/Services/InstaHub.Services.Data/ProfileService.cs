@@ -128,5 +128,12 @@
 
             return photos;
         }
+
+        public async Task ChangeUserImage(string userId, string fileName)
+        {
+            var user = await this.userRepository.All().FirstOrDefaultAsync(x => x.Id == userId);
+            user.ImagePath = fileName;
+            await this.userRepository.SaveChangesAsync();
+        }
     }
 }

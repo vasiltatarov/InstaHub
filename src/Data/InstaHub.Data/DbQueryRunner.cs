@@ -9,16 +9,12 @@
     public class DbQueryRunner : IDbQueryRunner
     {
         public DbQueryRunner(ApplicationDbContext context)
-        {
-            this.Context = context ?? throw new ArgumentNullException(nameof(context));
-        }
+            => this.Context = context ?? throw new ArgumentNullException(nameof(context));
 
         public ApplicationDbContext Context { get; set; }
 
         public Task RunQueryAsync(string query, params object[] parameters)
-        {
-            return this.Context.Database.ExecuteSqlRawAsync(query, parameters);
-        }
+            => this.Context.Database.ExecuteSqlRawAsync(query, parameters);
 
         public void Dispose()
         {

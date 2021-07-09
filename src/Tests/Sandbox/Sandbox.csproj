@@ -40,7 +40,6 @@
     <ProjectReference Include="..\..\Services\InstaHub.Services.Data\InstaHub.Services.Data.csproj" />
     <ProjectReference Include="..\..\Services\InstaHub.Services.Mapping\InstaHub.Services.Mapping.csproj" />
     <ProjectReference Include="..\..\Services\InstaHub.Services.Messaging\InstaHub.Services.Messaging.csproj" />
-    <ProjectReference Include="..\..\Services\InstaHub.Services\InstaHub.Services.csproj" />
   </ItemGroup>
 
 </Project>

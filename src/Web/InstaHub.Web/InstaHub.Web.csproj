@@ -51,8 +51,6 @@
     <ProjectReference Include="..\..\Services\InstaHub.Services.Data\InstaHub.Services.Data.csproj" />
     <ProjectReference Include="..\..\Services\InstaHub.Services.Mapping\InstaHub.Services.Mapping.csproj" />
     <ProjectReference Include="..\..\Services\InstaHub.Services.Messaging\InstaHub.Services.Messaging.csproj" />
-    <ProjectReference Include="..\..\Services\InstaHub.Services\InstaHub.Services.csproj" />
-    <ProjectReference Include="..\InstaHub.Web.Infrastructure\InstaHub.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\InstaHub.Web.ViewModels\InstaHub.Web.ViewModels.csproj" />
   </ItemGroup>
 </Project>

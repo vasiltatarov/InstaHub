@@ -9,10 +9,7 @@
     {
         private IHostingEnvironment hostingEnvironment;
 
-        public UploadPhotoService(IHostingEnvironment hostingEnvironment)
-        {
-            this.hostingEnvironment = hostingEnvironment;
-        }
+        public UploadPhotoService(IHostingEnvironment hostingEnvironment) => this.hostingEnvironment = hostingEnvironment;
 
         public async void UploadImage(IFormFile file)
         {

@@ -64,9 +64,9 @@
         </ul>
     </div>
 
-    <div class="text-center">
-        <div class="row">
-            <div class="about-info col-md-6">
+    <div class="row">
+        <div class="offset-4 col-6">
+            <div class="about-info">
                 <p><i class="fas fa-user-tie"></i>&nbsp Username - @this.Model.UserName</p>
                 <p><i class="fas fa-at"></i>&nbsp Email - @this.Model.UserName</p>
                 <p><i class="fas fa-calendar-alt"></i>&nbsp Joined on -  <time datetime="@this.Model.CreatedOn.ToString("O")"></time></p>
@@ -78,7 +78,7 @@
                     <p>
                         <textarea id="descriptionText" class="form-control" placeholder="Add your description here:" name="desc">@this.Model.Description</textarea>
                     </p>
-                    <i onclick="addDescription()" class="btn btn-primary">Update</i>
+                    <i onclick="addDescription()" class="btn btn-primary m-1">Update</i>
                 }
                 else
                 {
@@ -87,29 +87,25 @@
                     </p>
                 }
             </div>
+
+            <br />
+
+            @if (this.User.Identity.Name == this.Model.UserName)
+            {
+                <form method="post" enctype="multipart/form-data" asp-area="" asp-controller="Profile" asp-action="ChangeUserImage" asp-route-username="@this.Model.UserName">
+                    <p class="lead">Change your profile image</p>
+                    <div class="input-group">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" name="file">
+                            <label class="custom-file-label" for="file">Choose file</label>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-primary m-1" type="submit">Update</button>
+                </form>
+            }
         </div>
     </div>
-    
-    <br />
-
-    @if (this.User.Identity.Name == this.Model.UserName)
-    {
-        <form method="post" enctype="multipart/form-data" asp-area="" asp-controller="Profile" asp-action="ChangeUserImage" asp-route-username="@this.Model.UserName">
-            <div class="col-lg-6">
-                <p class="lead">Change your profile image</p>
-                <div class="input-group">
-                    <div class="custom-file">
-                        <input type="file" class="custom-file-input" name="file">
-                        <label class="custom-file-label" for="file">Choose file</label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group m-2">
-                <button class="btn btn-primary" type="submit">Update</button>
-            </div>
-        </form>
-    }
 </div>
 
 @section Scripts

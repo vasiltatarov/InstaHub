@@ -13,9 +13,7 @@
         private readonly IDeletableEntityRepository<ChatMessage> chatMessageRepository;
 
         public ChatService(IDeletableEntityRepository<ChatMessage> chatMessageRepository)
-        {
-            this.chatMessageRepository = chatMessageRepository;
-        }
+            => this.chatMessageRepository = chatMessageRepository;
 
         public async Task CreateAsync(string message, string userId)
         {

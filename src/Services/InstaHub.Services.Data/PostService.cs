@@ -14,13 +14,8 @@
         private readonly IDeletableEntityRepository<Post> postRepository;
 
         public PostService(IDeletableEntityRepository<Post> postRepository)
-        {
-            this.postRepository = postRepository;
-        }
+            => this.postRepository = postRepository;
 
-        /// <summary>
-        /// First call IncreaseVisitorsCount(id) that will be increase visit count and after that return post.
-        /// </summary>
         public async Task<T> GetById<T>(int id)
         {
             await this.IncreaseVisitorsCount(id);
@@ -50,14 +45,12 @@
             return post.Id;
         }
 
-        // For HomePageController.
         public IEnumerable<T> GetAllPosts<T>()
             => this.postRepository
                 .AllAsNoTracking()
                 .To<T>()
                 .ToList();
 
-        // For CategoriesController - Pagination
         public IEnumerable<T> GetByCategoryId<T>(int categoryId, int? take = null, int skip = 0)
         {
             var query = this.postRepository.All()
@@ -78,9 +71,6 @@
                 .All()
                 .Count(x => x.CategoryId == categoryId);
 
-        /// <summary>
-        /// Increase post visitors count.
-        /// </summary>
         public async Task IncreaseVisitorsCount(int id)
         {
             var post = this.postRepository

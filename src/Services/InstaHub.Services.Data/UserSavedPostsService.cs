@@ -14,11 +14,8 @@
     {
         private readonly IDeletableEntityRepository<UserSavedPost> userSavedPostsRepository;
 
-        public UserSavedPostsService(
-            IDeletableEntityRepository<UserSavedPost> userSavedPostsRepository)
-        {
-            this.userSavedPostsRepository = userSavedPostsRepository;
-        }
+        public UserSavedPostsService(IDeletableEntityRepository<UserSavedPost> userSavedPostsRepository)
+            => this.userSavedPostsRepository = userSavedPostsRepository;
 
         public async Task<bool> AddAsync(string userId, int postId)
         {

@@ -73,7 +73,8 @@
                 .ToList();
 
         public async Task<bool> CheckIfFollowExistAsync(string followerId, string followedId)
-            => await this.userFollows.All()
+            => await this.userFollows
+                .All()
                 .AnyAsync(x => x.FollowerId == followerId &&
                                x.FollowedId == followedId &&
                                x.IsFollowActive);

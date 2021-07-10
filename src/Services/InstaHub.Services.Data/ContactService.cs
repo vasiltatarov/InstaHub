@@ -9,7 +9,8 @@
     {
         private readonly IRepository<ContactForm> contactRepository;
 
-        public ContactService(IRepository<ContactForm> contactRepository) => this.contactRepository = contactRepository;
+        public ContactService(IRepository<ContactForm> contactRepository)
+            => this.contactRepository = contactRepository;
 
         public async Task Add(string name, string email, string content, string ip)
         {

@@ -11,9 +11,7 @@
         private readonly IRepository<Vote> votesRepository;
 
         public VoteService(IRepository<Vote> votesRepository)
-        {
-            this.votesRepository = votesRepository;
-        }
+            => this.votesRepository = votesRepository;
 
         /// <summary>
         /// VoteAsync - Create vote and add it to db. If vote is already exist, just update it.

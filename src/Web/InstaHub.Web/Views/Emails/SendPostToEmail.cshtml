@@ -1,8 +1,6 @@
 ﻿@model InstaHub.Web.ViewModels.Emails.SendFormViewModel
 
 <form method="post">
-    <div asp-validation-summary="All" class="text-danger"></div>
-
     <div class="form-group">
         <label>Email address</label>
         <input asp-for="@Model.To" class="form-control" placeholder="Enter email">
@@ -11,8 +9,3 @@
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
-
-
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}

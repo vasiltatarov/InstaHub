@@ -12,8 +12,6 @@
                     <grammarly-extension data-grammarly-shadow-root="true" style="position: absolute; top: 0px; left: 0px; pointer-events: none;" class="cGcvT"></grammarly-extension><grammarly-extension data-grammarly-shadow-root="true" style="mix-blend-mode: darken; position: absolute; top: 0px; left: 0px; pointer-events: none;" class="cGcvT"></grammarly-extension>
                     <div class="card-body p-5">
                         <form method="post">
-                            <div asp-validation-summary="All" class="text-danger"></div>
-
                             <div class="form-group">
                                 <label asp-for="Name">Your name</label>
                                 <input asp-for="Name" class="form-control form-control-lg" placeholder="Enter name">
@@ -42,7 +40,3 @@
         </div>
     </div>
 </div>
-
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}

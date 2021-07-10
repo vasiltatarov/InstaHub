@@ -13,8 +13,6 @@
         <hr />
 
         <form method="post" asp-action="Create" asp-controller="Posts">
-            <div asp-validation-summary="All"></div>
-
             <div class="form-group">
                 <label asp-for="Title">Title <span>*</span> <small>(This field use for title on your post.)</small></label>
                 <input asp-for="Title" class="form-control" />

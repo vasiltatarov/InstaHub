@@ -15,9 +15,7 @@
         private readonly IDeletableEntityRepository<Category> categoryRepository;
 
         public CategoryService(IDeletableEntityRepository<Category> categoryRepository)
-        {
-            this.categoryRepository = categoryRepository;
-        }
+            => this.categoryRepository = categoryRepository;
 
         public async Task CreateAsync(string name, string title, string description, string imageUrl)
         {
@@ -45,16 +43,15 @@
         }
 
         public T GetByName<T>(string name)
-        {
-            var category = this.categoryRepository.All()
+            => this.categoryRepository
+                .All()
                 .Where(x => x.Name.Replace(" ", "-") == name.Replace(" ", "-"))
                 .To<T>()
                 .FirstOrDefault();
-            return category;
-        }
 
         public async Task<T> GetByIdAsync<T>(int id)
-            => await this.categoryRepository.AllAsNoTracking()
+            => await this.categoryRepository
+                .AllAsNoTracking()
                 .Where(x => x.Id == id)
                 .To<T>()
                 .FirstOrDefaultAsync();

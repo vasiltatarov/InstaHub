@@ -31,22 +31,23 @@
 
         [Authorize]
         public IActionResult Create()
-        {
-            var categories = this.categoryService.GetAll<CategoryDropDownViewModel>();
-            var viewModel = new PostCreateInputModel()
+            => this.View(new PostCreateInputModel()
             {
-                Categories = categories,
-            };
-
-            return this.View(viewModel);
-        }
+                Categories = this.categoryService.GetAll<CategoryDropDownViewModel>(),
+            });
 
         [Authorize]
         [HttpPost]
         public async Task<IActionResult> Create(PostCreateInputModel input)
         {
+            if (!await this.categoryService.IsCategoryExists(input.CategoryId))
+            {
+                this.ModelState.AddModelError("Invalid Category", "Invalid Category");
+            }
+
             if (!this.ModelState.IsValid)
             {
+                input.Categories = this.categoryService.GetAll<CategoryDropDownViewModel>();
                 return this.View(input);
             }
 

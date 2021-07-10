@@ -21,8 +21,8 @@
             this.postService = postService;
         }
 
-        public IActionResult GetCategories() => this.View(
-                new IndexViewModel()
+        public IActionResult GetCategories()
+            => this.View(new IndexViewModel()
                 {
                     Categories = this.categoryService.GetAll<IndexCategoryViewModel>(),
                 });

@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true">
     <link rel="stylesheet" href="~/css/lazy.css" asp-append-version="true">
     <link href="~/lib/fontawesome/css/all.css" rel="stylesheet" asp-append-version="true" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js" rel="stylesheet" asp-append-version="true" />
+    <link href="~/lightbox/bootstrap-lightbox.css" rel="stylesheet" asp-append-version="true" />
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-transparent navbar-dark mb-4 bg-primary">
@@ -148,6 +148,8 @@
     <script src="~/vendor/nouislider/js/nouislider.js" asp-append-version="true"></script>
 
     <script src="~/js/lazy.js" asp-append-version="true"></script>
+
+    <script src="~/lightbox/bootstrap-lightbox.js" asp-append-version="true"></script>
 
     @await this.RenderSectionAsync("Scripts", required: false)
 </body>
